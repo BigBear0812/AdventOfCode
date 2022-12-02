@@ -1,0 +1,18 @@
+{
+  "name": "adventofcode2022",
+  "version": "1.0.0",
+  "description": "Advent of Code 2022",
+  "scripts": {
+    "day1": "node Day1.js Day1_input.txt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "advent",
+    "code",
+    "2022",
+    "answers"
+  ],
+  "author": "Matthew Miller",
+  "license": "ISC",
+  "type": "module"
+}
