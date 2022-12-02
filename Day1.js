@@ -1,6 +1,8 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
 
+// Puzzle for Day 1: https://adventofcode.com/2022/day/1
+
 // Check that the right number of arguments are present in the command
 if (process.argv.length !== 3){
   console.log('Please specify an input file.');
