@@ -4,6 +4,7 @@
   "description": "Advent of Code 2022",
   "scripts": {
     "day1": "node Day1.js Day1_input.txt",
+    "day2": "node Day2.js Day2_input.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
