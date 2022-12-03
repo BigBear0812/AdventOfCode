@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Advent of Code 2015 Solutions",
   "scripts": {
-    "day1": "node Day1.js Day1_input.txt"
+    "day1": "node Day1.js Day1_input.txt",
+    "day2": "node Day2.js Day2_input.txt"
   },
   "author": "Matthew Miller",
   "license": "ISC",
