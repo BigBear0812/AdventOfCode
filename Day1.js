@@ -25,20 +25,25 @@ const processLines = async(file) => {
   // Read in all of the lines one at a time
   for await (const line of file.readLines()) {
     const chars = Array.from(String(line))
+    // Start at floor 0 
     let currentFloor = 0;
     let firstCharNegative = null;
     for (let x = 0; x < chars.length; x++) {
       const c = chars[x];
+      // Move up or down the floors
       if(c === '(')
         currentFloor++;
       if(c === ')')
         currentFloor--;
+      // Check if the floor number has gone negative mfor the first time
       if(currentFloor < 0 && firstCharNegative === null)
         firstCharNegative = x + 1;
     }
+    // Pass out values
     floors.push({ 'currentFloor': currentFloor, 'firstCharNegative': firstCharNegative });
   }
 
+  // Log output
   console.log(`Floors Santa must visit floor: ${floors[0].currentFloor}`);
   console.log(`First char to send the floor number negative: ${floors[0].firstCharNegative}`);
 }
