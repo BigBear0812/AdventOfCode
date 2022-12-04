@@ -20,7 +20,7 @@ open(filename)
   for await (const line of file.readLines()) {
     fileContents.push(line);
   }
-  return fileContents
+  return fileContents;
 })
 .then(fileContents => {
   // Part 1
