@@ -7,7 +7,8 @@
     "day2": "node Day2.js Day2_input.txt",
     "day3": "node Day3.js Day3_input.txt",
     "day4": "node Day4.js",
-    "day5": "node Day5.js Day5_input.txt"
+    "day5": "node Day5.js Day5_input.txt",
+    "day6": "node Day6.js Day6_input.txt"
   },
   "author": "Matthew Miller",
   "license": "ISC",
