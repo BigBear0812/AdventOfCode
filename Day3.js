@@ -30,15 +30,15 @@ const processLines = async(file) => {
     const compartment1 = line.substring(0, line.length / 2);
     const compartment2 = line.substring(line.length / 2);
 
-    const chars = compartment1.split();
-    let itemsInBoth = [];
-    for(let x = 0; x < chars.length; x++){
+    const chars = compartment1.split('');
+    let itemsInBoth = null;
+    for(let x = 0; x < chars.length && itemsInBoth === null; x++){
       if(compartment2.indexOf(chars[x]) >= 0)
-        itemsInBoth.push(chars[x]);
+        itemsInBoth = chars[x];
     }
 
-    for(const item in itemsInBoth){
-      totalMatchedItemValues += priorities.indexOf(item) + 1
+    for(let x = 0; x < itemsInBoth.length; x++){
+      totalMatchedItemValues += priorities.indexOf(itemsInBoth[x]) + 1;
     }
   }
 
