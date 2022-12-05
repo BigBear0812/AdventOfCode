@@ -5,7 +5,8 @@
   "scripts": {
     "day1": "node Day1.js Day1_input.txt",
     "day2": "node Day2.js Day2_input.txt",
-    "day3": "node Day3.js Day3_input.txt"
+    "day3": "node Day3.js Day3_input.txt",
+    "day4": "node Day4.js Day4_input.txt"
   },
   "author": "Matthew Miller",
   "license": "ISC",
