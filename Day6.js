@@ -1,8 +1,7 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
-import { Console } from "node:console";
 
-// Puzzle for Day 5: https://adventofcode.com/2015/day/5
+// Puzzle for Day 6: https://adventofcode.com/2015/day/6
 // TODO: Possibly redo this using regex. 
 
 // Check that the right number of arguments are present in the command
