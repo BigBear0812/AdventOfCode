@@ -16,7 +16,7 @@ const filename = process.argv[2];
 // Open the file and pass it ot our main processing 
 open(filename)
 .then(async(file) => {
-  // Process all of the line of the file after it has been opened
+  // Process all of the lines of the file after it has been opened
   let fileContents = []
   for await (const line of file.readLines()) {
     fileContents.push(line);

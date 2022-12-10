@@ -18,7 +18,7 @@ open(filename)
   processLines(file)
 });
 
-// Process all of the line of the file after it has been opened
+// Process all of the lines of the file after it has been opened
 const processLines = async(file) => {
 
   // OP
