@@ -1,0 +1,3 @@
+[submodule "AOCPuzzlesInputs"]
+	path = AOCPuzzlesInputs
+	url = git@github.com:BigBear0812/AOCPuzzlesInputs.git
