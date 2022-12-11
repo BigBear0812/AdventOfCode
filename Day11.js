@@ -1,4 +1,4 @@
-mport process from "node:process";
+import process from "node:process";
 import { open } from "node:fs/promises";
 
 // Puzzle for Day 11: https://adventofcode.com/2022/day/11
@@ -48,7 +48,7 @@ open(filename)
       trueMatch[2], 
       falseMatch[2]);
 
-    monkeys.push(monkey);
+    monkeys[monkey.number] = monkey;
   }
 
   for(let round = 0; round < TOTALROUNDS; round++){
@@ -58,12 +58,24 @@ open(filename)
         let item = monkey.items.shift();
         item = monkey.inspect(item);
         if(monkey.test(item))
-          monkeys[monkey.trueMonkey].items.push();
+          monkeys[monkey.trueMonkey].items.push(item);
         else
-          monkeys[monkey.falseMonkey].items.push();
+          monkeys[monkey.falseMonkey].items.push(item);
       }
     }
   }
+
+  let eachMB = [];
+  for(const monkey of monkeys)
+    eachMB.push(monkey.itemsInspected);
+  
+  quickSort(eachMB);
+
+  let mb1 = eachMB.pop();
+  let mb2 = eachMB.pop();
+  let monkeyBusiness = mb1 * mb2;
+
+  console.log(`Total monkey business: ${monkeyBusiness}`);
 
 
 });
@@ -85,6 +97,65 @@ class Monkey {
   }
 
   test(item){
-    return item % testNum === 0
+    return item % this.testNum === 0
   }
+}
+
+const quickSort = (array, leftIndex, rightIndex) => {
+  // Initialize Values if not already set
+  if(!leftIndex)
+    leftIndex = 0;
+  if(!rightIndex)
+    rightIndex = array.length-1;
+
+  // Check base case that the array is longer than 1 value
+  if(array.length > 1){
+    // Partition and get the pivot index
+    let pivotIndex = partition(array, leftIndex, rightIndex);
+
+    // Quick sort the left partitionif there is anything remaining to sort there
+    if(leftIndex < pivotIndex - 1)
+      quickSort(array, leftIndex, pivotIndex - 1);
+
+    // Quick sort the right partition if there is anything remaining to sort there
+    if(pivotIndex < rightIndex) 
+      quickSort(array, pivotIndex, rightIndex);
+  }
+}
+
+// Partition the array and return the pivot index.
+const partition = (array, leftIndex, rightIndex) => {
+  // Get the middle value of the array and use that as the pivot value
+  var pivot= array[Math.floor((rightIndex + leftIndex) / 2)];
+  // Set the initial left and right indexes
+  var left = leftIndex;
+  var right = rightIndex;
+
+  // Sort all values to be on either the left 
+  // or the right of the pivot by swapping values 
+  // until the pivot is in the middle with lower 
+  // values on the left and higher values on the 
+  // right of the pivot value
+  while(left <= right){
+    while(array[left] < pivot)
+      left++;
+    while(array[right] > pivot)
+      right --;
+
+    if(left <= right){
+      swap(array, left, right);
+      left++;
+      right--;
+    }
+  }
+  // Return the final index of the pivot value
+  return left; 
+}
+
+// Basic swap of two values at specified indexes in the array
+const swap = (array, indexA, indexB) => {
+  let temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
+  return array;
 }
