@@ -26,6 +26,103 @@ open(filename)
 
   const TOTALROUNDS = 20;
 
+  // Parse in the monkeys from the input
+  let monkeys = parseMonkeys(fileContents);
+
+  // Count the number of round
+  for(let round = 0; round < TOTALROUNDS; round++){
+    // Go through each monkey
+    for(let m = 0; m < monkeys.length; m++){
+      // While the current monkey still has items to through
+      let monkey = monkeys[m];
+      while(monkey.items.length > 0){
+        // Get the first item
+        let item = monkey.items.shift();
+        // Get the stress value for inspection and divide it by 3 since the monkey gets bored
+        item = Math.floor(monkey.inspect(item) / 3);
+        // Which monkey to pass it to next
+        if(monkey.test(item))
+          monkeys[monkey.trueMonkey].items.push(item);
+        else
+          monkeys[monkey.falseMonkey].items.push(item);
+      }
+    }
+  }
+
+  // Calc the monkey business
+  const monkeyBusiness = calcMonkeyBusiness(monkeys);
+
+  // Log output
+  console.log(`Total monkey business Part 1: ${monkeyBusiness}`);
+
+  // Pass the input to Part 2
+  return fileContents;
+
+})
+.then((fileContents) => {
+  
+  const TOTALROUNDS = 10000;
+
+  // Parse in the monkeys from the input
+  let monkeys = parseMonkeys(fileContents);
+
+  // Multiply together all of the divisors for the tests to get a common multiple. 
+  // This is used in modulo arithmetic to maintain the same result for the tests 
+  // without the integers getting to large to work with.
+  let commonMultiple = 1;
+  for(const monkey of monkeys){
+    commonMultiple = commonMultiple * monkey.testNum;
+  }
+
+  // Count the number of rounds
+  for(let round = 0; round < TOTALROUNDS; round++){
+    // Go through each monkey
+    for(let m = 0; m < monkeys.length; m++){
+      // While the current monkey still has items to through
+      let monkey = monkeys[m];
+      while(monkey.items.length > 0){
+        // Get the first item
+        let item = monkey.items.shift();
+        // Get the stress value for inspection and modulo it by the common multiple 
+        item = monkey.inspect(item) % commonMultiple;
+        // Which monkey to pass it to next
+        if(monkey.test(item))
+          monkeys[monkey.trueMonkey].items.push(item);
+        else
+          monkeys[monkey.falseMonkey].items.push(item);
+      }
+    }
+  }
+
+  // Calc the monkey business
+  const monkeyBusiness = calcMonkeyBusiness(monkeys);
+
+  // Log output
+  console.log(`Total monkey business Part 2: ${monkeyBusiness}`);
+});
+
+class Monkey {
+  constructor(number, items, operation, testNum, trueMonkey, falseMonkey){
+    this.number = parseInt(number);
+    this.items = items.split(', ').map(x => x = parseInt(x));
+    this.operation = operation;
+    this.testNum = parseInt(testNum);
+    this.trueMonkey = parseInt(trueMonkey);
+    this.falseMonkey = parseInt(falseMonkey);
+    this.itemsInspected = 0;
+  }
+
+  inspect(old){
+    this.itemsInspected++;
+    return eval(this.operation);
+  }
+
+  test(item){
+    return item % this.testNum === 0
+  }
+}
+
+const parseMonkeys = (fileContents) => {
   const monkeyReg = new RegExp(/Monkey (\d):/);
   const itemsRegex = new RegExp(/Starting items:((?: \d+,*)+)/);
   const operationRegex = new RegExp(/Operation: new = (.+)/);
@@ -42,8 +139,8 @@ open(filename)
     const falseMatch = fileContents[lineIndex+5].match(trueFalseRegex);
 
     const monkey = new Monkey(monkeyMatch[1], 
-      itemsMatch[1], 
-      operationMatch[1], 
+      itemsMatch[1],
+      operationMatch[1],
       testMatch[1], 
       trueMatch[2], 
       falseMatch[2]);
@@ -51,20 +148,10 @@ open(filename)
     monkeys[monkey.number] = monkey;
   }
 
-  for(let round = 0; round < TOTALROUNDS; round++){
-    for(let m = 0; m < monkeys.length; m++){
-      let monkey = monkeys[m];
-      while(monkey.items.length > 0){
-        let item = monkey.items.shift();
-        item = monkey.inspect(item);
-        if(monkey.test(item))
-          monkeys[monkey.trueMonkey].items.push(item);
-        else
-          monkeys[monkey.falseMonkey].items.push(item);
-      }
-    }
-  }
+  return monkeys;
+}
 
+const calcMonkeyBusiness = (monkeys) => {
   let eachMB = [];
   for(const monkey of monkeys)
     eachMB.push(monkey.itemsInspected);
@@ -73,32 +160,7 @@ open(filename)
 
   let mb1 = eachMB.pop();
   let mb2 = eachMB.pop();
-  let monkeyBusiness = mb1 * mb2;
-
-  console.log(`Total monkey business: ${monkeyBusiness}`);
-
-
-});
-
-class Monkey {
-  constructor(number, items, operation, testNum, trueMonkey, falseMonkey){
-    this.number = parseInt(number);
-    this.items = items.split(', ').map(x => x = parseInt(x));
-    this.operation = operation;
-    this.testNum = parseInt(testNum);
-    this.trueMonkey = parseInt(trueMonkey);
-    this.falseMonkey = parseInt(falseMonkey);
-    this.itemsInspected = 0;
-  }
-
-  inspect(old){
-    this.itemsInspected++;
-    return Math.floor(eval(this.operation) / 3);
-  }
-
-  test(item){
-    return item % this.testNum === 0
-  }
+  return mb1 * mb2;
 }
 
 const quickSort = (array, leftIndex, rightIndex) => {
