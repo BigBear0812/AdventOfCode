@@ -40,7 +40,7 @@ open(filename)
         let item = monkey.items.shift();
         // Get the stress value for inspection and divide it by 3 since the monkey gets bored
         item = Math.floor(monkey.inspect(item) / 3);
-        // Which monkey to pass it to next
+        // Which monkey to throw it to next
         if(monkey.test(item))
           monkeys[monkey.trueMonkey].items.push(item);
         else
@@ -85,7 +85,7 @@ open(filename)
         let item = monkey.items.shift();
         // Get the stress value for inspection and modulo it by the common multiple 
         item = monkey.inspect(item) % commonMultiple;
-        // Which monkey to pass it to next
+        // Which monkey to throw it to next
         if(monkey.test(item))
           monkeys[monkey.trueMonkey].items.push(item);
         else
@@ -101,6 +101,7 @@ open(filename)
   console.log(`Total monkey business Part 2: ${monkeyBusiness}`);
 });
 
+// A class to represent each monkey
 class Monkey {
   constructor(number, items, operation, testNum, trueMonkey, falseMonkey){
     this.number = parseInt(number);
@@ -112,25 +113,31 @@ class Monkey {
     this.itemsInspected = 0;
   }
 
+  // Evaluate the command for each monkey and add one to the number of items inspected
   inspect(old){
     this.itemsInspected++;
     return eval(this.operation);
   }
 
+  // Check if the test is true or false to determine which monkey to throw to next
   test(item){
     return item % this.testNum === 0
   }
 }
 
+// Parse the text line into monkey objects
 const parseMonkeys = (fileContents) => {
+  // Each line regex
   const monkeyReg = new RegExp(/Monkey (\d):/);
   const itemsRegex = new RegExp(/Starting items:((?: \d+,*)+)/);
   const operationRegex = new RegExp(/Operation: new = (.+)/);
   const testRegex = new RegExp(/Test: divisible by (\d+)/);
   const trueFalseRegex = new RegExp(/If ([truefals]+): throw to monkey (\d+)/);
 
+  // Resulting monkey objects array
   let monkeys = [];
   for(let lineIndex = 0; lineIndex < fileContents.length; lineIndex = lineIndex + 7){
+    // Use regex to get each line for this monkey parsed in
     const monkeyMatch = fileContents[lineIndex].match(monkeyReg);
     const itemsMatch = fileContents[lineIndex+1].match(itemsRegex);
     const operationMatch = fileContents[lineIndex+2].match(operationRegex);
@@ -138,6 +145,7 @@ const parseMonkeys = (fileContents) => {
     const trueMatch = fileContents[lineIndex+4].match(trueFalseRegex);
     const falseMatch = fileContents[lineIndex+5].match(trueFalseRegex);
 
+    // Create the new monkey object and add iot to the correct position in the array
     const monkey = new Monkey(monkeyMatch[1], 
       itemsMatch[1],
       operationMatch[1],
@@ -151,13 +159,17 @@ const parseMonkeys = (fileContents) => {
   return monkeys;
 }
 
+// Calculate the monkey business for this array
 const calcMonkeyBusiness = (monkeys) => {
+  // Extract each monkeys number of items inspected into an array
   let eachMB = [];
   for(const monkey of monkeys)
     eachMB.push(monkey.itemsInspected);
   
+  // Sort them by ascending order
   quickSort(eachMB);
 
+  // Take the largest two values, multiply them together, and return them
   let mb1 = eachMB.pop();
   let mb2 = eachMB.pop();
   return mb1 * mb2;
