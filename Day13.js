@@ -38,7 +38,7 @@ open(filename)
       runningTotal += ((i / 3) + 1);
   }
 
-  // 6086
+  // Log output
   console.log(`Sum of the packets indicies in the right order: ${runningTotal}`);
 
   return fileContents;
@@ -50,7 +50,7 @@ open(filename)
   packets.push([[2]]);
   packets.push([[6]]);
 
-  // Bubble sort the packets since this check order is only 
+  // Bubble sort the packets since the checkOrder method is only 
   // made to compare values next to each other
   for(let a = 0; a < packets.length; a++){
     for(let b = 0; b < packets.length - a - 1; b++){
@@ -61,13 +61,14 @@ open(filename)
     }
   }
 
-  // Compute decoder value by finding the divider packets and multiplying them
+  // Compute decoder value by finding the divider 
+  // packets and multiplying their indexes
   packets = packets.map(x => JSON.stringify(x));
   let divider1Index = packets.indexOf('[[2]]') + 1;
   let divider2Index = packets.indexOf('[[6]]') + 1;
   let final = divider1Index * divider2Index;
 
-  // 27588 too low
+  // Log output
   console.log(`The decoder key for the distress signal: ${final}`);
 });
 
@@ -101,7 +102,7 @@ const checkOrder = (left, right) => {
       return false;
     }
   }
-  // Check if these are boath arrays to be compared
+  // Check if these are both arrays to be compared
   else if(Array.isArray(left) && Array.isArray(right)){
     // Get the maximum length between the arrays
     let len = left.length > right.length ? left.length : right.length;
