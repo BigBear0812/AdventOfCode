@@ -36,18 +36,59 @@ open(filename)
       const lrSize = pair.distance - Math.abs(critRow - pair.sensor.y);
       const left = pair.sensor.x - lrSize;
       const right = pair.sensor.x + lrSize;
-      let current = left;
-      while(current <= right){
-        if(coveredXs.indexOf(current) === -1)
-          coveredXs.push(current);
-        current++;
+      coveredXs.push({left: left, right: right});
+    }
+  }
+
+  // Bubble sort the points by the left value
+  for(let a = 0; a < coveredXs.length; a++){
+    for(let b = 0; b < coveredXs.length - a - 1; b++){
+      let result = coveredXs[b].left < coveredXs[b + 1].left
+      if(result !== true){
+        swap(coveredXs, b, b + 1);
       }
     }
   }
 
+  let total = 0;
+  let lowest = coveredXs[0].left;
+  let highest = coveredXs[0].right;
+  for(let i = 1; i < coveredXs; i++){
+    let cons = contains(lowest, highest, coveredXs[i].left, coveredXs[i].right);
+    let over = overlaps(lowest, highest, coveredXs[i].left, coveredXs[i].right);
+    if (!cons){
+      if(over > 0)
+        highest= coveredXs[i].right;
+      else{
+        total += highest - lowest;
+        lowest = coveredXs[i].left;
+        highest = coveredXs[i].right;
+      }
+    }
 
-  console.log(`Number of covered space on row 2000000: ${coveredXs.length}`);
+  }
+  total += highest - lowest;
+
+  // 2652668 too low
+  console.log(`Number of covered space on row 2000000: ${total}`);
 });
+
+// Basic swap of two values at specified indexes in the array
+const swap = (array, indexA, indexB) => {
+  let temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
+  return array;
+}
+
+const contains = (min1, max1, min2, max2) => {
+  return min1 <= min2 && max1 >= max2;
+}
+
+const overlaps = (min1, max1, min2, max2) => {
+  return Math.max(0, Math.min(max1, max2) - Math.max(min1, min2));
+}
+
 
 // Used for printing out the grid during testing.
 const print = (grid) => {
