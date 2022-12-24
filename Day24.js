@@ -40,6 +40,8 @@ open(filename)
 
   // Log output
   console.log(`Total time for Part 2: ${trip1.time + trip2.time + trip3.time}`)
+
+  // TODO: Overall this takes a few minutes to complete each trip. It would be good to improve this in the future.
 });
 
 // Use Breadth First Search (BFS) to find the shortest path through the blizzard field
