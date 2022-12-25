@@ -1,7 +1,7 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
 
-// Puzzle for Day 14: https://adventofcode.com/2022/day/14
+// Puzzle for Day 15: https://adventofcode.com/2022/day/15
 
 // Check that the right number of arguments are present in the command
 if (process.argv.length !== 3){
@@ -23,82 +23,153 @@ open(filename)
   return fileContents;
 })
 .then((fileContents) => { 
+  // The row we are concerned with
   const critRow = 2000000;
 
   // Parse input to get the sensor and beacon location and disatance info
   const sensorsAndBeacons = parseInput(fileContents);
 
+  // Calc the number covered for the given row
+  const segments = coveredRowSegments(sensorsAndBeacons, critRow, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+  const total = numCovered(segments);
+
+  // Log output
+  console.log(`Number of covered spaces on row 2000000: ${total}`);
+
+  return fileContents;
+})
+.then((fileContents) => {
+  // Boundaries for the saearch area
+  const lowBnd = 0;
+  const upBnd = 4000000;
+  // Parse input to get the sensor and beacon location and disatance info
+  const sensorsAndBeacons = parseInput(fileContents);
+
+  // Position of the distress beacon
+  let y;
+  let x;
+  
+  // Check each row for one row that has an uncovered space to get the Y coordinate of the distress beacon
+  for(let row = lowBnd; row <= upBnd; row++){
+    // Calc the number covered for the current row
+    const segments = coveredRowSegments(sensorsAndBeacons, row, lowBnd, upBnd);
+    const total = numCovered(segments);
+
+    // If it is less than fully covered record it
+    if (total < upBnd - lowBnd)
+      y = row;
+  }
+
+  // Check each col for one col that has an uncovered space to get the X coordinate of the distress beacon
+  for(let col = lowBnd; col <= upBnd; col++){
+    // Calc the number covered for the current col
+    const segments = coveredColSegments(sensorsAndBeacons, col, lowBnd, upBnd);
+    const total = numCovered(segments);
+
+    // If it is less than fully covered record it
+    if (total < upBnd - lowBnd)
+      x = col;
+  }
+
+  // Calc frequency
+  const frequency = (x * 4000000) + y;
+
+  // Log output
+  console.log(`Distress Beacon Position: (${x},${y})`);
+  console.log(`Distress Beacon Frequency: ${frequency}`);
+
+});
+
+// Check a given row for the segments of that row covered by each sensor
+const coveredRowSegments = (sensorsAndBeacons, row, lowBnd, upBnd) => {
+  // Determine the segments of the current row are covered by each of the 
+  // sensors within the upper and lower bounds
   let coveredXs = [];
   for(const pair of sensorsAndBeacons){
+    // First find if this sensor touches this row
     const topRow = pair.sensor.y - pair.distance;
     const bottomRow = pair.sensor.y + pair.distance;
-    if(topRow <= critRow && critRow <= bottomRow){
-      const lrSize = pair.distance - Math.abs(critRow - pair.sensor.y);
-      const left = pair.sensor.x - lrSize;
-      const right = pair.sensor.x + lrSize;
+    // If it does then find out the left and right bound of the x values for this segment
+    if(topRow <= row && row <= bottomRow){
+      const lrSize = pair.distance - Math.abs(row - pair.sensor.y);
+      const left = Math.max(lowBnd, pair.sensor.x - lrSize);
+      const right = Math.min(upBnd, pair.sensor.x + lrSize);
       coveredXs.push({left: left, right: right});
     }
   }
 
-  // Bubble sort the points by the left value
-  for(let a = 0; a < coveredXs.length; a++){
-    for(let b = 0; b < coveredXs.length - a - 1; b++){
-      let result = coveredXs[b].left < coveredXs[b + 1].left
+  return coveredXs;
+}
+
+// Check a given col for the segments of that col covered by each sensor
+const coveredColSegments = (sensorsAndBeacons, col, lowBnd, upBnd) => {
+  // Determine the segments of the current col are covered by each of the 
+  // sensors within the upper and lower bounds
+  let coveredYs = [];
+  for(const pair of sensorsAndBeacons){
+    // First find if this sensor touches this col
+    const leftCol = pair.sensor.x - pair.distance;
+    const rightCol = pair.sensor.x + pair.distance;
+    // If it does then find out the left and right bound of the y values for this segment
+    if(leftCol <= col && col <= rightCol){
+      const lrSize = pair.distance - Math.abs(col - pair.sensor.x);
+      const left = Math.max(lowBnd, pair.sensor.y - lrSize);
+      const right = Math.min(upBnd, pair.sensor.y + lrSize);
+      coveredYs.push({left: left, right: right});
+    }
+  }
+
+  return coveredYs;
+}
+
+// Return the number of covered space for the given set of segments
+const numCovered = (segments) => {
+
+  // Bubble sort the segments by the left value to ensure that the 
+  // next value always has a higher or equal left value
+  for(let a = 0; a < segments.length; a++){
+    for(let b = 0; b < segments.length - a - 1; b++){
+      let result = segments[b].left < segments[b + 1].left
       if(result !== true){
-        swap(coveredXs, b, b + 1);
+        let temp = segments[b];
+        segments[b] = segments[b + 1];
+        segments[b + 1] = temp;
       }
     }
   }
 
+  // Find the total number of covered points along this line by 
+  // comparing the lengths of covered segments and checking if 
+  // they are contained or overlap their previous segments
   let total = 0;
-  let lowest = coveredXs[0].left;
-  let highest = coveredXs[0].right;
-  for(let i = 1; i < coveredXs; i++){
-    let cons = contains(lowest, highest, coveredXs[i].left, coveredXs[i].right);
-    let over = overlaps(lowest, highest, coveredXs[i].left, coveredXs[i].right);
+  // Start with the first segment
+  let lowest = segments[0].left;
+  let highest = segments[0].right;
+  // Iterate through each sorted segment after the first
+  for(let i = 1; i < segments.length; i++){
+    // Check for being contained by the previous and for overlaps
+    let cons = lowest <= segments[i].left && highest >= segments[i].right;
+    let over = Math.max(0, Math.min(highest, segments[i].right) - Math.max(lowest, segments[i].left));
     if (!cons){
+      // If not contained by but overlaping the next segment this
+      // must have a higher right value so treat them as one 
+      // segment and change the highest value
       if(over > 0)
-        highest= coveredXs[i].right;
+        highest= segments[i].right;
+      // Otherwise this is seperate segment. Total up the 
+      // current segment and set the highest and lowest 
+      // values to the new segment being tracked
       else{
         total += highest - lowest;
-        lowest = coveredXs[i].left;
-        highest = coveredXs[i].right;
+        lowest = segments[i].left;
+        highest = segments[i].right;
       }
     }
-
   }
+  // Add the final segment to the total
   total += highest - lowest;
 
-  // 2652668 too low
-  console.log(`Number of covered space on row 2000000: ${total}`);
-});
-
-// Basic swap of two values at specified indexes in the array
-const swap = (array, indexA, indexB) => {
-  let temp = array[indexA];
-  array[indexA] = array[indexB];
-  array[indexB] = temp;
-  return array;
-}
-
-const contains = (min1, max1, min2, max2) => {
-  return min1 <= min2 && max1 >= max2;
-}
-
-const overlaps = (min1, max1, min2, max2) => {
-  return Math.max(0, Math.min(max1, max2) - Math.max(min1, min2));
-}
-
-
-// Used for printing out the grid during testing.
-const print = (grid) => {
-  for(const lineGrid of grid){
-    let output = "";
-    for(const symbol of lineGrid){
-      output += symbol;
-    }
-    console.log(output);
-  }
+  return total;
 }
 
 // Parse the input into a workable object list
@@ -133,46 +204,4 @@ const parseInput = (fileContents) => {
   }
 
   return allSAndB;
-}
-
-// Create the grid used for this puzzle from the sensors and beacons info
-const createGrid = (allSAndB) => {
-  
-  // find the boundaries of the grid based on the sensors and beacons positions
-  let minX = Number.MAX_SAFE_INTEGER;
-  let maxX = Number.MIN_SAFE_INTEGER; 
-  let minY = Number.MAX_SAFE_INTEGER;
-  let maxY = Number.MIN_SAFE_INTEGER;
-  
-  // Find the bounds by using the sensors and the distance to the 
-  // beacon to make sure all sensor covered area will be included on the grid
-  for(const pair of allSAndB){
-    if(minX > pair.sensor.x - pair.distance)
-      minX = pair.sensor.x - pair.distance;
-    if(maxX < pair.sensor.x + pair.distance)
-      maxX = pair.sensor.x + pair.distance;
-    if(minY > pair.sensor.y - pair.distance)
-      minY = pair.sensor.y - pair.distance;
-    if(maxY < pair.sensor.y + pair.distance)
-      maxY = pair.sensor.y + pair.distance;
-  }
-
-  // Pre-Populate the grid with dots.
-  let grid = [];
-  let yLen = maxY - minY;
-  let xLen = maxX - minX;
-  for(let y = 0; y <= yLen; y++){
-    let gridRow = [];
-    for(let x = 0; x <= xLen; x++){
-      gridRow.push('.');
-    }
-    grid.push(gridRow);
-  }
-
-  // Return the grid
-  return {
-    grid: grid,
-    offsetX: minX,
-    offsetY: minY
-  }
 }
