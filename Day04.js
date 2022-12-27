@@ -25,7 +25,7 @@ open(filename)
 })
 .then((fileContents) => {
   // Setup variables
-  let secret = fileContents[0];//'bgvyzdsv';
+  let secret = fileContents[0];
   let found5Zeros = null;
   let found6Zeros = null;
 
