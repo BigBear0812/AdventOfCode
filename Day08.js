@@ -1,6 +1,5 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
-import { getHeapCodeStatistics } from "node:v8";
 
 // Puzzle for Day 8: https://adventofcode.com/2015/day/8
 
