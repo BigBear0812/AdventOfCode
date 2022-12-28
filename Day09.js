@@ -1,7 +1,5 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
-import { formatWithOptions } from "node:util";
-import { match } from "node:assert";
 
 // Puzzle for Day 9: https://adventofcode.com/2015/day/9
 
