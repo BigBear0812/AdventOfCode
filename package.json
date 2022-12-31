@@ -14,7 +14,8 @@
     "day09": "node Day09.js ./AOCPuzzlesInputs/2015/Day09_input.txt",
     "day10": "node Day10.js ./AOCPuzzlesInputs/2015/Day10_input.txt",
     "day11": "node Day11.js ./AOCPuzzlesInputs/2015/Day11_input.txt",
-    "day12": "node Day12.js ./AOCPuzzlesInputs/2015/Day12_input.txt"
+    "day12": "node Day12.js ./AOCPuzzlesInputs/2015/Day12_input.txt",
+    "day13": "node Day13.js ./AOCPuzzlesInputs/2015/Day13_input.txt"
   },
   "author": "Matthew Miller",
   "license": "ISC",
