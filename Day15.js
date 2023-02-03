@@ -1,6 +1,5 @@
 import process from "node:process";
 import { open } from "node:fs/promises";
-import { validateHeaderName } from "node:http";
 
 // Puzzle for Day 15: https://adventofcode.com/2015/day/15
 
