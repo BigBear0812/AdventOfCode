@@ -59,7 +59,8 @@ const leastExpensiveWin = (player, boss) => {
   let inital = {
     player: JSON.parse(JSON.stringify(player)),
     boss: JSON.parse(JSON.stringify(boss)),
-    effects: []
+    effects: [],
+    isPlayerTurn: true
   };
 
   let queue = [];
