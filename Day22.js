@@ -68,10 +68,17 @@ const leastExpensiveWin = (player, boss) => {
 
   while(queue.length > 1){
     let current = this.queue.shift();
+    // Process active effects
     for(let effect of current.effect){
-      if(effect.every !== null)
-        effect.every();
       
+      
+      effect.timer--;
+      if(effect.name === 'Poison'){
+
+      }
+      else if (effect.name === 'Recharge'){
+
+      }
     }
   }
 }
