@@ -23,13 +23,24 @@ open(filename)
   return fileContents;
 })
 .then((fileContents) => {
+  // Get the boss info from the input file and parse 
+  // it into a new contestant object
   let boss = parseInput(fileContents);
 
+  // Create a new contestant object for the player
   let player = new Contestant(50, 0, 500);
 
-  let LEW = leastExpensiveWin(player, boss);
+  // Find the least expensive win
+  let LEW = leastExpensiveWin(player, boss, false);
 
+  // Log output
   console.log(`Part1 : ${LEW}`);
+
+  // Find the least expensive win on hard mode for Part 2
+  let LEWHardMode = leastExpensiveWin(player, boss, true);
+
+  // Log output
+  console.log(`Part2 : ${LEWHardMode}`);
 });
 
 // Parse the boss info from the input file
@@ -44,10 +55,10 @@ const parseInput = (fileContents) => {
     let matches = line.match(reg);
     switch(matches[1]){
       case "Hit Points":
-        hp = matches[2];
+        hp = parseInt(matches[2]);
         break;
       case "Damage":
-        damage = matches[2];
+        damage = parseInt(matches[2]);
         break;
     }
   }
@@ -55,29 +66,132 @@ const parseInput = (fileContents) => {
   return new Contestant(hp, damage, 0);
 }
 
-const leastExpensiveWin = (player, boss) => {
+// Breadth First Search (BFS) implementation of looking for the least expensive win 
+const leastExpensiveWin = (player, boss, hardMode) => {
+  // The initial state of the game from the inputs
   let inital = {
     player: JSON.parse(JSON.stringify(player)),
     boss: JSON.parse(JSON.stringify(boss)),
     effects: [],
-    isPlayerTurn: true
+    isPlayerTurn: true,
+    manaSpent: 0
   };
 
+  // The queue of next possible state to consider
   let queue = [];
+  // Add the inital state to the queue
   queue.push(inital);
 
-  while(queue.length > 1){
-    let current = this.queue.shift();
-    // Process active effects
-    for(let effect of current.effect){
-      
-      
+  // Keep processing until there are no more states to process.
+  while(queue.length > 0){
+    // Take the next move off the front of the queue
+    let current = queue.shift();
+
+    // If this is hard more and it is the player's turn then 
+    // reduce their hp by one and check if this is a loss
+    if(hardMode && current.isPlayerTurn){
+      current.player.hp--;
+      if(current.player.hp <= 0)
+        continue;
+    }
+
+    // Check if the player hasenough mana tio cast a spell. 
+    // If not this is a lose so continue
+    if(current.player.mana < 53)
+      continue;
+
+    // Process active effects.
+    for(let effect of current.effects){
+      // Reduce the timer by one for this effect
       effect.timer--;
-      if(effect.name === 'Poison'){
+      // If this is poision boss loses 3 hp
+      if(effect.name === 'Poison')
+        current.boss.hp -= 3;
+      // If this is recharge the player gains 101 mana
+      else if (effect.name === 'Recharge')
+        current.player.mana += 101;
+      // If the shield effect has ended then remove the armor points from the player
+      else if (effect.name === 'Shield' && effect.timer === 0)
+        current.player.armor -= 7;
+      
+    }
+    
+    // Check if the boss lost from the poision
+    if(current.boss.hp <= 0){
+        return current.manaSpent;
+    }
 
+    // Remove effects that have run out of turns on their timer
+    current.effects = current.effects.filter(x => x.timer > 0);
+
+    // If this is a player turn
+    if(current.isPlayerTurn){
+      // Check the next possible move, one for each spell
+      for(let spell of spells){
+        // The potential next state
+        let temp = null;
+        // Check if this is the spell being evaluated. If there 
+        // is enough mana for it, and if it creates an effct 
+        // whether or not that effect is already running. If it 
+        // is allowed then create a new state for it in temp. 
+        if(spell === 'Magic Missle' && current.player.mana >= 53){
+          temp = JSON.parse(JSON.stringify(current));
+          temp.boss.hp -= 4;
+          temp.player.mana -= 53;
+          temp.manaSpent += 53;
+        }
+        else if(spell === 'Drain' && current.player.mana >= 73){
+          temp = JSON.parse(JSON.stringify(current));
+          temp.boss.hp -= 2;
+          temp.player.hp += 2;
+          temp.player.mana -= 73;
+          temp.manaSpent += 73;
+        }
+        else if(spell === 'Shield' && current.player.mana >= 113 && current.effects.find(x => x.name === 'Shield') === undefined){
+          temp = JSON.parse(JSON.stringify(current));
+          temp.player.armor += 7;
+          temp.effects.push({name: 'Shield', timer: 6});
+          temp.player.mana -= 113;
+          temp.manaSpent += 113;
+        }
+        else if(spell === 'Poison' && current.player.mana >= 173 && current.effects.find(x => x.name === 'Poison') === undefined){
+          temp = JSON.parse(JSON.stringify(current));
+          temp.effects.push({name: 'Poison', timer: 6});
+          temp.player.mana -= 173;
+          temp.manaSpent += 173;
+        }
+        else if(spell === 'Recharge' && current.player.mana >= 229 && current.effects.find(x => x.name === 'Recharge') === undefined){
+          temp = JSON.parse(JSON.stringify(current));
+          temp.effects.push({name: 'Recharge', timer: 5});
+          temp.player.mana -= 229;
+          temp.manaSpent += 229;
+        }
+
+        // Check if there is a next state to process
+        if(temp != null){
+          // Check if this next state is not a win and If not add it to the queue
+          if(temp.boss.hp > 0 ){
+            temp.isPlayerTurn = !temp.isPlayerTurn;
+            queue.push(temp);
+          }
+          // If this is a win then return the value
+          else if(temp.boss.hp <= 0)
+            return temp.manaSpent;
+        }
       }
-      else if (effect.name === 'Recharge'){
+    }
+    // Process the boss' turn
+    else{
+      // Find the amount of damage done taking into acount 
+      // the player's armor and a minimum of 1 damage 
+      let damage = current.boss.damage - current.player.armor;
+      damage = damage < 1 ? 1 : damage;
+      current.player.hp -= damage;
 
+      // If the player has not lost then add this to be evaluated again
+      if(current.player.hp > 0){
+        current.isPlayerTurn = !current.isPlayerTurn;
+        queue.push(current);
       }
     }
   }
@@ -93,41 +207,11 @@ class Contestant {
   }
 }
 
-class Spell {
-  constructor(name, cost, action){
-    this.name = name;
-    this.cost = cost;
-    this.action = action;
-  }
-}
-
-class Effect {
-  constructor(timer, name, start, every, end){
-    this.timer = timer;
-    this.name = name;
-    this.action = action;
-    this.start = start;
-    this.every = every;
-    this.end = end;
-  }
-}
-
+// The spells that can be cast
 const spells = [
-  new Spell('Magic Missile', 53, (player, boss) => {
-    boss.hp -= 4;
-  }),
-  new Spell('Drain', 73, (player, boss) => {
-    boss.hp -= 2;
-    player.hp += 2;
-  }),
-  new Spell('Shield', 113, (player, boss) => {
-    // Get rid of effects and hard code the functions, each state should just track names and timers for effects
-    return new Effect(6, 'Shield', (player, boss) => player.armor += 7, null, (player, boss) => player.armor -= 7);
-  }),
-  new Spell('Poison', 173, (player, boss) => {
-    return new Effect(6, 'Poison', null, (player, boss) => boss.hp -= 3, null);
-  }),
-  new Spell('Recharge', 229, (player, boss) => {
-    return new Effect(5, 'Recharge', null, (player, boss) => player.mana += 101, null);
-  }),
-]
+  'Magic Missle',
+  'Drain',
+  'Shield',
+  'Poison',
+  'Recharge'
+];
