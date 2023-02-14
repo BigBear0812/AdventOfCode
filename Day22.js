@@ -167,7 +167,10 @@ const leastExpensiveWin = (player, boss, hardMode) => {
           temp.manaSpent += 229;
         }
 
-        // Check if there is a next state to process
+        // IMPORTANT!!! 
+        // Check if there is a next state to process. If no next 
+        // state this means no move was made. The player must 
+        // always make a move or this is not valid
         if(temp != null){
           // Check if this next state is not a win and If not add it to the queue
           if(temp.boss.hp > 0 ){
