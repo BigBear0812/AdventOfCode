@@ -30,13 +30,13 @@ open(filename)
   let nextGood1 = nextGoodPassword(oldPassword);
 
   // Log output
-  console.log(`First Next Good Password: ${nextGood1}`);
+  console.log('Part 1:', nextGood1);
 
   // Find the second next good password
   let nextGood2 = nextGoodPassword(nextGood1);
 
   // Log output
-  console.log(`Second Next Good Password: ${nextGood2}`);
+  console.log('Part 2:', nextGood2);
   
 });
 

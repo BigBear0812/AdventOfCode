@@ -58,8 +58,8 @@ const processLines = async(file) => {
     }
 
     // Log output
-    console.log(`House that got at least one present in year 1: ${houseLocsY1.length}`);
-    console.log(`House that got at least one present in year 2: ${houseLocsY2.length}`);
+    console.log('Part 1:', houseLocsY1.length);
+    console.log('Part 2:', houseLocsY2.length);
   }
 
 }

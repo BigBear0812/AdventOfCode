@@ -75,8 +75,8 @@ const processLines = async(file) => {
   }
 
   // Log output
-  console.log(`Number of nice strings Part 1: ${niceTotal1}`);
-  console.log(`Number of nice strings Part 2: ${niceTotal2}`);
+  console.log('Part 1:', niceTotal1);
+  console.log('Part 2:', niceTotal2);
 }
 
 // Method for finding how many times a particular pair of letter 

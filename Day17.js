@@ -30,7 +30,7 @@ open(filename)
   let combinations = findAllCombinations(containers, 150);
 
   // Log output
-  console.log(`Number of Combinations Part 1: ${combinations.length}`);
+  console.log('Part 1:', combinations.length);
 
   // Find the number of container combinations that all 
   // use the minimum number of containers possible
@@ -55,7 +55,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Number of Combinations Part 2: ${minComboCount}`)
+  console.log('Part 2:', minComboCount);
 });
 
 // Parse input values into an array of integers

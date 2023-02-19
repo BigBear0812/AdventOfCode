@@ -36,13 +36,13 @@ open(filename)
   let LEW = leastExpensiveWin(boss, player, combos);
 
   // Log output
-  console.log(`Part 1: ${LEW}`);
+  console.log('Part 1:', LEW);
   
   // Get the most expensive loss
   let MEL = mostExpensiveLose(boss, player, combos);
 
   // Log output
-  console.log(`Part 2: ${MEL}`);
+  console.log('Part 2:', MEL);
 
 });
 

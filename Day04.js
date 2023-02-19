@@ -39,6 +39,6 @@ open(filename)
   }
 
   // Log output
-  console.log(`Lowest positive number for 5 zero hash: ${found5Zeros}`);
-  console.log(`Lowest positive number for 6 zero hash: ${found6Zeros}`);
+  console.log('Part 1:', found5Zeros);
+  console.log('Part 2:', found6Zeros);
 });

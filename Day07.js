@@ -109,7 +109,7 @@ open(filename)
     }
   }
   // Log Output
-  console.log(`Value of wire a Part 1: ${wires["a"].value}`);
+  console.log('Part 1:', wires["a"].value);
 
   // Copy wire a's value to the value of wire b
   wires["b"].value = wires["a"].value
@@ -133,7 +133,7 @@ open(filename)
   wires["a"].value = getValue(wires["a"].command);
   
   // Log Output
-  console.log(`Value of wire a Part 2: ${wires["a"].value}`);
+  console.log('Part 2:', wires["a"].value);
 
 });
 

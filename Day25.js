@@ -33,7 +33,7 @@ open(filename)
   let code = calcCode(nthVal);
 
   // Log output
-  console.log('Part 1: ', code);
+  console.log('Part 1:', code);
 });
 
 // Parse in the row and colum using reg ex from the first line of the input

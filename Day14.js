@@ -31,12 +31,12 @@ open(filename)
   // Find the longest distance travelled during the time period
   let longestDis = longestDistance(reindeer, time);
   // Log output
-  console.log(`Longest Distance: ${longestDis}`);
+  console.log('Part 1:', longestDis);
 
   // Find the score of the reindeer with the most points over the time period.
   let points = mostPoints(reindeer, time);
   // Log output
-  console.log(`Highest Points: ${points}`);
+  console.log('Part 2:', points);
 
 });
 

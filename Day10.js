@@ -31,8 +31,8 @@ open(filename)
   let fifty = lookAndSayNumberSequence(start, 50);
 
   // Log output
-  console.log(`Length after 40 iterations: ${forty.length}`);
-  console.log(`Length after 50 iterations: ${fifty.length}`);
+  console.log('Part 1:', forty.length);
+  console.log('Part 2:', fifty.length);
 });
 
 // Look-and-Say number sequence iterator

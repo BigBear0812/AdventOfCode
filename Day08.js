@@ -43,6 +43,6 @@ open(filename)
   }
 
   // Log output for Parts 1 and 2
-  console.log(`Part1: ${codeTotal - memoryTotal}`);
-  console.log(`Part2: ${encodedTotal - codeTotal}`);
+  console.log('Part1:', codeTotal - memoryTotal);
+  console.log('Part2:', encodedTotal - codeTotal);
 });

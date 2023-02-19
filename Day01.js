@@ -44,6 +44,6 @@ const processLines = async(file) => {
   }
 
   // Log output
-  console.log(`Floors Santa must visit floor: ${floors[0].currentFloor}`);
-  console.log(`First char to send the floor number negative: ${floors[0].firstCharNegative}`);
+  console.log('Part 1:', floors[0].currentFloor);
+  console.log('Part 2:', floors[0].firstCharNegative);
 }

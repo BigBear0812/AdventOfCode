@@ -36,7 +36,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Best arrangement score Part 1: ${highScore}`);
+  console.log('Part 1:', highScore);
 
   // Send file contents to Part 2
   return fileContents;
@@ -55,7 +55,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Best arrangement score Part 2: ${highScore}`);
+  console.log('Part 2:', highScore);
 });
 
 // Parse the input into a rules map

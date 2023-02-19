@@ -71,7 +71,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Total Lights On: ${total}`);
+  console.log('Part 1:', total);
 
   return fileContents;
 })
@@ -119,7 +119,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Total Light Brightness: ${total}`);
+  console.log('Part 2:', total);
 });
 
 const parseLine = (line) => {

@@ -33,7 +33,7 @@ open(filename)
   let count = countLightsOn(result);
 
   // Log output
-  console.log(`Part 1: ${count}`);
+  console.log('Part 1:', count);
 
   // Pass fileContents to part 2
   return fileContents;
@@ -49,7 +49,7 @@ open(filename)
   let count = countLightsOn(result);
 
   // Log output
-  console.log(`Part 2: ${count}`);
+  console.log('Part 2:', count);
 });
 
 // Parse the input file lines into a 2 diemnsional array

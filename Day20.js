@@ -30,14 +30,14 @@ open(filename)
   let house = findHouse(totalPresents, 10, null, 0);
 
   // Log output
-  console.log(`Part 1: ${house}`);
+  console.log('Part 1:', house);
 
   // Find the house for part two expecting that it will be a higher 
   // number than part one due to the 50 house limit
   let house2 = findHouse(totalPresents, 11, 50, house);
 
   // Log output
-  console.log(`Part 2: ${house2}`);
+  console.log('Part 2:', house2);
 });
 
 // Solution for find the house number based on the situation

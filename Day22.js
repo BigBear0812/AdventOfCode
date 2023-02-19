@@ -34,13 +34,13 @@ open(filename)
   let LEW = leastExpensiveWin(player, boss, false);
 
   // Log output
-  console.log(`Part1 : ${LEW}`);
+  console.log('Part 1:', LEW);
 
   // Find the least expensive win on hard mode for Part 2
   let LEWHardMode = leastExpensiveWin(player, boss, true);
 
   // Log output
-  console.log(`Part2 : ${LEWHardMode}`);
+  console.log('Part 2:', LEWHardMode);
 });
 
 // Parse the boss info from the input file

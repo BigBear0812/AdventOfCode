@@ -48,8 +48,8 @@ open(filename)
   }
 
   // Log output
-  console.log(`Minimum length visting all cities: ${min}`);
-  console.log(`Maximum length visting all cities: ${max}`);
+  console.log('Part 1:', min);
+  console.log('Part 2:', max);
 });
 
 // Parse the input

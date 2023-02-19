@@ -44,13 +44,13 @@ open(filename)
   let match = findMatchingSuePart1(sues, sample);
 
   // Log output
-  console.log(`Part1: Aunt ${match}`);
+  console.log('Part1:', match);
 
   // Find Aunt Sue matching Part 2's scenario
   let match2 = findMatchingSuePart2(sues, sample);
 
   // Log output
-  console.log(`Part2: Aunt ${match2}`);
+  console.log('Part2:', match2);
 
 });
 

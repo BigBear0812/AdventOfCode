@@ -54,8 +54,8 @@ const processLines = async(file) => {
   }
 
   // Log output
-  console.log(`Total wrapping paper (sqft): ${grandTotalWrappingPaper}`);
-  console.log(`Total Ribbon (ft) ${grandTotalRibbon}`);
+  console.log('Part 1:', grandTotalWrappingPaper);
+  console.log('Part 2:', grandTotalRibbon);
 }
 
 // Basic bubble sorting algorithm
