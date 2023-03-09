@@ -1,7 +1,7 @@
 {
-  "name": "adventofcode2022",
+  "name": "adventofcode",
   "version": "1.0.0",
-  "description": "Advent of Code 2022",
+  "description": "Advent of Code",
   "scripts": {
     "day01": "node Day01.js ./AOCPuzzlesInputs/2022/Day01_input.txt",
     "day02": "node Day02.js ./AOCPuzzlesInputs/2022/Day02_input.txt",
