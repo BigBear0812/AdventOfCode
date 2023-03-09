@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 21: https://adventofcode.com/2022/day/21
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+const part1 = (fileContents) => {
   // Parse file contents
   let monkeys = parseInput(fileContents);
 
@@ -30,12 +13,10 @@ open(filename)
   let result = evaluateMonkeys(monkeys, 'root', new Map());
 
   // Log output
-  console.log(`ROOT Value: ${result}`);
+  console.log('Part 1:', result);
+}
 
-  // Pass the file contents to Part 2
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   // Parse file contents
   let monkeys = parseInput(fileContents);
 
@@ -75,9 +56,9 @@ open(filename)
   let result = evaluateMonkeys(monkeys, 'humn', resolvedMonkeys);
 
   // Log output
-  console.log(`HUMN Value: ${result}`);
+  console.log('Part 2:', result);
   
-});
+}
 
 // Parse the input into a map of key value pairs. Some pairs 
 // will be value and some expressions to be evaluated

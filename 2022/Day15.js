@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 15: https://adventofcode.com/2022/day/15
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+const part1 = (fileContents) => { 
   // The row we are concerned with
   const critRow = 2000000;
 
@@ -34,11 +17,10 @@ open(filename)
   const total = numCovered(segments);
 
   // Log output
-  console.log(`Number of covered spaces on row 2000000: ${total}`);
+  console.log('Part 1:', total);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   // Boundaries for the saearch area
   const lowBnd = 0;
   const upBnd = 4000000;
@@ -75,10 +57,8 @@ open(filename)
   const frequency = (x * 4000000) + y;
 
   // Log output
-  console.log(`Distress Beacon Position: (${x},${y})`);
-  console.log(`Distress Beacon Frequency: ${frequency}`);
-
-});
+  console.log('Part 2:', frequency);
+}
 
 // Check a given row for the segments of that row covered by each sensor
 const coveredRowSegments = (sensorsAndBeacons, row, lowBnd, upBnd) => {

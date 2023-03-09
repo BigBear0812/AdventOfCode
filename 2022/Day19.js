@@ -1,43 +1,27 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 19: https://adventofcode.com/2022/day/19
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  let blueprints = part1(fileContents);
+  part2(blueprints);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
+const part1 = (fileContents) => {
+  // Parse in all of the blueprints
+  let blueprints = parseInput(fileContents);
 
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
-    // Parse in all of the blueprints
-    let blueprints = parseInput(fileContents);
+  // Process each blueprint for the given number of minutes
+  let results = processBlueprints(blueprints, 24);
 
-    // Process each blueprint for the given number of minutes
-    let results = processBlueprints(blueprints, 24);
+  // Get the sum of all quality values for each blueprint
+  let total = results.reduce((total, geodes, index) => total + (geodes * index), 0);
 
-    // Get the sum of all quality values for each blueprint
-    let total = results.reduce((total, geodes, index) => total + (geodes * index), 0);
+  // Log output
+  console.log('Part 1:', total);
 
-    // Log output
-    console.log(`Total Part 1: ${total}`);
+  return blueprints;
+}
 
-    return blueprints;
-})
-.then((blueprints) => {
+const part2 = (blueprints) => {
   // Process only the first 3 blueprints for the given number of minutes
   let results = processBlueprints(blueprints.slice(0, 3), 32);
 
@@ -45,8 +29,8 @@ open(filename)
   let total = results.reduce((total, geodes) => total * geodes, 1);
 
   // Log output
-  console.log(`Total Part 2: ${total}`);
-});
+  console.log('Part 2:', total);
+}
 
 // Parse the input line by line using regex
 const parseInput = (fileContents) => {

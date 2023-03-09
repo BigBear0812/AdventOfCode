@@ -1,30 +1,12 @@
 // Solution Inspired by: https://github.com/mebeim/aoc/blob/master/2022/README.md#day-16---proboscidea-volcanium
-
-import process, { pid } from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 16: https://adventofcode.com/2022/day/16
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  let map = part1(fileContents);
+  part2(map);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+const part1 = (fileContents) => { 
   // Starting values
   const startValve = 'AA';
   let timeLeft = 30;
@@ -42,12 +24,13 @@ open(filename)
   }
 
   // Log output
-  console.log(`Total Water Released 1: ${highest}`);
+  console.log('Part 1:', highest);
 
   // Pass the parsed input to Part 2
   return input;
-})
-.then((map) => {
+}
+
+const part2 = (map) => {
   // Starting values
   const startValve = 'AA';
   let timeLeft = 26;
@@ -79,8 +62,8 @@ open(filename)
   }
 
   // Log output
-  console.log(`Total Water Released 2: ${highest}`);
-});
+  console.log('Part 2:', highest);
+}
 
 // Check if to arrays have any values in common
 const arraysIntersect = (arrayA, arrayB) => {

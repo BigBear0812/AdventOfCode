@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 13: https://adventofcode.com/2022/day/13
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+const part1 = (fileContents) => { 
   // Keep a running total of the sumof the inidices of the correct packets
   let runningTotal = 0;
   
@@ -39,11 +22,10 @@ open(filename)
   }
 
   // Log output
-  console.log(`Sum of the packets indicies in the right order: ${runningTotal}`);
+  console.log('Part 1:', runningTotal);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   // Parse all packets into an array
   let packets = fileContents.filter(x => x !== '').map(x => JSON.parse(x));
   // Add divider packets into the array
@@ -69,8 +51,8 @@ open(filename)
   let final = divider1Index * divider2Index;
 
   // Log output
-  console.log(`The decoder key for the distress signal: ${final}`);
-});
+  console.log('Part 2:', final);
+}
 
 // Basic swap of two values at specified indexes in the array
 const swap = (array, indexA, indexB) => {

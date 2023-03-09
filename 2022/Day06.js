@@ -1,29 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-import { copyFile } from "node:fs";
-
 // Puzzle for Day 6: https://adventofcode.com/2022/day/6
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+export const run = (fileContents) => { 
   // All data should be on the first line
   let data = fileContents[0];
 
@@ -33,10 +10,10 @@ open(filename)
   let startOfMessageMarker = detectStartOf(data, 14);
   
   // Log output
-  console.log(`Start of Packet Marker is at: ${startOfPacketMarker}`);
-  console.log(`Start of Message Marker is at: ${startOfMessageMarker}`);
+  console.log('Part 1:', startOfPacketMarker);
+  console.log('Part 2:', startOfMessageMarker);
 
-});
+}
 
 const detectStartOf = (data, bufferSize) => {
   // The start of marker needs an invalid value to 

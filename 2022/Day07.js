@@ -1,29 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-import { copyFile } from "node:fs";
-
 // Puzzle for Day 7: https://adventofcode.com/2022/day/7
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+export const run = (fileContents) => { 
   // Setup reg ex to parse incoming lines of text
   const cmdReg = new RegExp(/\$ (cd|ls) *(.+)*/);
   const fileReg = new RegExp(/(\d+) (.+)/);
@@ -64,7 +41,7 @@ open(filename)
   let result = traverseFolders(fileSystem, 100000);
   
   // Log Output Part 1
-  console.log(`Total size of folders under 100000: ${result.runningTotal}`);
+  console.log('Part 1:', result.runningTotal);
 
   // Calculate the amount fo space that minimum amount of space 
   // that needs to be freed up to accommodate the space needed
@@ -82,9 +59,9 @@ open(filename)
   const smallest = largeEnough[0];
   
   // Log Output Part 2
-  console.log(`Smallest folder to delete that is large enough to delete: ${smallest}`);
+  console.log('Part 2:', smallest);
 
-});
+}
 
 const traverseFolders = (folder, part1MaxSize) => {
   // Find the size of all files in this folder

@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 20: https://adventofcode.com/2022/day/20
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+const part1 = (fileContents) => {
   // Parse file input
   let file = parseInput(fileContents, 1);
   
@@ -36,11 +19,10 @@ open(filename)
   let sum = one + two + three;
 
   // Log output
-  console.log(`Part 1 sum of items at 1000, 2000, and 3000: ${sum}`);
+  console.log('Part 1:', sum);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   // Parse file input
   let file = parseInput(fileContents, 811589153);
   
@@ -54,8 +36,8 @@ open(filename)
   let sum = one + two + three;
 
   // Log output 
-  console.log(`Part 2 sum of items at 1000, 2000, and 3000: ${sum}`);
-});
+  console.log('Part 2:', sum);
+}
 
 // Parse each line of the input as a seperate number multiplied by the specified mutiplier.
 // Insert each number as a node into the linked list in the order they are in the file

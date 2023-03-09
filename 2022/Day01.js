@@ -1,32 +1,13 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 1: https://adventofcode.com/2022/day/1
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(file => {
-  processLines(file)
-});
-
-// Process all of the lines of the file after it has been opened
-const processLines = async(file) => {
+export const run = (fileContents) => {
   // The running total for the current pack
   let runningTotal = 0;
   // The values of all packs
   let allTotals = [];
 
   // Read in all of the lines one at a time
-  for await (const line of file.readLines()) {
+  for (const line of fileContents) {
     // If the line has a value the parse the int value and add it to the running total
     if(line){
       runningTotal += parseInt(line);
@@ -47,8 +28,8 @@ const processLines = async(file) => {
   const third = allTotals[allTotals.length-3];
   const total = first + second + third;
 
-  console.log(`Highest 3 Packs: ${first}, ${second}, ${third}`);
-  console.log(`Highest 3 Total: ${total}`);
+  console.log('Part 1:', first);
+  console.log('Part 2:', total);
 }
 
 const quickSort = (array, leftIndex, rightIndex) => {

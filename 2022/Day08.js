@@ -1,31 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-import { copyFile } from "node:fs";
-import { Console } from "node:console";
-import { getCipherInfo } from "node:crypto";
-
 // Puzzle for Day 8: https://adventofcode.com/2022/day/8
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
   // The grid of all tree heights
   let grid = []
   
@@ -109,6 +84,6 @@ open(filename)
   visibleTrees += (grid.length * 4) - 4;
 
   // Log output
-  console.log(`Visible Number of Trees: ${visibleTrees}`);
-  console.log(`Highest Scenic Score: ${highScenicScore}`);
-})
+  console.log('Part 1:', visibleTrees);
+  console.log('Part 2:', highScenicScore);
+}

@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 22: https://adventofcode.com/2022/day/22
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+const part1 = (fileContents) => {
   // Parse the input file into a useable grid map and instructions set
   let input = parseInput(fileContents);
   // Navigate the map based on part 1 rules
@@ -42,11 +25,10 @@ open(filename)
   let number = 1000 * (finalPos.y + 1) + 4 * (finalPos.x + 1) + facing;
 
   // Log output
-  console.log(`Final Number Part 1: ${number}`);
+  console.log('Part 1:', number);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   // Parse the input file into a useable grid map and instructions set
   let input = parseInput(fileContents);
   // Convert the 2D map into a 3D cube
@@ -71,8 +53,8 @@ open(filename)
   let number = 1000 * (finalY) + 4 * (finalX) + facing;
 
   // Log output
-  console.log(`Final Number Part 2: ${number}`);
-});
+  console.log('Part 2:', number);
+}
 
 // Parse the input from lines of a file into a 2D map and array if instructions
 const parseInput = (fileContents) => {

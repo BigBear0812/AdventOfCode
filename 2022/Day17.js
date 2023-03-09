@@ -1,28 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 17: https://adventofcode.com/2022/day/17
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+const part1 = (fileContents) => { 
   const maxRocks = 2022;
   // Jet pattern parsed in from file
   let jetPattern = fileContents[0].split('');
@@ -31,11 +14,10 @@ open(filename)
   let highest = runSimulation(maxRocks, jetPattern);
 
   // Log output
-  console.log(`Highest point after ${maxRocks} rocks: ${highest}`);
+  console.log('Part 1:', highest);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
   const maxRocks = 1000000000000;
   // Jet pattern parsed in from file
   let jetPattern = fileContents[0].split('');
@@ -44,8 +26,8 @@ open(filename)
   let highest = runSimulation(maxRocks, jetPattern);
 
   // Log output
-  console.log(`Highest point after ${maxRocks} rocks: ${highest}`);
-});
+  console.log('Part 2:', highest);
+}
 
 const runSimulation = (maxRocks, jetPattern) => {
   

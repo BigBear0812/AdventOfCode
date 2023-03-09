@@ -4,26 +4,7 @@ import { copyFile } from "node:fs";
 
 // Puzzle for Day 5: https://adventofcode.com/2022/day/5
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => { 
+export const run = (fileContents) => { 
   
   // Objects to hold our results in
   let stacks1 = {};
@@ -109,7 +90,7 @@ open(filename)
   }
 
   // Log output
-  console.log(`Boxes on top of each stack Part 1: ${boxesOnTop1}`);
-  console.log(`Boxes on top of each stack Part 2: ${boxesOnTop2}`);
+  console.log('Part 1:', boxesOnTop1);
+  console.log('Part 2:', boxesOnTop2);
 
-});
+}

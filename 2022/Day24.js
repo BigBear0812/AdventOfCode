@@ -1,28 +1,7 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 24: https://adventofcode.com/2022/day/24
+// TODO: Overall this takes a few minutes to complete each trip. It would be good to improve this in the future.
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
   // Parse input for blizzard positions, start, end, maxX, and maxY
   let input = parseInput(fileContents);
 
@@ -30,7 +9,7 @@ open(filename)
   let trip1 = searchBestPath({x: input.start.x, y: input.start.y, blizzards: input.blizzards}, input.end, input.x, input.y); 
   
   // Log output
-  console.log(`Total time for Part 1: ${trip1.time}`);
+  console.log('Part 1:', trip1.time);
 
   // Go back to start from the end based on the blizzard configuration from the end of trip1
   let trip2 = searchBestPath({x: trip1.x, y: trip1.y, blizzards : trip1.blizzards}, input.start, input.x, input.y);
@@ -39,10 +18,8 @@ open(filename)
   let trip3 = searchBestPath({x: trip2.x, y: trip2.y, blizzards : trip2.blizzards}, input.end, input.x, input.y);
 
   // Log output
-  console.log(`Total time for Part 2: ${trip1.time + trip2.time + trip3.time}`)
-
-  // TODO: Overall this takes a few minutes to complete each trip. It would be good to improve this in the future.
-});
+  console.log('Part 2:', trip1.time + trip2.time + trip3.time);
+}
 
 // Use Breadth First Search (BFS) to find the shortest path through the blizzard field
 const searchBestPath = (start, end, maxX, maxY) => {

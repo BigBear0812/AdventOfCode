@@ -1,29 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-import { ifError } from "node:assert";
-
 // Puzzle for Day 25: https://adventofcode.com/2022/day/25
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
 
   // Convert each line of the input from SNAFU to Decimal and add them together
   let total = 0;
@@ -31,15 +8,12 @@ open(filename)
     total += snafuToDecmial(line);
   }
 
-  // Log the decimal sum
-  console.log(`Decmial Total: ${total}`);
-
   // Convert the sum back to SNAFU
   let output = decimalToSnafu(total);
 
   // Log the SNAFU sum
-  console.log(`SNAFU Total: ${output}`);
-});
+  console.log('Part 1:', output);
+}
 
 // Convert from decimal to SNAFU
 const decimalToSnafu = (decimalNum) => {

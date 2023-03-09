@@ -1,29 +1,11 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 3: https://adventofcode.com/2022/day/3
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
+export const run = (fileContents)=> {
+  part1(fileContents);
+  part2(fileContents);
 }
 
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the lines of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then(fileContents => {
-  // Part 1
+const part1 = (fileContents) => {
   let totalMatchedItemValues = 0;
 
   for (const line of fileContents) {
@@ -33,11 +15,10 @@ open(filename)
     totalMatchedItemValues += findCommonSymbolValue([compartment1, compartment2])
   }
 
-  console.log(`Total item priorities in both compartments for all rucksacks: ${totalMatchedItemValues}`);
-  return fileContents;
-})
-.then(fileContents => {
-  // Part 2
+  console.log('Part 1:', totalMatchedItemValues);
+}
+
+const part2 = (fileContents) => {
   let totalBadgePriorities = 0;
 
   for (let x = 0; x < fileContents.length; x=x+3) {
@@ -48,8 +29,8 @@ open(filename)
     totalBadgePriorities += findCommonSymbolValue([elf1, elf2, elf3]);
   }
 
-  console.log(`Total badge priorities for each elf group: ${totalBadgePriorities}`);
-});
+  console.log('Part 2:', totalBadgePriorities);
+}
 
 // Find the common char between the strings in the array 
 // and return the priority value for it
