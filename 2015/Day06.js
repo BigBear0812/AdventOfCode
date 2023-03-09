@@ -1,31 +1,14 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 6: https://adventofcode.com/2015/day/6
-// TODO: Possibly redo this using regex. 
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
 const xLen = 1000;
 const yLen = 1000;
 
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the line of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
+  part1(fileContents);
+  part2(fileContents);
+}
+
+const part1 = (fileContents) => {
   // Off false
   // On  true
 
@@ -72,10 +55,9 @@ open(filename)
 
   // Log output
   console.log('Part 1:', total);
+}
 
-  return fileContents;
-})
-.then((fileContents) => {
+const part2 = (fileContents) => {
 
   // Create the grid
   let grid = [];
@@ -120,7 +102,9 @@ open(filename)
 
   // Log output
   console.log('Part 2:', total);
-});
+};
+
+
 
 const parseLine = (line) => {
   const regex = new RegExp('([turnofgle ]+) (\\d+),(\\d+) through (\\d+),(\\d+)');

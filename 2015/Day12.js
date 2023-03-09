@@ -1,28 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 12: https://adventofcode.com/2015/day/12
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the line of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
   // Parse the input's first line as a JSON object
   let input = JSON.parse(fileContents[0]);
 
@@ -35,7 +13,7 @@ open(filename)
   // Log output
   console.log('Part 1:', total1);
   console.log('Part 2:', total2);
-});
+}
 
 // Fin all of the numbers in the object and add them together. This uses a Breadth First Search (BFS) 
 // approach as opposed to a recursive approach since the recursive approach gave a stack overflow error.

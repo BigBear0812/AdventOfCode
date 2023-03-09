@@ -1,29 +1,7 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
+// Puzzle for Day 4: https://adventofcode.com/2015/day/4
 import { createHash } from 'node:crypto'
 
-// Puzzle for Day 4: https://adventofcode.com/2015/day/4
-
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the line of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
   // Setup variables
   let secret = fileContents[0];
   let found5Zeros = null;
@@ -41,4 +19,4 @@ open(filename)
   // Log output
   console.log('Part 1:', found5Zeros);
   console.log('Part 2:', found6Zeros);
-});
+}

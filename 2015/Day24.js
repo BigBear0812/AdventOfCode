@@ -1,28 +1,6 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-
 // Puzzle for Day 24: https://adventofcode.com/2015/day/24
 
-// Check that the right number of arguments are present in the command
-if (process.argv.length !== 3){
-  console.log('Please specify an input file.');
-  process.exit(1);
-}
-
-// Get the file name from the last argv value
-const filename = process.argv[2];
-
-// Open the file and pass it ot our main processing 
-open(filename)
-.then(async(file) => {
-  // Process all of the line of the file after it has been opened
-  let fileContents = []
-  for await (const line of file.readLines()) {
-    fileContents.push(line);
-  }
-  return fileContents;
-})
-.then((fileContents) => {
+export const run = (fileContents) => {
   // Parse the input and get the packegs weights as a list of numbers
   let packages = parseInput(fileContents);
 
@@ -43,7 +21,7 @@ open(filename)
 
   // Log output
   console.log('Part 2:', result2.QE);
-});
+}
 
 // Parse each line of the input as an int into an array
 const parseInput = (fileContents) => {
