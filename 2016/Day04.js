@@ -110,7 +110,7 @@ const findValidRooms = (roomData) => {
       }
     }
   
-    // Get a list where the each index withw value has a list of letters 
+    // Get a list where the each index with value has a list of letters 
     // that all appeared that many time in the name
     let orderedCounts = [];
     // For each key, value in the map
