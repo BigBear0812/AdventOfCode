@@ -14,8 +14,9 @@ export const run = (fileContents) => {
   console.log("Part 2:", results.locationsBelow50);
 }
 
-// Get the number of steps to the goal and the number of 
-// unique locations under 50 steps from the start
+// Breadth Frist Search (BFS) to get the number of 
+// steps to the goal and the number of unique locations 
+// under 50 steps from the start
 const stepsToGoal = (favNum, goal) => {
   // Start
   let startingLocation = {x: 1, y: 1};
