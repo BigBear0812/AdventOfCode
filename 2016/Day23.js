@@ -8,10 +8,10 @@ export const run = (fileContents) => {
   // is 7 but the constant multiplication by copying and incrementing 
   // becomes extremely slow as numbers increase. This means that we 
   // need to implement a multiply function which is hinted at in the 
-  // puzzle. Replacing the first line with multiply and then filling 
-  // in the rest of the commands with things that always cause no 
-  // action and the program to continue allows the rest of the program 
-  // to function normally and efficiently.
+  // puzzle. Do this by reaplcing the first line with multiply and 
+  // then filling in the rest of the commands with things that always 
+  // cause no action. This allows the rest of the program to function 
+  // normally and efficiently.
   commands.splice(2, 8, 
     {command: 'mul', val1: 'b', val2: 'a'}, 
     {command: 'jnz', val1: 0, val2: 0}, 
