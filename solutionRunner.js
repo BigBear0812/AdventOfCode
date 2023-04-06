@@ -31,9 +31,9 @@ open(filename)
   import(module).then(mod => {
     let result = mod.run(fileContents);
 
-    if(result.part1)
+    if(result.part1 !== null && result.part1 !== undefined)
       console.log("Part 1:", result.part1);
-    if(result.part2)
+    if(result.part2 !== null && result.part2 !== undefined)
       console.log("Part 2:", result.part2);
   });
 });
