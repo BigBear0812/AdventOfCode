@@ -25,7 +25,5 @@ export const run = (fileContents) => {
     floors.push({ 'currentFloor': currentFloor, 'firstCharNegative': firstCharNegative });
   }
 
-  // Log output
-  console.log('Part 1:', floors[0].currentFloor);
-  console.log('Part 2:', floors[0].firstCharNegative);
+  return {part1: floors[0].currentFloor, part2: floors[0].firstCharNegative};
 }

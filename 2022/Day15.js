@@ -1,8 +1,10 @@
 // Puzzle for Day 15: https://adventofcode.com/2022/day/15
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => { 
@@ -16,8 +18,7 @@ const part1 = (fileContents) => {
   const segments = coveredRowSegments(sensorsAndBeacons, critRow, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
   const total = numCovered(segments);
 
-  // Log output
-  console.log('Part 1:', total);
+  return total;
 }
 
 const part2 = (fileContents) => {
@@ -56,8 +57,7 @@ const part2 = (fileContents) => {
   // Calc frequency
   const frequency = (x * 4000000) + y;
 
-  // Log output
-  console.log('Part 2:', frequency);
+  return frequency;
 }
 
 // Check a given row for the segments of that row covered by each sensor

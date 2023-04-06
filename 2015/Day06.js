@@ -4,8 +4,10 @@ const xLen = 1000;
 const yLen = 1000;
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => {

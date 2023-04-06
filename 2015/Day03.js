@@ -38,12 +38,9 @@ export const run = (fileContents) => {
       // Alternate between Santa and Robo-Santa
       moveSanta = !moveSanta;
     }
-
-    // Log output
-    console.log('Part 1:', houseLocsY1.length);
-    console.log('Part 2:', houseLocsY2.length);
   }
 
+  return {part1: houseLocsY1.length, part2: houseLocsY2.length};
 }
 
 // Method to update the position of a location based on the given directional character

@@ -8,14 +8,11 @@ export const run = (fileContents) => {
 
   // Find the longest distance travelled during the time period
   let longestDis = longestDistance(reindeer, time);
-  // Log output
-  console.log('Part 1:', longestDis);
 
   // Find the score of the reindeer with the most points over the time period.
   let points = mostPoints(reindeer, time);
-  // Log output
-  console.log('Part 2:', points);
 
+  return {part1: longestDis, part2: points};
 }
 
 // Parse the text input into reindeer objects

@@ -4,8 +4,6 @@ export const run = (fileContents) => {
   let floors = parseInput(fileContents);
 
   let moves1 = leastNumberOfSteps(floors);
-  
-  console.log("Part 1:", moves1);
 
   floors[0].microchips.push('elerium');
   floors[0].generators.push('elerium');
@@ -13,8 +11,8 @@ export const run = (fileContents) => {
   floors[0].generators.push('dilithium');
 
   let moves2 = leastNumberOfSteps(floors);
-  
-  console.log("Part 2:", moves2);
+
+  return {part1: moves1, part2: moves2};
 }
 
 // Use Breadth First Search (BFS) to get the least number of steps 

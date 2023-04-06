@@ -25,9 +25,7 @@ export const run = (fileContents) => {
     max = Math.max(max, result);
   }
 
-  // Log output
-  console.log('Part 1:', min);
-  console.log('Part 2:', max);
+  return {part1: min, part2: max};
 }
 
 // Parse the input

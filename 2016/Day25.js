@@ -7,8 +7,7 @@ export const run = (fileContents) => {
   // Find the lowest positive int that will create the clock signal
   let lowest = findLowestA(commands);
 
-  // Log output
-  console.log("Part 1:", lowest);
+  return {part1: lowest};
 }
 
 // Finds the lowest int that will output the clock signal

@@ -83,7 +83,5 @@ export const run = (fileContents) => {
   // Add the outer edge trees and don't double count the corner trees
   visibleTrees += (grid.length * 4) - 4;
 
-  // Log output
-  console.log('Part 1:', visibleTrees);
-  console.log('Part 2:', highScenicScore);
+  return {part1: visibleTrees, part2: highScenicScore};
 }

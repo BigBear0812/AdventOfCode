@@ -10,8 +10,7 @@ export const run = (fileContents) => {
   // Find the nth code
   let code = calcCode(nthVal);
 
-  // Log output
-  console.log('Part 1:', code);
+  return {part1: code};
 }
 
 // Parse in the row and colum using reg ex from the first line of the input

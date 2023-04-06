@@ -10,9 +10,7 @@ export const run = (fileContents) => {
   // be ordered from shortest path to longest path.
   let paths = findAllPaths(passcode);
 
-  // Log output
-  console.log("Part 1:", paths[0]);
-  console.log("Part 2:", paths[paths.length-1].length);
+  return {part1: paths[0], part2: paths[paths.length-1].length};
 }
 
 // Breadth First Search (BFS) to find all of the paths that lead to the vault

@@ -12,9 +12,7 @@ export const run = (fileContents) => {
   let totalSurfaceArea = drop.surfaceArea();
   let exteriorSurfaceArea = drop.exteriorSurfaceArea();
 
-  // Log output
-  console.log('Part 1:', totalSurfaceArea);
-  console.log('Part 2:', exteriorSurfaceArea);
+  return {part1: totalSurfaceArea, part2: exteriorSurfaceArea};
 }
 
 // A class to hold the information about the droplet

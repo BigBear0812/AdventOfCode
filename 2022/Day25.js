@@ -11,8 +11,7 @@ export const run = (fileContents) => {
   // Convert the sum back to SNAFU
   let output = decimalToSnafu(total);
 
-  // Log the SNAFU sum
-  console.log('Part 1:', output);
+  return{part1: output};
 }
 
 // Convert from decimal to SNAFU

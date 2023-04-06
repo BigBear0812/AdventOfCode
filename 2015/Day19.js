@@ -11,14 +11,10 @@ export const run = (fileContents) => {
   let count = 0;
   results.forEach(() => count++);
 
-  // Log output
-  console.log('Part 1:', count);
-
   // Find the number of steps needed to reach the medicine molecule
   let count2 = stepsToMolecule(info);
 
-  // Log output
-  console.log('Part 2:', count2);
+  return {part1: count, part2: count2};
 }
 
 // Parse the input file lines into a useable object

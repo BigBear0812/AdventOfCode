@@ -10,15 +10,10 @@ export const run = (fileContents) => {
   // Calculate Part 1
   let largestTotal = calcBestCookie(allOptions, ingredients);
 
-  // Log output
-  console.log('Part 1:', largestTotal);
-
   // Calculate Part 2
   let fiveHundredCalCokie = calcBestCookie(allOptions, ingredients, 500);
 
-  // Log output
-  console.log('Part 2:', fiveHundredCalCokie);
-
+  return {part1: largestTotal, part2: fiveHundredCalCokie};
 }
 
 // Parse the input lines

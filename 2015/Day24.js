@@ -9,9 +9,6 @@ export const run = (fileContents) => {
 
   // Find the resulting package set for group 1
   let result1 = arranger1.findGroup1();
-  
-  // Log output
-  console.log('Part 1:', result1.QE);
 
   // Create a package arranger with 4 groups
   let arranger2 = new PackageArranger(packages, 4);
@@ -19,8 +16,7 @@ export const run = (fileContents) => {
   // Find the resulting package set for group 1
   let result2 = arranger2.findGroup1();
 
-  // Log output
-  console.log('Part 2:', result2.QE);
+  return {part1: result1.QE, part2: result2.QE}
 }
 
 // Parse each line of the input as an int into an array

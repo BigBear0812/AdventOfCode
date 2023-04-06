@@ -34,9 +34,7 @@ export const run = (fileContents) => {
     grandTotalRibbon += sidePerimeters[0] + cubicVol;
   }
 
-  // Log output
-  console.log('Part 1:', grandTotalWrappingPaper);
-  console.log('Part 2:', grandTotalRibbon);
+  return {part1: grandTotalWrappingPaper, part2: grandTotalRibbon};
 } 
 
 // Basic bubble sorting algorithm

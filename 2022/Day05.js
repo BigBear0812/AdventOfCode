@@ -1,7 +1,3 @@
-import process from "node:process";
-import { open } from "node:fs/promises";
-import { copyFile } from "node:fs";
-
 // Puzzle for Day 5: https://adventofcode.com/2022/day/5
 
 export const run = (fileContents) => { 
@@ -89,8 +85,5 @@ export const run = (fileContents) => {
       boxesOnTop2 += stacks2[s][stacks2[s].length - 1];
   }
 
-  // Log output
-  console.log('Part 1:', boxesOnTop1);
-  console.log('Part 2:', boxesOnTop2);
-
+  return {part1: boxesOnTop1, part2: boxesOnTop2};
 }

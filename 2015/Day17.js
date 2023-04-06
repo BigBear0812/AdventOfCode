@@ -7,9 +7,6 @@ export const run = (fileContents) => {
   // Find all possible combinations that exactly match the amount of eggnog
   let combinations = findAllCombinations(containers, 150);
 
-  // Log output
-  console.log('Part 1:', combinations.length);
-
   // Find the number of container combinations that all 
   // use the minimum number of containers possible
 
@@ -32,8 +29,7 @@ export const run = (fileContents) => {
     }
   }
 
-  // Log output
-  console.log('Part 2:', minComboCount);
+  return {part1: combinations.length, part2: minComboCount};
 }
 
 // Parse input values into an array of integers

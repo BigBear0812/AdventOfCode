@@ -11,17 +11,13 @@ export const run = (fileContents) => {
   // Generate the keys for Part 1
   let keys = find64Keys(gen);
 
-  // Log output
-  console.log("Part 1:", keys[63].index);
-
   // Create a generator for Part 2
   let gen2 = new HashGenerator2(salt);
 
   // Generate the keys for Part 2
   let keys2 = find64Keys(gen2);
 
-  // Log output
-  console.log("Part 2:", keys2[63].index);
+  return {part1: keys[63].index, part2: keys2[63].index};
 }
 
 // Find the next 64 keys

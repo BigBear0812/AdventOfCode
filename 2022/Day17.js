@@ -1,8 +1,10 @@
 // Puzzle for Day 17: https://adventofcode.com/2022/day/17
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => { 
@@ -13,8 +15,7 @@ const part1 = (fileContents) => {
   // Run the simulation
   let highest = runSimulation(maxRocks, jetPattern);
 
-  // Log output
-  console.log('Part 1:', highest);
+  return highest;
 }
 
 const part2 = (fileContents) => {
@@ -25,8 +26,7 @@ const part2 = (fileContents) => {
   // Run the simulation
   let highest = runSimulation(maxRocks, jetPattern);
 
-  // Log output
-  console.log('Part 2:', highest);
+  return highest;
 }
 
 const runSimulation = (maxRocks, jetPattern) => {

@@ -87,8 +87,8 @@ export const run = (fileContents) => {
       } 
     }
   }
-  // Log Output
-  console.log('Part 1:', wires["a"].value);
+  // Output Part 1
+  let result1 = wires["a"].value;
 
   // Copy wire a's value to the value of wire b
   wires["b"].value = wires["a"].value
@@ -111,9 +111,10 @@ export const run = (fileContents) => {
   // Recompute wire a's signal value
   wires["a"].value = getValue(wires["a"].command);
   
-  // Log Output
-  console.log('Part 2:', wires["a"].value);
+  // Output Part 2
+  let result2 = wires["a"].value;
 
+  return {part1: result1, part2: result2};
 }
 
 const getValue = (output) => {

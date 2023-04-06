@@ -53,10 +53,8 @@ export const run = (fileContents) => {
     // For part two take the letter that appears least often
     partTwoMessage += orderedLetterStr.slice(0, 1);
   }
-  
-  // Log output
-  console.log("Part 1:", partOneMessage);
-  console.log("Part 2:", partTwoMessage);
+
+  return {part1: partOneMessage, part2: partTwoMessage};
 }
 
 // Parse the input data into a 2d array of letters in each message

@@ -8,10 +8,7 @@ export const run = (fileContents) => {
   let decompressedV1 = decompressLength(compressed);
   let decompressedV2 = decompressLength(compressed, true);
 
-  // Log output
-  console.log("Part 1:", decompressedV1);
-  console.log("Part 2:", decompressedV2);
-
+  return{part1: decompressedV1, part2: decompressedV2};
 }
 
 // Find the decompressed length of the file using either the v1 or v2 algorithm

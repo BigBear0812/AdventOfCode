@@ -1,8 +1,10 @@
 // Puzzle for Day 13: https://adventofcode.com/2022/day/13
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => { 
@@ -21,8 +23,7 @@ const part1 = (fileContents) => {
       runningTotal += ((i / 3) + 1);
   }
 
-  // Log output
-  console.log('Part 1:', runningTotal);
+  return runningTotal;
 }
 
 const part2 = (fileContents) => {
@@ -50,8 +51,7 @@ const part2 = (fileContents) => {
   let divider2Index = packets.indexOf('[[6]]') + 1;
   let final = divider1Index * divider2Index;
 
-  // Log output
-  console.log('Part 2:', final);
+  return final;
 }
 
 // Basic swap of two values at specified indexes in the array

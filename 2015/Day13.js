@@ -1,8 +1,10 @@
 // Puzzle for Day 13: https://adventofcode.com/2015/day/13
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => {
@@ -18,8 +20,7 @@ const part1 = (fileContents) => {
     highScore = Math.max(highScore, list.score(rules));
   }
 
-  // Log output
-  console.log('Part 1:', highScore);
+  return highScore;
 }
 
 const part2 = (fileContents) => {
@@ -35,8 +36,7 @@ const part2 = (fileContents) => {
     highScore = Math.max(highScore, list.score(rules));
   }
 
-  // Log output
-  console.log('Part 2:', highScore);
+  return highScore;
 }
 
 // Parse the input into a rules map

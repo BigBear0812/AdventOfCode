@@ -25,9 +25,6 @@ export const run = (fileContents) => {
     idSum += room.sectorId;
   }
 
-  // Log ouput
-  console.log("Part 1:", idSum);
-
   // Decrypt all room names
   decryptRoomNames(validRooms);
 
@@ -39,8 +36,7 @@ export const run = (fileContents) => {
       roomId = room.sectorId;
   }
 
-  // Log output
-  console.log("Part 2:", roomId);
+  return {part1: idSum, part2: roomId};
 }
 
 // Decrypt all room names that have been found to be valid

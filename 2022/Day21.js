@@ -1,8 +1,10 @@
 // Puzzle for Day 21: https://adventofcode.com/2022/day/21
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => {
@@ -12,8 +14,7 @@ const part1 = (fileContents) => {
   // Evaluate monkeys using recursion to get the result of root
   let result = evaluateMonkeys(monkeys, 'root', new Map());
 
-  // Log output
-  console.log('Part 1:', result);
+  return result;
 }
 
 const part2 = (fileContents) => {
@@ -55,9 +56,7 @@ const part2 = (fileContents) => {
   // Evaluate this new set of equations and resolved values using recursion to find the value of humn
   let result = evaluateMonkeys(monkeys, 'humn', resolvedMonkeys);
 
-  // Log output
-  console.log('Part 2:', result);
-  
+  return result;
 }
 
 // Parse the input into a map of key value pairs. Some pairs 

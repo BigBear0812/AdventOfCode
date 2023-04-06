@@ -11,14 +11,10 @@ export const run = (fileContents) => {
   // Get the data and checksum for the initial state for the specified disk size
   let result1 = generateDataAndChecksum(initialState, diskSize1);
 
-  // Log output
-  console.log("Part 1:", result1.checksum.join(''));
-
   // Get the data and checksum for the initial state for the specified disk size
   let result2 = generateDataAndChecksum(initialState, diskSize2);
 
-  // Log output
-  console.log("Part 2:", result2.checksum.join(''));
+  return {part1: result1.checksum.join(''), part2: result2.checksum.join('')};
 }
 
 // Generate the data and the checksum for this disk

@@ -12,16 +12,11 @@ export const run = (fileContents) => {
 
   // Get the least expensive win
   let LEW = leastExpensiveWin(boss, player, combos);
-
-  // Log output
-  console.log('Part 1:', LEW);
   
   // Get the most expensive loss
   let MEL = mostExpensiveLose(boss, player, combos);
 
-  // Log output
-  console.log('Part 2:', MEL);
-
+  return {part1: LEW, part2: MEL};
 }
 
 // Parse the boss info from the input file

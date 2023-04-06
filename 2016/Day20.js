@@ -11,16 +11,12 @@ export const run = (fileContents) => {
   bubbleSort(combined);
 
   // Get the lowest IP by taking the first IP block's high value and adding 1
-  let lowest = combined[0].high +1
-
-  // Log output
-  console.log("Part 1:", lowest);
+  let lowest = combined[0].high +1;
 
   // Count all avilable IP addresses
   let count = countAvailableIps(combined);
 
-  // Log output
-  console.log("Part 2:", count);
+  return {part1: lowest, part2: count};
 }
 
 // Reduce the set of IP addesses blocks by continually recombining 

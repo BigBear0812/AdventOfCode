@@ -20,16 +20,13 @@ export const run = (fileContents) => {
 
   // Find Aunt Sue matching Part 1's scenario
   let match = findMatchingSuePart1(sues, sample);
-
-  // Log output
-  console.log('Part1:', match);
+  match = parseInt(match.split(' ')[1]);
 
   // Find Aunt Sue matching Part 2's scenario
   let match2 = findMatchingSuePart2(sues, sample);
+  match2 = parseInt(match2.split(' ')[1])
 
-  // Log output
-  console.log('Part2:', match2);
-
+  return {part1: match, part2: match2};
 }
 
 // Parse each line of the input as a new Aunt Sue object

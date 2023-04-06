@@ -39,9 +39,6 @@ export const run = (fileContents) => {
   // the sum of all folder sizes less than or equal to 100000,
   // and a list of all of the folder sizes in the system
   let result = traverseFolders(fileSystem, 100000);
-  
-  // Log Output Part 1
-  console.log('Part 1:', result.runningTotal);
 
   // Calculate the amount fo space that minimum amount of space 
   // that needs to be freed up to accommodate the space needed
@@ -57,10 +54,8 @@ export const run = (fileContents) => {
   const largeEnough = result.allFolderSizes.filter(x => x >= needToFreeUp);
   quickSort(largeEnough);
   const smallest = largeEnough[0];
-  
-  // Log Output Part 2
-  console.log('Part 2:', smallest);
 
+  return {part1: result.runningTotal, part2: smallest};
 }
 
 const traverseFolders = (folder, part1MaxSize) => {

@@ -62,9 +62,7 @@ export const run = (fileContents) => {
       supportsSSL++;
   }
 
-  // Log output
-  console.log("Part 1:", supportsTls);
-  console.log("Part 2:", supportsSSL);
+  return {part1: supportsTls, part2: supportsSSL};
 }
 
 // A method to return all ABA or BAB patterns in a sequence

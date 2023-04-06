@@ -6,8 +6,10 @@ export const run = (fileContents) => {
   let triangles2 = parseInput2(fileContents);
 
   // Count the number of valid triangles in the set
-  console.log("Part 1:", countValidTriangles(triangles1));
-  console.log("Part 2:", countValidTriangles(triangles2));
+  let result1 = countValidTriangles(triangles1);
+  let result2 = countValidTriangles(triangles2);
+
+  return {part1: result1, part2: result2};
 }
 
 // Parse the input according to part 1

@@ -7,14 +7,10 @@ export const run = (fileContents) => {
   // The number of viable pairs
   let pairsCount = countPairs(nodes);
 
-  // Log output
-  console.log("Part 1:", pairsCount);
-
   // The number of moves to get the goal data to the (0,0) node
   let numMoves = findNumMoves(nodes);
 
-  // Log output
-  console.log("Part 2:", numMoves);
+  return {part1: pairsCount, part2: numMoves};
 }
 
 // Find the number of moves to get the goal data to the (0,0) node

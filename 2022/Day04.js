@@ -32,8 +32,5 @@ export const run = (fileContents) => {
       totalAnyOverlap++;
   }
 
-  // Log output
-  console.log('Part 1:', totalCompleteOverlap);
-  console.log('Part 2:', totalAnyOverlap);
-
+  return {part1: totalCompleteOverlap, part2: totalAnyOverlap};
 }

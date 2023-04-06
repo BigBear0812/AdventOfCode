@@ -18,10 +18,8 @@ export const run = (fileContents) => {
         count++;
     }
   }
-  //Log output
-  console.log("Part 1:", count);
-  console.log("Part 2:");
-  print(screen);
+
+  return {part1: count, part2: print(screen)};
 }
 
 // Process all of the commands on the screen of the given size
@@ -123,8 +121,10 @@ const parseInput = (fileContents) => {
 
 // Print the screen array to the console
 const print = (screen) => {
+  let result = "\n";
   for(let y = 0; y < screen.length; y++){
     let line = screen[y].join('');
-    console.log(line);
+    result += line + "\n";
   }
+  return result;
 }

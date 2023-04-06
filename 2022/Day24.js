@@ -7,9 +7,6 @@ export const run = (fileContents) => {
 
   // Find trip 1 time from start to end
   let trip1 = searchBestPath({x: input.start.x, y: input.start.y, blizzards: input.blizzards}, input.end, input.x, input.y); 
-  
-  // Log output
-  console.log('Part 1:', trip1.time);
 
   // Go back to start from the end based on the blizzard configuration from the end of trip1
   let trip2 = searchBestPath({x: trip1.x, y: trip1.y, blizzards : trip1.blizzards}, input.start, input.x, input.y);
@@ -17,8 +14,7 @@ export const run = (fileContents) => {
   // Return the the end one more time from start based on the blizzard configuration of trip 2
   let trip3 = searchBestPath({x: trip2.x, y: trip2.y, blizzards : trip2.blizzards}, input.end, input.x, input.y);
 
-  // Log output
-  console.log('Part 2:', trip1.time + trip2.time + trip3.time);
+  return {part1: trip1.time, part2: trip1.time + trip2.time + trip3.time};
 }
 
 // Use Breadth First Search (BFS) to find the shortest path through the blizzard field

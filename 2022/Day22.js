@@ -1,8 +1,10 @@
 // Puzzle for Day 22: https://adventofcode.com/2022/day/22
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => {
@@ -24,8 +26,7 @@ const part1 = (fileContents) => {
 
   let number = 1000 * (finalPos.y + 1) + 4 * (finalPos.x + 1) + facing;
 
-  // Log output
-  console.log('Part 1:', number);
+  return number;
 }
 
 const part2 = (fileContents) => {
@@ -52,8 +53,7 @@ const part2 = (fileContents) => {
 
   let number = 1000 * (finalY) + 4 * (finalX) + facing;
 
-  // Log output
-  console.log('Part 2:', number);
+  return number;
 }
 
 // Parse the input from lines of a file into a 2D map and array if instructions

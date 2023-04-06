@@ -7,14 +7,10 @@ export const run = (fileContents) => {
   // Run the program for part 1
   let results = runProgram(commands, 0, 0);
 
-  // Log output
-  console.log('Part 1:', results.b);
-
   // Run the program for part 2
   let results2 =  runProgram(commands, 1, 0);
 
-  // Logh output
-  console.log('Part 2:', results2.b);
+  return {part1: results.b, part2: results2.b};
 }
 
 // Parse the input file to add each line to the set of commands

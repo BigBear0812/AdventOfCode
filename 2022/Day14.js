@@ -1,8 +1,10 @@
 // Puzzle for Day 14: https://adventofcode.com/2022/day/14
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2};
 }
 
 const part1 = (fileContents) => { 
@@ -52,8 +54,7 @@ const part1 = (fileContents) => {
     }
   }
 
-  // Log output
-  console.log('Part 1:', sandCount);
+  return sandCount;
 }
 
 const part2 = (fileContents)=>{
@@ -106,8 +107,7 @@ const part2 = (fileContents)=>{
     }
   }
 
-  // Log output
-  console.log('Part 2:', sandCount);
+  return sandCount;
 }
 
 // Used for printing out the grid during testing.

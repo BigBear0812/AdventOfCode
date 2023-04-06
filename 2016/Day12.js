@@ -13,9 +13,6 @@ export const run = (fileContents) => {
   // Process the commands in the program
   processCommands(commands, registers1);
 
-  // Log output
-  console.log("Part 1:", registers1.get('a'));
-
   // Setup the registers for Part 2
   let registers2 = new Map();
   registers2.set('a', 0);
@@ -26,8 +23,7 @@ export const run = (fileContents) => {
   // Process the commands in the program
   processCommands(commands, registers2);
 
-  // Log output
-  console.log("Part 2:", registers2.get('a'));
+  return {part1: registers1.get('a'), part2: registers2.get('a')};
 }
 
 // Process the commands in the program

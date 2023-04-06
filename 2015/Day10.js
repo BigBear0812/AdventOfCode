@@ -8,9 +8,7 @@ export const run = (fileContents) => {
   let forty = lookAndSayNumberSequence(start, 40);
   let fifty = lookAndSayNumberSequence(start, 50);
 
-  // Log output
-  console.log('Part 1:', forty.length);
-  console.log('Part 2:', fifty.length);
+  return {part1: forty.length, part2: fifty.length};
 }
 
 // Look-and-Say number sequence iterator

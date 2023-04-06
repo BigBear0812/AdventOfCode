@@ -1,8 +1,10 @@
 // Puzzle for Day 19: https://adventofcode.com/2022/day/19
 
 export const run = (fileContents) => {
-  let blueprints = part1(fileContents);
-  part2(blueprints);
+  let result1 = part1(fileContents);
+  let result2 = part2(result1.blueprints);
+
+  return {part1: result1.total, part2: result2};
 }
 
 const part1 = (fileContents) => {
@@ -15,10 +17,7 @@ const part1 = (fileContents) => {
   // Get the sum of all quality values for each blueprint
   let total = results.reduce((total, geodes, index) => total + (geodes * index), 0);
 
-  // Log output
-  console.log('Part 1:', total);
-
-  return blueprints;
+  return {blueprints, total};
 }
 
 const part2 = (blueprints) => {
@@ -28,8 +27,7 @@ const part2 = (blueprints) => {
   // Multiply each of the outputs together
   let total = results.reduce((total, geodes) => total * geodes, 1);
 
-  // Log output
-  console.log('Part 2:', total);
+  return total;
 }
 
 // Parse the input line by line using regex

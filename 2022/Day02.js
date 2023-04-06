@@ -62,9 +62,7 @@ export const run = (fileContents) => {
       runningTotal1 += games1.indexOf(line) + 1;
       runningTotal2 += games2.indexOf(line) + 1;
     }
-  
-    // Log output
-    console.log('Part 1:', runningTotal1);
-    console.log('Part 2:', runningTotal2);
+    
+    return{part1: runningTotal1, part2: runningTotal2};
   }
 }

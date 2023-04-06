@@ -7,15 +7,10 @@ export const run = (fileContents) => {
   // Find the first next good password
   let nextGood1 = nextGoodPassword(oldPassword);
 
-  // Log output
-  console.log('Part 1:', nextGood1);
-
   // Find the second next good password
   let nextGood2 = nextGoodPassword(nextGood1);
 
-  // Log output
-  console.log('Part 2:', nextGood2);
-  
+  return {part1: nextGood1, part2: nextGood2};
 }
 
 // Get the next good password by incrementing the poasswords by one letter 

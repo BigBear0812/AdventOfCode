@@ -1,8 +1,10 @@
 // Puzzle for Day 18: https://adventofcode.com/2015/day/18
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2}
 }
 
 const part1 = (fileContents) => {
@@ -15,8 +17,7 @@ const part1 = (fileContents) => {
   // Count the lights that are on
   let count = countLightsOn(result);
 
-  // Log output
-  console.log('Part 1:', count);
+  return count;
 }
 
 const part2 = (fileContents) => {
@@ -29,8 +30,7 @@ const part2 = (fileContents) => {
   // Count the lights that are on
   let count = countLightsOn(result);
 
-  // Log output
-  console.log('Part 2:', count);
+  return count;
 }
 
 // Parse the input file lines into a 2 diemnsional array

@@ -39,7 +39,5 @@ export const run = (fileContents) => {
     }
   }
 
-  // Log output
-  console.log("Part 1:", passwordPart1);
-  console.log("Part 2:", passwordPart2.join(''));
+  return {part1: passwordPart1, part2: passwordPart2.join('')};
 }

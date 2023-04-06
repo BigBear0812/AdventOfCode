@@ -7,9 +7,6 @@ export const run = (fileContents) => {
   // Find the time to drop the capsule so it passes through perfectly
   let time1 = findTimeToDropCapsule(discs);
 
-  // Log output
-  console.log("Part 1:", time1);
-
   // Add another disc for Part 2
   discs.push({
     discNum: discs[discs.length-1].discNum + 1,
@@ -20,8 +17,7 @@ export const run = (fileContents) => {
   // Find the time to drop the capsule so it passes through perfectly
   let time2 = findTimeToDropCapsule(discs);
 
-  // Log output
-  console.log("Part 2:", time2);
+  return {part1: time1, part2: time2};
 }
 
 // Find the time to drop the capsule so it passes through the discs perfectly

@@ -23,9 +23,7 @@ export const run = (fileContents) => {
     processStep(bots, outputs);
   }while(!result1 || !result2)
 
-  // Log output
-  console.log("Part 1:", result1);
-  console.log("Part 2:", result2);
+  return {part1: result1, part2: result2};
 }
 
 // Process a single step in the process of passing around microchips

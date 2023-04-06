@@ -28,8 +28,7 @@ export const run = (fileContents) => {
   const third = allTotals[allTotals.length-3];
   const total = first + second + third;
 
-  console.log('Part 1:', first);
-  console.log('Part 2:', total);
+  return {part1: first, part2: total};
 }
 
 const quickSort = (array, leftIndex, rightIndex) => {

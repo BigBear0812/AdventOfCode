@@ -10,17 +10,13 @@ export const run = (fileContents) => {
   // The scrambled passcode after applying all of the steps
   let scrambled = scramblePasscode(steps, passcode);
 
-  // Log output
-  console.log("Part 1:", scrambled.join(''));
-
   // The scrambled passcode from the password file
   let scrambledFilePasscode = 'fbgdceah'.split('');
 
   // The uncscrambled passcode after applying all rules in reverse
   let unscrambled = scramblePasscode(steps, scrambledFilePasscode, true);
 
-  // Log output
-  console.log("Part 2:", unscrambled.join(''));
+  return {part1: scrambled.join(''), part2: unscrambled.join('')};
 }
 
 // A method to scramble or unscramble a passcode given the set of instructions

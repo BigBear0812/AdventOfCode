@@ -100,7 +100,5 @@ export const run = (fileContents) => {
   let distance = Math.abs(position.x) + Math.abs(position.y);
   let hideoutDistance = Math.abs(hideoutPosition.x) + Math.abs(hideoutPosition.y);
 
-  // Log output
-  console.log("Part 1:", distance);
-  console.log("Part 2:", hideoutDistance);
+  return {part1: distance, part2: hideoutDistance};
 }

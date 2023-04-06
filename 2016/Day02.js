@@ -34,9 +34,7 @@ export const run = (fileContents) => {
     resultPart2.push(keypadPart2[positionPart2.y][positionPart2.x]);
   }
 
-  // Log output
-  console.log("Part 1:", resultPart1.join(""));
-  console.log("Part 2:", resultPart2.join("")); 
+  return {part1: resultPart1.join(""), part2: resultPart2.join("")};
 }
 
 const processUpdate = (instruction, position, keypad) => {

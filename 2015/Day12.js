@@ -10,9 +10,7 @@ export const run = (fileContents) => {
   // Find the total for part two
   let total2 = findAndAddNumbers(input, true);
 
-  // Log output
-  console.log('Part 1:', total1);
-  console.log('Part 2:', total2);
+  return{part1: total1, part2: total2};
 }
 
 // Fin all of the numbers in the object and add them together. This uses a Breadth First Search (BFS) 

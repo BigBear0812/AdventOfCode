@@ -55,9 +55,7 @@ export const run = (fileContents) => {
       niceTotal2++;
   }
 
-  // Log output
-  console.log('Part 1:', niceTotal1);
-  console.log('Part 2:', niceTotal2);
+  return {part1: niceTotal1, part2: niceTotal2};
 }
 
 // Method for finding how many times a particular pair of letter 

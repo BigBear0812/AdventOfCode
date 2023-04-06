@@ -1,8 +1,10 @@
 // Puzzle for Day 20: https://adventofcode.com/2022/day/20
 
 export const run = (fileContents) => {
-  part1(fileContents);
-  part2(fileContents);
+  let result1 = part1(fileContents);
+  let result2 = part2(fileContents);
+
+  return {part1: result1, part2: result2}
 }
 
 const part1 = (fileContents) => {
@@ -18,8 +20,7 @@ const part1 = (fileContents) => {
   let three = file.nthValueAfterZero(3000);
   let sum = one + two + three;
 
-  // Log output
-  console.log('Part 1:', sum);
+  return sum;
 }
 
 const part2 = (fileContents) => {
@@ -35,8 +36,7 @@ const part2 = (fileContents) => {
   let three = file.nthValueAfterZero(3000);
   let sum = one + two + three;
 
-  // Log output 
-  console.log('Part 2:', sum);
+  return sum;
 }
 
 // Parse each line of the input as a seperate number multiplied by the specified mutiplier.

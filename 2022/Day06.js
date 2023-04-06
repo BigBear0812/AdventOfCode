@@ -8,10 +8,8 @@ export const run = (fileContents) => {
   let startOfPacketMarker = detectStartOf(data, 4);
   // Part 2
   let startOfMessageMarker = detectStartOf(data, 14);
-  
-  // Log output
-  console.log('Part 1:', startOfPacketMarker);
-  console.log('Part 2:', startOfMessageMarker);
+
+  return {part1: startOfPacketMarker, part2: startOfMessageMarker};
 
 }
 

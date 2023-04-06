@@ -3,7 +3,9 @@
 
 export const run = (fileContents) => {
   let map = part1(fileContents);
-  part2(map);
+  let result2 = part2(map.input);
+
+  return {part1: map.highest, part2: result2};
 }
 
 const part1 = (fileContents) => { 
@@ -23,11 +25,8 @@ const part1 = (fileContents) => {
       highest = score;
   }
 
-  // Log output
-  console.log('Part 1:', highest);
-
   // Pass the parsed input to Part 2
-  return input;
+  return {input, highest};
 }
 
 const part2 = (map) => {
@@ -61,8 +60,7 @@ const part2 = (map) => {
     }
   }
 
-  // Log output
-  console.log('Part 2:', highest);
+  return highest;
 }
 
 // Check if to arrays have any values in common

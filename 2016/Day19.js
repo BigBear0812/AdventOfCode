@@ -10,17 +10,13 @@ export const run = (fileContents) => {
   // Find the winning elf when the elves steal from the elf next to themselves
   let winningElf1 = stealFromNext(elfCircle1);
 
-  // Log output
-  console.log("Part 1:", winningElf1.value.elfNum);
-
   // Create an elf circular doubley linked list with the specified number of elves
   let elfCircle2 = createElfCircle(numElves);
 
   // Find the winning elf when the elves steal form across from themselves
   let winningElf2 = stealFromAcross(elfCircle2);
 
-  // Log output
-  console.log("Part 2:", winningElf2.value.elfNum);
+  return {part1: winningElf1.value.elfNum, part2: winningElf2.value.elfNum};
 }
 
 // Simulate stealing gifts from the next elf

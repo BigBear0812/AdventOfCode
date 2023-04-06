@@ -9,9 +9,7 @@ export const run = (fileContents) => {
   // Get the results
   let results = stepsToGoal(favNum, goal);
 
-  // Log output
-  console.log("Part 1:", results.numSteps);
-  console.log("Part 2:", results.locationsBelow50);
+  return {part1: results.numSteps, part2: results.locationsBelow50};
 }
 
 // Breadth Frist Search (BFS) to get the number of 

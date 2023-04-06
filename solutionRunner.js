@@ -29,6 +29,11 @@ open(filename)
 .then(fileContents => {
   // Import the specified module and run the solution that has been specified
   import(module).then(mod => {
-    mod.run(fileContents);
+    let result = mod.run(fileContents);
+
+    if(result.part1)
+      console.log("Part 1:", result.part1);
+    if(result.part2)
+      console.log("Part 2:", result.part2);
   });
 });

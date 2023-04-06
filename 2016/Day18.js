@@ -10,17 +10,13 @@ export const run = (fileContents) => {
   // Count the number of safe tiles
   let count1 = countSafe(map1);
 
-  // Log output
-  console.log("Part 1:", count1);
-
   // Generate a map of the traps and safe tiles in the room
   let map2 = generateRoomMap(startRow, 400000);
 
   // Count the number of safe tiles
   let count2 = countSafe(map2);
 
-  // Log output
-  console.log("Part 2:", count2);
+  return {part1: count1, part2: count2};
 }
 
 // Generate a map of the safe and trap tile in the room based on 

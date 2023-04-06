@@ -16,7 +16,5 @@ export const run = (fileContents) => {
       found6Zeros = x;
   }
 
-  // Log output
-  console.log('Part 1:', found5Zeros);
-  console.log('Part 2:', found6Zeros);
+  return {part1: found5Zeros, part2: found6Zeros}
 }

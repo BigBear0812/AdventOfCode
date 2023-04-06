@@ -20,7 +20,5 @@ export const run = (fileContents) => {
     encodedTotal += encodedLength;
   }
 
-  // Log output for Parts 1 and 2
-  console.log('Part1:', codeTotal - memoryTotal);
-  console.log('Part2:', encodedTotal - codeTotal);
+  return {part1: codeTotal - memoryTotal, part2: encodedTotal - codeTotal};
 }

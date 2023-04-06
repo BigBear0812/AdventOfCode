@@ -13,14 +13,10 @@ export const run = (fileContents) => {
   // Find the shortest path for Part 1
   let shortestPath1 = findShortestPath(matrix);
 
-  // Log output
-  console.log("Part 1:", shortestPath1);
-
   // Find the shortest path for Part 2
   let shortestPath2 = findShortestPath(matrix, true);
 
-  // Log output
-  console.log("Part 2:", shortestPath2);
+  return {part1: shortestPath1, part2: shortestPath2};
 }
 
 // Depth First Search (DFS) all paths. Return the distance travlled for 

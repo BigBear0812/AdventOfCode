@@ -35,9 +35,6 @@ export const run = (fileContents) => {
   // Process the commands in the program
   processCommands(commands1, registers1);
 
-  // Log output
-  console.log("Part 1:", registers1.get('a'));
-
   // Create a copy of the commands for part 2
   let commands2 = JSON.parse(JSON.stringify(commands));
 
@@ -51,8 +48,7 @@ export const run = (fileContents) => {
   // Process the commands in the program
   processCommands(commands2, registers2);
 
-  // Log output
-  console.log("Part 2:", registers2.get('a'));
+  return {part1: registers1.get('a'), part2: registers2.get('a')};
 }
 
 // Process the commands in the program

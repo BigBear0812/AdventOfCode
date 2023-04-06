@@ -11,14 +11,10 @@ export const run = (fileContents) => {
   // Find the least expensive win
   let LEW = leastExpensiveWin(player, boss, false);
 
-  // Log output
-  console.log('Part 1:', LEW);
-
   // Find the least expensive win on hard mode for Part 2
   let LEWHardMode = leastExpensiveWin(player, boss, true);
 
-  // Log output
-  console.log('Part 2:', LEWHardMode);
+  return {part1: LEW, part2: LEWHardMode};
 }
 
 // Parse the boss info from the input file
