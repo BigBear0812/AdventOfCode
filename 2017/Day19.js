@@ -1,4 +1,4 @@
-// Puzzle for Day 18: https://adventofcode.com/2017/day/18
+// Puzzle for Day 19: https://adventofcode.com/2017/day/19
 
 export const run = (fileContents) => {
   // Parse in the input files map
