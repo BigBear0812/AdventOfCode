@@ -7,7 +7,6 @@ export const run = (fileContents) => {
   // Run the standard program as specified from the input file
   let output = findNumber(data);
 
-  // 7679893 too high, 28 not right, 11657838 too high, 2813690 not right
   return {part1: output.first, part2: output.last};
 }
 
