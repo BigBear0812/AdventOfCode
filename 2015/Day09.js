@@ -35,7 +35,7 @@ const parseInput = (fileContents) => {
   let graph = new Graph();
 
   // Read each line
-  for(const line of fileContents){
+  for(const line of fileContents){8
     // Use regex to get the important information
     let matches = line.match(reg);
 
