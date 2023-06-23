@@ -261,11 +261,12 @@ class PriorityQueue {
     const min = this.heap[0];
     // Pop the last item off the heap
     const end = this.heap.pop();
-    // Add the end node to the front of the heap
-    this.heap[0] = end;
-    // If there are still nodes in the heap then heapify 
-    // down the new node at the top of the heap
+    // If there are still nodes in the heap then 
+    // add the end node to the front of the heap 
+    // and heapify down the new node at the top 
+    // of the heap
     if (this.heap.length > 0) {
+      this.heap[0] = end;
       this.#heapifyDown();
     }
     return min;
