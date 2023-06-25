@@ -10,6 +10,7 @@ export const run = (fileContents) => {
   return {part1: constellations.length};
 }
 
+// Find all of the constellations in the map of stars
 const findConstellations = (stars) => {
   // All constellations
   let constellations = [];
