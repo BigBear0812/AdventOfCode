@@ -1,4 +1,4 @@
-// Puzzle for Day 8: https://adventofcode.com/2019/day/8
+// Puzzle for Day 9: https://adventofcode.com/2019/day/8
 
 export const run = (fileContents) => {
   // Parse the program in from the input file
