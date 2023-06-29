@@ -6,11 +6,11 @@ export const run = (fileContents) => {
   
   // Setup a computer for part 1 and run the program
   let comp1 = new IntCodeComputer(program);
-  let result1 = comp1.runProgram(1);
+  let result1 = comp1.runProgram([1]);
 
   // Setup a computer for part 2 and run the program
   let comp2 = new IntCodeComputer(program);
-  let result2 = comp2.runProgram(2);
+  let result2 = comp2.runProgram([2]);
 
   return {part1: result1.val[0], part2: result2.val[0]};
 }
