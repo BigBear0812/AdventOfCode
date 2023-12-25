@@ -29,12 +29,12 @@ open(filename)
 })
 .then(fileContents => {
   // Import the specified module and run the solution that has been specified
-  import(module).then(mod => {
+  import(module).then(async(mod) => {
     let startTime;
     let totalTime;
     if(showTime === "time")
       startTime = Date.now();
-    let result = mod.run(fileContents);
+    let result = await mod.run(fileContents);
     
     if(startTime)
       totalTime = Date.now() - startTime;
@@ -43,6 +43,7 @@ open(filename)
     if(result.part2 !== null && result.part2 !== undefined)
       console.log("Part 2:", result.part2);
     if(totalTime)
-      console.log("Execution Time:", totalTime / 1000, "s")
+      console.log("Execution Time:", totalTime / 1000, "s");
+    process.exit();
   });
 });
