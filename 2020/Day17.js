@@ -1,4 +1,4 @@
-// Puzzle for Day 16: https://adventofcode.com/2020/day/16
+// Puzzle for Day 17: https://adventofcode.com/2020/day/17
 
 export const run = (fileContents) => {
 
