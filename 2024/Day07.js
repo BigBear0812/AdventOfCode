@@ -57,7 +57,10 @@ const checkAllEquations = (data, withConcat) => {
         newAnswers.push(answer * next);
         // If concatenation is included then add that new answer as well
         if (withConcat)
-          newAnswers.push(parseInt(`${answer}${next}`));
+          // Concatenate using math
+          // Multiply the current answer by 10^(number of digits of the next value).
+          // This way when adding the next value it will fill the newly added zeros of the answer. 
+          newAnswers.push(answer * Math.pow(10, Math.floor(Math.log10(next))+1) + next);
       }
       // Set the answer array to the new answers for the next number to be processed
       answers = newAnswers;
