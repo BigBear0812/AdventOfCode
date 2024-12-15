@@ -19,10 +19,10 @@ export const run = async (fileContents) => {
  * @returns {Promise<number>} The number of seconds until the robots form the Christmas tree
  */
 const findTheTree = async (robots) => {
-  // Save the round that the user says the tree is found in
-  let foundRound = null;
-  // Continue simulating rounds one at a time until the tree is found
-  for(let r = 1; !foundRound; r++){
+  // Save the second that the user says the tree is found in
+  let foundSeconds = null;
+  // Continue simulating seconds one at a time until the tree is found
+  for(let s = 1; !foundSeconds; s++){
     // Save a set of the new positions generated
     let positions = new Set()
     // Update the position of each robot while also 
@@ -51,13 +51,13 @@ const findTheTree = async (robots) => {
       output += 'Do you see a tree? (y/N): ';
       // Present the question and await a response
       let answer = await askQuestion(output);
-      // If the user answered yes set the found round to the current round number
+      // If the user answered yes set the found second to the current second
       if(answer.toUpperCase().startsWith('Y')){
-        foundRound = r;
+        foundSeconds = s;
       }
     }
   }
-  return foundRound;
+  return foundSeconds;
 }
 
 /**
@@ -100,8 +100,8 @@ const safetyFactorSim = (robots, seconds) => {
   // Get the new position of each robot
   for(let robot of robots){
     // Get the X and Y coordinates of the the robot after 100 seconds of movement
-    let pX = (robot.p.x + (robot.v.x * seconds) + (WIDTH * seconds)) % WIDTH;
-    let pY = (robot.p.y + (robot.v.y * seconds) + (HEIGHT * seconds)) % HEIGHT;
+    let pX = (robot.p.x + robot.v.x * seconds + WIDTH * seconds) % WIDTH;
+    let pY = (robot.p.y + robot.v.y * seconds + HEIGHT * seconds) % HEIGHT;
 
     // If on a center line ignore it
     if(pX === centerX || pY === centerY){
