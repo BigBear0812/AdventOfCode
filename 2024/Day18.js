@@ -19,23 +19,32 @@ export const run = (fileContents) => {
  * @param {{y: number, x: number}[]} data The spaces where data is falling
  * @returns The location that prevents a completed path
  */
-const part2 = (data) => {
-  // Answer for the problem
+const part2 = (data, shortestPaths) => {
+  // Store the answer for the problem
   let answer;
+  // Flatten the shortest paths nodes into a single array
+  let path = shortestPaths.flat(Infinity);
 
-  // Start trying to find a solution using the first 2000 corrupted memory coordinates. 
-  // This is a guess that the answer is likely somewhere after this.
-  // Continue while no answer is found.
-  for(let i = 2048; !answer; i++ ){
-    // Slice the data to the specific length
-    let slicedData = data.slice(0, i);
-    // Create a graph of it
-    let graph = createGraph(slicedData);
-    // If the graph does not have the end node the answer is found
-    if (!graph.hasNode({y: HEIGHT-1, x: WIDTH-1}))
-      answer = slicedData[slicedData.length-1];
+  // Start where part 1 left off
+  for(let i = 1024; !answer; i++){
+    // Check if the path is interrupted by the next corrupted location.
+    if(path.indexOf(`${data[i].x},${data[i].y}`) !== -1){
+      // If it is interrupted then build the graph up to this point
+      // Slice the data to the specific length
+      let slicedData = data.slice(0, i);
+      // Create a graph of it
+      let graph = createGraph(slicedData);
+      // If the graph does not have the end node the answer is found
+      if (!graph.hasNode({y: HEIGHT-1, x: WIDTH-1}))
+        answer = slicedData[slicedData.length-1];
+      // Otherwise find the shortest paths and repeat the process
+      else{
+        let result = graph.djikstraShortestPath({y:0, x:0}, {y: HEIGHT-1, x: WIDTH-1});
+        path = result.shortestPaths.flat(Infinity);
+      }
+    }
   }
-  // Output it in the correct format
+  
   return `${answer.x},${answer.y}`;
 }
 
