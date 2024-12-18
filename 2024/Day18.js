@@ -26,7 +26,7 @@ const part2 = (data) => {
   // Start trying to find a solution using the first 2000 corrupted memory coordinates. 
   // This is a guess that the answer is likely somewhere after this.
   // Continue while no answer is found.
-  for(let i = 2000; !answer; i++ ){
+  for(let i = 2048; !answer; i++ ){
     // Slice the data to the specific length
     let slicedData = data.slice(0, i);
     // Create a graph of it
