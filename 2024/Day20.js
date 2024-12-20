@@ -8,7 +8,7 @@ export const run = (fileContents) => {
 }
 
 /**
- * Solve either of the problem
+ * Solve either part of the problem
  * @param {{graph: Graph, start: {y: number, x: number}, end: {y: number, x: number}}} data The graph data, start, and end points
  * @param {number} shortcutMaxDistance The max distance a shortcut can be
  * @returns Number of shortcuts that save more than 100 picoseconds
@@ -18,7 +18,7 @@ const solver = (data, shortcutMaxDistance) => {
   let locationDistances = new Map();
   // Get the path from the end to the start. This produces a shortest path where 
   // each index is the locations distance from the end.
-  let pathLocations = data.graph.djikstraShortestPath(data.end, data.start).shortestPaths[0]
+  let pathLocations = data.graph.dijkstraShortestPath(data.end, data.start).shortestPaths[0]
   // Parse the info into coordinates and key strings
     .map((loc) => {
       let splits = loc.split(',').map(val => parseInt(val));
@@ -137,7 +137,7 @@ const createGraph = (fileContents) => {
 
 /**
  * A weighted graph that will be used find the all of the shortest paths between
- * two nodes using Djikstra's algorithm with a priority queue
+ * two nodes using Dijkstra's algorithm with a priority queue
  */
 class Graph {
   constructor(){
@@ -194,7 +194,7 @@ class Graph {
 
   /**
    * Compute all of the shortest paths between two points using 
-   * djikstra's algorithm with a priority queue
+   * Dijkstra's algorithm with a priority queue
    * @param {{y: number, x: number}} start The start node
    * @param {{y: number, x: number}} end The end node
    * @returns {{
@@ -202,7 +202,7 @@ class Graph {
    *  shortestDistance: number
    * }} All of the shortest paths and the shortest distance from start to end nodes
    */
-  djikstraShortestPath(start, end){
+  dijkstraShortestPath(start, end){
     // The unique strings for the start and end nodes from their data objects
     let startNode = this.#key(start.x, start.y);
     let endNode = this.#key(end.x, end.y);

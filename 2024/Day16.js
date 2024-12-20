@@ -116,9 +116,9 @@ const part1 = (data) => {
   // Create each option for the end node
   let end1 = {y: data.end.y, x: data.end.x, direction: '>'};
   let end2 = {y: data.end.y, x: data.end.x, direction: '^'};
-  // Run djikstra's algorithm for each possible end state
-  let result1 = data.graph.djikstraShortestPath(start, end1);
-  let result2 = data.graph.djikstraShortestPath(start, end2);
+  // Run Dijkstra's algorithm for each possible end state
+  let result1 = data.graph.dijkstraShortestPath(start, end1);
+  let result2 = data.graph.dijkstraShortestPath(start, end2);
   // Return the one with the shortest path
   return result1.shortestDistance < result2.shortestDistance ? result1 : result2;; 
 }
@@ -283,7 +283,7 @@ const createGraph = (grid) => {
 
 /**
  * A weighted graph that will be used find the all of the shortest paths between
- * two nodes using Djikstra's algorithm with a priority queue
+ * two nodes using Dijkstra's algorithm with a priority queue
  */
 class Graph {
   constructor(){
@@ -371,7 +371,7 @@ class Graph {
 
   /**
    * Compute all of the shortest paths between two points using 
-   * djikstra's algorithm with a priority queue
+   * Dijkstra's algorithm with a priority queue
    * @param {{y: number, x: number, direction: string}} start The start node
    * @param {{y: number, x: number, direction: string}} end The end node
    * @returns {{
@@ -379,7 +379,7 @@ class Graph {
    *  shortestDistance: number
    * }} All of the shortest paths and the shortest distance from start to end nodes
    */
-  djikstraShortestPath(start, end){
+  dijkstraShortestPath(start, end){
     // The unique strings for the start and end nodes from their data objects
     let startNode = this.#key(start.x, start.y, start.direction);
     let endNode = this.#key(end.x, end.y, end.direction);

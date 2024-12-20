@@ -39,7 +39,7 @@ const part2 = (data, shortestPaths) => {
         answer = slicedData[slicedData.length-1];
       // Otherwise find the shortest paths and repeat the process
       else{
-        let result = graph.djikstraShortestPath({y:0, x:0}, {y: HEIGHT-1, x: WIDTH-1});
+        let result = graph.dijkstraShortestPath({y:0, x:0}, {y: HEIGHT-1, x: WIDTH-1});
         path = result.shortestPaths.flat(Infinity);
       }
     }
@@ -57,7 +57,7 @@ const part1 = (data) => {
   // Create the graph with the limited set of data
   let graph = createGraph(data.slice(0, 1024));
   // Use Dijkstra's shortest path algorithm to find the shortest distance to the end node
-  let result = graph.djikstraShortestPath({y: 0,x: 0}, {y: HEIGHT-1, x: WIDTH-1});
+  let result = graph.dijkstraShortestPath({y: 0,x: 0}, {y: HEIGHT-1, x: WIDTH-1});
   return result;
 }
 
@@ -128,7 +128,7 @@ const createGraph = (data) => {
 
 /**
  * A weighted graph that will be used find the all of the shortest paths between
- * two nodes using Djikstra's algorithm with a priority queue
+ * two nodes using Dijkstra's algorithm with a priority queue
  */
 class Graph {
   constructor(){
@@ -185,7 +185,7 @@ class Graph {
 
   /**
    * Compute all of the shortest paths between two points using 
-   * djikstra's algorithm with a priority queue
+   * Dijkstra's algorithm with a priority queue
    * @param {{y: number, x: number}} start The start node
    * @param {{y: number, x: number}} end The end node
    * @returns {{
@@ -193,7 +193,7 @@ class Graph {
    *  shortestDistance: number
    * }} All of the shortest paths and the shortest distance from start to end nodes
    */
-  djikstraShortestPath(start, end){
+  dijkstraShortestPath(start, end){
     // The unique strings for the start and end nodes from their data objects
     let startNode = this.#key(start.x, start.y);
     let endNode = this.#key(end.x, end.y);

@@ -13,9 +13,9 @@ export const run = (fileContents) => {
   // relationshsips while finding the total risk for part 1
   let data = createGraph(depth, end);
 
-  // Djikstra's shortest path algorithm with a priority queue 
+  // Dijkstra's shortest path algorithm with a priority queue 
   // to find the quickest way to reach the end point
-  let result = data.graph.djikstraShortestPath(start, end);
+  let result = data.graph.dijkstraShortestPath(start, end);
 
   return {part1: data.totalRisk, part2: result.distance};
 }
@@ -129,7 +129,7 @@ const createGraph = (depth, end) => {
 }
 
 // A weighted graph that will be used find the shortest path between 
-// two nodes using Djikstra's algorithm with a priority queue
+// two nodes using Dijkstra's algorithm with a priority queue
 class Graph {
   constructor(){
     this.edges = {};
@@ -155,8 +155,8 @@ class Graph {
   }
 
   // Compute the shortest path between two points using 
-  // djikstra's algorithm with a priority queue
-  djikstraShortestPath(start, end){
+  // Dijkstra's algorithm with a priority queue
+  dijkstraShortestPath(start, end){
     // The unique strings for the start and end nodes from their data objects
     let startNode = this.#key(start.x, start.y, start.tool);
     let endNode = this.#key(end.x, end.y, end.tool);
