@@ -4,8 +4,8 @@ export const run = (fileContents) => {
   let lists = createLists(fileContents);
   let result1 = part1(lists);
   let result2 = part2(lists);
-  return {part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
 /**
  * Part 2 solution
@@ -16,20 +16,23 @@ const part2 = (lists) => {
   // Create a total for the similarity score
   let total = 0;
   // Examine each value in the left list
-  for(let x = 0; x < lists.left.length; x++){
+  for (let x = 0; x < lists.left.length; x++) {
     // Save the total count of times it appears in the right list
     let count = 0;
     // Examine each value in the right list until reaching a number larger the the current value
-    for(let y = 0; y < lists.right.length && lists.right[y] <= lists.left[x]; y++){
+    for (
+      let y = 0;
+      y < lists.right.length && lists.right[y] <= lists.left[x];
+      y++
+    ) {
       // If the values match add one to the count.
-      if(lists.right[y] === lists.left[x])
-        count++;
+      if (lists.right[y] === lists.left[x]) count++;
     }
-    // Multiply the count by the value and add to the the total similarity score. 
+    // Multiply the count by the value and add to the the total similarity score.
     total += lists.left[x] * count;
   }
   return total;
-}
+};
 
 /**
  * Part 1 solution
@@ -42,11 +45,11 @@ const part1 = (lists) => {
     // Get the right value that corresponds to the left values index
     let rightVal = lists.right[index];
     // Get the absolute value of the difference between the numbers and add it to the total
-    return total + (Math.abs(leftVal - rightVal));
-  }, 0)
-  
+    return total + Math.abs(leftVal - rightVal);
+  }, 0);
+
   return distance;
-}
+};
 
 /**
  * Crate the lists from the input file
@@ -59,7 +62,7 @@ const createLists = (fileContents) => {
   let right = [];
 
   // Go over each line of the input
-  for(let line of fileContents){
+  for (let line of fileContents) {
     // Use regex to match the numbers in the row
     let matches = line.match(/(\d+)\s+(\d+)/);
     // Parse the string numbers to ints and add them to the left and right arrays correctly
@@ -71,5 +74,5 @@ const createLists = (fileContents) => {
   left.sort();
   right.sort();
 
-  return {left, right};
-}
+  return { left, right };
+};

@@ -2,14 +2,14 @@
 
 export const run = (fileContents) => {
   // Parse the program in from the input file
-  let program = fileContents[0].split(",").map(x => parseInt(x));
+  let program = fileContents[0].split(",").map((x) => parseInt(x));
 
   // Find the highest output for each part of the puzzle
-  let result1 = highestOutput(program, [0,1,2,3,4]);
-  let result2 = highestOutput(program, [5,6,7,8,9], true);
+  let result1 = highestOutput(program, [0, 1, 2, 3, 4]);
+  let result2 = highestOutput(program, [5, 6, 7, 8, 9], true);
 
-  return {part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
 // Find the highest output for the set of phase settings and if this should use the feedback loop
 const highestOutput = (memory, phaseValues, feedbackLoop = false) => {
@@ -19,7 +19,7 @@ const highestOutput = (memory, phaseValues, feedbackLoop = false) => {
   let highestThrust = 0;
 
   // Check each permutation of the phase values
-  for(let perm of permutations){
+  for (let perm of permutations) {
     // Thruster output from the last round starting with 0
     let thruster = 0;
 
@@ -36,7 +36,7 @@ const highestOutput = (memory, phaseValues, feedbackLoop = false) => {
     let programCInputs = [perm[2]];
     let programDInputs = [perm[3]];
     let programEInputs = [perm[4]];
-    
+
     // Current index for each programs input array
     let inputIndexA = 0;
     let inputIndexB = 0;
@@ -53,8 +53,8 @@ const highestOutput = (memory, phaseValues, feedbackLoop = false) => {
 
     // Final opcode from amplifier E
     let finalOpcode;
-    
-    do{
+
+    do {
       // Setup, run, handle output for program A
       programAInputs.push(thruster);
       let outputA = runProgram(programA, programAInputs, inputIndexA, indexA);
@@ -91,21 +91,21 @@ const highestOutput = (memory, phaseValues, feedbackLoop = false) => {
       indexE = outputE.index;
 
       // If the last op code is an output set the thruster value to it
-      if(outputE.opCode === 4)
-        thruster = outputE.output[0];
+      if (outputE.opCode === 4) thruster = outputE.output[0];
       // Set final op code to the op code value that halted amplifier E
       finalOpcode = outputE.opCode;
-    }
-    // Continue while the programs have not halted and this is using the feedback loop
-    while(finalOpcode !== 99 && feedbackLoop)
+    } while (
+      // Continue while the programs have not halted and this is using the feedback loop
+      finalOpcode !== 99 &&
+      feedbackLoop
+    );
 
     // If this is the highest thruster value save it
-    if(thruster > highestThrust)
-      highestThrust = thruster;
+    if (thruster > highestThrust) highestThrust = thruster;
   }
 
   return highestThrust;
-}
+};
 
 // Run the program until it completes
 // intcode program, intput array, index of the input array, index of the program
@@ -119,133 +119,116 @@ const runProgram = (program, input, inIndex, index) => {
   // Current opcode
   let opCode;
   //Continue until reaching the end of the program or the program breaks for opcode 99
-  while(x < program.length){
+  while (x < program.length) {
     // Get program opcode and parameter modes for this command
     opCode = program[x];
     let param3Mode = Math.floor(opCode / 10000);
-    opCode = opCode - (param3Mode * 10000);
+    opCode = opCode - param3Mode * 10000;
     let param2Mode = Math.floor(opCode / 1000);
-    opCode = opCode - (param2Mode * 1000);
+    opCode = opCode - param2Mode * 1000;
     let param1Mode = Math.floor(opCode / 100);
-    opCode = opCode - (param1Mode * 100);
+    opCode = opCode - param1Mode * 100;
 
-    // For each command get the parameter values based on 
+    // For each command get the parameter values based on
     // the parameter modes then run the command
 
     // Add
-    if(opCode === 1){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      let param3 = program[x+3];
+    if (opCode === 1) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
+      let param3 = program[x + 3];
 
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
 
-      program[param3] = param1 + param2; 
-      x+=4;
+      program[param3] = param1 + param2;
+      x += 4;
     }
     // Mutiply
-    else if(opCode === 2){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      let param3 = program[x+3];
-      
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+    else if (opCode === 2) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
+      let param3 = program[x + 3];
 
-      program[param3] = param1 * param2; 
-      x+=4;
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
+
+      program[param3] = param1 * param2;
+      x += 4;
     }
     // Input
-    else if(opCode === 3){
-      let param1 = program[x+1];
+    else if (opCode === 3) {
+      let param1 = program[x + 1];
 
       program[param1] = input[inputIndex];
-      x+=2;
+      x += 2;
       inputIndex++;
     }
     // Output
-    else if(opCode === 4){
-      let param1 = program[x+1];
+    else if (opCode === 4) {
+      let param1 = program[x + 1];
 
-      if(param1Mode === 0)
-        param1 = program[param1];
+      if (param1Mode === 0) param1 = program[param1];
 
       output.push(param1);
-      x+=2;
+      x += 2;
       break;
     }
     // Jump if true
-    else if(opCode === 5){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+    else if (opCode === 5) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
 
-      if(param1 !== 0)
-        x = param2;
-      else
-        x+=3;
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
+
+      if (param1 !== 0) x = param2;
+      else x += 3;
     }
     // Jump if false
-    else if(opCode === 6){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+    else if (opCode === 6) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
 
-      if(param1 === 0)
-        x = param2;
-      else
-        x+=3;
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
+
+      if (param1 === 0) x = param2;
+      else x += 3;
     }
     // Less than
-    else if(opCode === 7){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      let param3 = program[x+3];
-      
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+    else if (opCode === 7) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
+      let param3 = program[x + 3];
+
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
 
       program[param3] = param1 < param2 ? 1 : 0;
-      x+=4;
+      x += 4;
     }
     // Equals
-    else if(opCode === 8){
-      let param1 = program[x+1];
-      let param2 = program[x+2];
-      let param3 = program[x+3];
-      
-      if(param1Mode === 0)
-        param1 = program[param1];
-      if(param2Mode === 0)
-        param2 = program[param2];
+    else if (opCode === 8) {
+      let param1 = program[x + 1];
+      let param2 = program[x + 2];
+      let param3 = program[x + 3];
+
+      if (param1Mode === 0) param1 = program[param1];
+      if (param2Mode === 0) param2 = program[param2];
 
       program[param3] = param1 === param2 ? 1 : 0;
-      x+=4;
+      x += 4;
     }
     // Exit
-    else if(opCode === 99){
-      x+=1;
+    else if (opCode === 99) {
+      x += 1;
       break;
     }
   }
 
-  return {output, program, inputIndex, index:x, opCode};
-}
+  return { output, program, inputIndex, index: x, opCode };
+};
 
 // Create all permutations of 0-4
 // https://stackoverflow.com/questions/9960908/permutations-in-javascript
@@ -254,17 +237,17 @@ const permutator = (inputArr) => {
 
   const permute = (arr, m = []) => {
     if (arr.length === 0) {
-      result.push(m)
+      result.push(m);
     } else {
       for (let i = 0; i < arr.length; i++) {
         let curr = arr.slice();
         let next = curr.splice(i, 1);
-        permute(curr.slice(), m.concat(next))
-     }
-   }
- }
+        permute(curr.slice(), m.concat(next));
+      }
+    }
+  };
 
- permute(inputArr)
+  permute(inputArr);
 
- return result;
-}
+  return result;
+};

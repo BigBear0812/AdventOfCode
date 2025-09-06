@@ -11,40 +11,38 @@ export const run = (fileContents) => {
   let result1 = checkCorruption(image);
   let result2 = renderImage(image, width, height);
 
-  return {part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
 // Render Image for part 2
 const renderImage = (image, width, height) => {
   // Output
-  let output = '\n';
+  let output = "\n";
 
   // Create the output line by line
-  for(let y = 0; y < height; y++){
-    let line = '';
-    for(let x = 0; x < width; x++){
-      for(let l = 0; l < image.length; l++){
+  for (let y = 0; y < height; y++) {
+    let line = "";
+    for (let x = 0; x < width; x++) {
+      for (let l = 0; l < image.length; l++) {
         // If not transparent
-        if(image[l][y][x] !== 2){
+        if (image[l][y][x] !== 2) {
           // If white render space
-          if(image[l][y][x] === 0)
-            line += ' ';
+          if (image[l][y][x] === 0) line += " ";
           // If black render #
-          else if(image[l][y][x] === 1)
-            line += '#';
+          else if (image[l][y][x] === 1) line += "#";
           // Break out since this pixel is now rendered
           break;
         }
       }
     }
-    // End the line with a new line character 
+    // End the line with a new line character
     // and add it to the output
-    line += '\n';
+    line += "\n";
     output += line;
   }
 
   return output;
-}
+};
 
 // Check if the image is corrupted for part 1
 const checkCorruption = (image) => {
@@ -54,14 +52,14 @@ const checkCorruption = (image) => {
   let fewest0Result = 0;
 
   // Check each layer
-  for(let l = 0; l < image.length; l++){
+  for (let l = 0; l < image.length; l++) {
     // Count the number of 0's, 1's, and 2's
     let count0 = 0;
     let count1 = 0;
     let count2 = 0;
-    for(let y = 0; y < image[l].length; y++){
-      for(let x = 0; x < image[l][y].length;x++){
-        switch(image[l][y][x]){
+    for (let y = 0; y < image[l].length; y++) {
+      for (let x = 0; x < image[l][y].length; x++) {
+        switch (image[l][y][x]) {
           case 0:
             count0++;
             break;
@@ -76,28 +74,28 @@ const checkCorruption = (image) => {
     }
 
     // Check if this layer is the one with the fewest 0's
-    if(count0 < fewest0){
+    if (count0 < fewest0) {
       fewest0 = count0;
       fewest0Result = count1 * count2;
     }
   }
 
   return fewest0Result;
-}
+};
 
 // Parse the input into image data from an input file
 const parseInput = (fileContents, width, height) => {
   // Get all pixels as a single array
-  let pixels = fileContents[0].split('').map(x => parseInt(x));
+  let pixels = fileContents[0].split("").map((x) => parseInt(x));
   // Image 3d array
   let image = [];
 
   // Current layer
   let layer = [];
-  // Splice each row for each layer from the pixels string. 
+  // Splice each row for each layer from the pixels string.
   // Add each layer one at a time to the image
-  while(pixels.length > 0){
-    while(layer.length < height){
+  while (pixels.length > 0) {
+    while (layer.length < height) {
       layer.push(pixels.splice(0, width));
     }
     image.push(layer);
@@ -105,4 +103,4 @@ const parseInput = (fileContents, width, height) => {
   }
 
   return image;
-}
+};

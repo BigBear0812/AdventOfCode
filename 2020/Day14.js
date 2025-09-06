@@ -4,13 +4,13 @@ export const run = (fileContents) => {
   // An array of the program commands in order
   let program = [];
   // Process each line of the input a a new command
-  for(let line of fileContents){
+  for (let line of fileContents) {
     // Use regex to extract the necessary data
     let matches = line.match(/(mask|mem\[(\d+)\]) = ([\dX]+)/);
     program.push({
       operation: matches[1],
       memId: matches[2],
-      value: matches[3]
+      value: matches[3],
     });
   }
 
@@ -19,7 +19,7 @@ export const run = (fileContents) => {
   let result2 = part2(program);
 
   return { part1: result1, part2: result2 };
-}
+};
 
 /**
  * Part 2
@@ -31,13 +31,13 @@ const part2 = (program) => {
   let mask;
   let memory = new Map();
   // Process each line of the program one at a time
-  for(let command of program){
+  for (let command of program) {
     // If this is a new mask update the mask variable
-    if(command.operation === "mask"){
+    if (command.operation === "mask") {
       mask = command.value.split("");
     }
     // Otherwise compute a new memory value to be stored
-    else{
+    else {
       // Get the value to be stored
       let value = parseInt(command.value);
       // Get the decimal value of the mem id
@@ -47,19 +47,19 @@ const part2 = (program) => {
       // Add the initial memID decimal value to the results array
       results.push(decimalToBinary(decimal).split(""));
       // Check each value of the mask
-      for(let x = 0; x < mask.length; x++){
+      for (let x = 0; x < mask.length; x++) {
         // Set the value in each result to 1
-        if(mask[x] === "1"){
-          for(let result of results){
-            result[x] = "1"
+        if (mask[x] === "1") {
+          for (let result of results) {
+            result[x] = "1";
           }
         }
         // Create 2 results for each result that each have a 0 and 1 at this spot in the result
-        else if(mask[x] === "X"){
+        else if (mask[x] === "X") {
           // New results being created
           let newResults = [];
           // For each result add a 0 and 1 copy of the result
-          for(let result of results){
+          for (let result of results) {
             // Create two copies
             let copy0 = JSON.parse(JSON.stringify(result));
             let copy1 = JSON.parse(JSON.stringify(result));
@@ -75,7 +75,7 @@ const part2 = (program) => {
         }
       }
       // Set the memory for each result
-      for(let result of results){
+      for (let result of results) {
         // Convert each result to a decimal
         let maskedDecimal = binaryToDecimal(result.join(""));
         // Use the decimal as the mem id and store the commands value into it.
@@ -85,7 +85,7 @@ const part2 = (program) => {
   }
   // Sum all results in memory and return them
   return sumMemory(memory);
-}
+};
 
 /**
  * Part 1
@@ -97,21 +97,21 @@ const part1 = (program) => {
   let mask;
   let memory = new Map();
   // Process each line of the program one at a time
-  for(let command of program){
+  for (let command of program) {
     // If this is a new mask update the mask variable
-    if(command.operation === "mask"){
+    if (command.operation === "mask") {
       mask = command.value.split("");
     }
     // Otherwise compute a new memory value to be stored
-    else{
+    else {
       // Get the decimal value fo the commands value
       let decimal = parseInt(command.value);
       // Convert to a binary string array
       let binary = decimalToBinary(decimal).split("");
       // For each value in mask check update the value in the binary string array
-      for(let x = 0; x < mask.length; x++){
+      for (let x = 0; x < mask.length; x++) {
         // If mask value is not an X update the binary string array at this spot with the mask value
-        if(mask[x] !== "X"){
+        if (mask[x] !== "X") {
           binary[x] = mask[x];
         }
       }
@@ -123,11 +123,11 @@ const part1 = (program) => {
   }
   // Sum all results in memory and return them
   return sumMemory(memory);
-}
+};
 
 /**
  * Sum all of the values in each populated spot in the memory map
- * @param {Map} memory The map of memory values 
+ * @param {Map} memory The map of memory values
  * @returns {number} The sum of all values in the memory
  */
 const sumMemory = (memory) => {
@@ -136,7 +136,7 @@ const sumMemory = (memory) => {
     sum += value;
   });
   return sum;
-}
+};
 
 /**
  * Convert a binary string into a decimal number
@@ -145,7 +145,7 @@ const sumMemory = (memory) => {
  */
 const binaryToDecimal = (binary) => {
   return parseInt(binary, 2);
-}
+};
 
 /**
  * Convert a decimal number into a binary string filled with placeholder 0's to 36 digits
@@ -161,8 +161,8 @@ const decimalToBinary = (decimal) => {
   let paddingLength = outputLength - shortBinary.length;
   // Create padding and append it to the binary string
   let padding = "";
-  for(let x = 0; x < paddingLength; x++){
+  for (let x = 0; x < paddingLength; x++) {
     padding += "0";
   }
   return padding + shortBinary;
-}
+};

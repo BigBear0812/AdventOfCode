@@ -12,10 +12,10 @@ export const run = (fileContents) => {
 
   // Find the high scores for parts 1 and 2 of the puzzle
   let highScore1 = findHighScore(playerCount, lastMarble);
-  let highScore2 = findHighScore(playerCount, (lastMarble * 100));
+  let highScore2 = findHighScore(playerCount, lastMarble * 100);
 
-  return {part1: highScore1, part2: highScore2};
-}
+  return { part1: highScore1, part2: highScore2 };
+};
 
 // Find the high score for the game given the number of players and the highest value marble
 const findHighScore = (playerCount, lastMarble) => {
@@ -28,18 +28,18 @@ const findHighScore = (playerCount, lastMarble) => {
   circle.insert(0);
 
   // Simulate each marble
-  for(let m = 1; m <= lastMarble; m++){
+  for (let m = 1; m <= lastMarble; m++) {
     // If the marble is a multiple of 23
-    if(m % 23 === 0){
+    if (m % 23 === 0) {
       // Advance back 6
       circle.advancePrev(6);
       // Delete the pervious marble
       let deleted = circle.delete();
       // Update score for the current elf
-      scores[(m-1) % playerCount] += m + deleted;
+      scores[(m - 1) % playerCount] += m + deleted;
     }
     // Else this is a marble to be placed like normal
-    else{
+    else {
       // Advance forward 2
       circle.advanceNext(2);
       // Insert the value behind the current marble
@@ -51,48 +51,46 @@ const findHighScore = (playerCount, lastMarble) => {
 
   // Return the highest score
   return Math.max(...scores);
-}
+};
 
-// A class for maintaining and manipulating a circular doubley linked list 
+// A class for maintaining and manipulating a circular doubley linked list
 class LinkedList {
-  constructor(){
+  constructor() {
     this.head = null;
     this.length = 0;
   }
-  
+
   // Insert values in the last position of the list behind the head of the list
-  insert(value){
+  insert(value) {
     // If no items exist insert insert the value as the head node and link it to itself
-    if(this.head === null){
+    if (this.head === null) {
       this.head = new LinkedListNode(value, null, null);
       this.head.prev = this.head;
       this.head.next = this.head;
     }
-    // If a head already exists add this beihnd the head and update the 
+    // If a head already exists add this beihnd the head and update the
     // adjacent node references node references
-    else{ 
+    else {
       let prev = this.head.prev;
       let item = new LinkedListNode(value, this.head, prev);
       this.head.prev = item;
       prev.next = item;
     }
-    this.length++; 
+    this.length++;
   }
 
   // Advance the head node to the next one in the list the given number of times
-  advanceNext(count = 1){
-    for(let x = 0; x < count; x++)
-      this.head = this.head.next;
+  advanceNext(count = 1) {
+    for (let x = 0; x < count; x++) this.head = this.head.next;
   }
   // Advance the head node to the prev one in the list the given number of times
-  advancePrev(count = 1){
-    for(let x = 0; x < count; x++)
-      this.head = this.head.prev;
+  advancePrev(count = 1) {
+    for (let x = 0; x < count; x++) this.head = this.head.prev;
   }
 
-  // Delete the prev node to the one at the current head of the list 
+  // Delete the prev node to the one at the current head of the list
   // and return the node value being deleted
-  delete(){
+  delete() {
     let result = this.head.prev.value;
 
     this.head.prev.prev.next = this.head;
@@ -105,7 +103,7 @@ class LinkedList {
 
 // A class for storing linked list node information
 class LinkedListNode {
-  constructor(value, next, prev){
+  constructor(value, next, prev) {
     this.value = value;
     this.next = next;
     this.prev = prev;

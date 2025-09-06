@@ -1,6 +1,6 @@
 // Puzzle for Day 15: https://adventofcode.com/2015/day/15
 
-export const run = (fileContents) => { 
+export const run = (fileContents) => {
   // Parse the input file lines into and ingredients map
   let ingredients = parseInput(fileContents);
 
@@ -13,35 +13,39 @@ export const run = (fileContents) => {
   // Calculate Part 2
   let fiveHundredCalCokie = calcBestCookie(allOptions, ingredients, 500);
 
-  return {part1: largestTotal, part2: fiveHundredCalCokie};
-}
+  return { part1: largestTotal, part2: fiveHundredCalCokie };
+};
 
 // Parse the input lines
 const parseInput = (fileContents) => {
   // Regex for parsing each line
-  let reg = new RegExp(/(\w+): capacity (-*\d+), durability (-*\d+), flavor (-*\d+), texture (-*\d+), calories (-*\d+)/);
+  let reg = new RegExp(
+    /(\w+): capacity (-*\d+), durability (-*\d+), flavor (-*\d+), texture (-*\d+), calories (-*\d+)/,
+  );
   // Map of all ingredients
   let ingredients = new Map();
   // Parse each line and create a new object to be added to the map
-  for(let item of fileContents){
+  for (let item of fileContents) {
     let matches = item.match(reg);
-    let ingredient = new Ingredient(matches[1], 
-      parseInt(matches[2]), 
-      parseInt(matches[3]), 
-      parseInt(matches[4]), 
-      parseInt(matches[5]), 
-      parseInt(matches[6]));
+    let ingredient = new Ingredient(
+      matches[1],
+      parseInt(matches[2]),
+      parseInt(matches[3]),
+      parseInt(matches[4]),
+      parseInt(matches[5]),
+      parseInt(matches[6]),
+    );
     ingredients.set(ingredient.name, ingredient);
   }
   return ingredients;
-}
+};
 
 // Generate all of the options for the amount of each ingredient
 const generateAllOptions = (ingredients) => {
   // The start where each ingredient has an amount of 1
   let start = [];
   ingredients.forEach((ingre) => {
-    start.push({name: ingre.name, amount: 1});
+    start.push({ name: ingre.name, amount: 1 });
   });
 
   // The queue of next possible options
@@ -54,38 +58,36 @@ const generateAllOptions = (ingredients) => {
   let allOptions = new Set();
 
   // Keep processing possible states until there are none left in the queue to check.
-  while(queue.length > 0){
+  while (queue.length > 0) {
     let current = queue.pop();
 
     // Check the total sum of the amounts for this option
     let sum = current.reduce((accumulator, val) => accumulator + val.amount, 0);
 
     // If this is not a valid option then find the next options
-    if(sum < 100){
-
+    if (sum < 100) {
       // Check for a new next option for each ingredient
-      for(let ingre of current){
-
-        // Create a new option from the current one and add 1 to the current 
+      for (let ingre of current) {
+        // Create a new option from the current one and add 1 to the current
         // ingredient to generate a potential next option
         let temp = JSON.parse(JSON.stringify(current));
-        temp.find( i => i.name === ingre.name).amount++;
+        temp.find((i) => i.name === ingre.name).amount++;
 
         // Generate a unique key for this possible next options
-        let key = temp.map(val => `${val.name}:${val.amount}`).join(',');
+        let key = temp.map((val) => `${val.name}:${val.amount}`).join(",");
 
-        // If this possible next state has not been checked yet then add 
+        // If this possible next state has not been checked yet then add
         // it to the checked states and the next queue
-        if(!checkOptions.has(key)){
+        if (!checkOptions.has(key)) {
           checkOptions.add(key);
           queue.push(temp);
         }
       }
     }
     // Else this options amount sum is 100 and is a valid option to consider
-    else{
+    else {
       // Generate the unique key for this option
-      let key = current.map(val => `${val.name}:${val.amount}`).join(',');
+      let key = current.map((val) => `${val.name}:${val.amount}`).join(",");
 
       // Add the key to the checked options and the all options sets
       checkOptions.add(key);
@@ -94,7 +96,7 @@ const generateAllOptions = (ingredients) => {
   }
 
   return allOptions;
-}
+};
 
 // Find the cookie option with the highest value that matches the calorie count if specified
 const calcBestCookie = (allOptions, ingredients, calorieCount) => {
@@ -104,24 +106,24 @@ const calcBestCookie = (allOptions, ingredients, calorieCount) => {
   // Check each valid option
   allOptions.forEach((key) => {
     // Decode the set key into an ingredient option object
-    let current = key.split(',').map(val => {
-      let ingre = val.split(':');
-      return {name: ingre[0], amount: ingre[1]};
+    let current = key.split(",").map((val) => {
+      let ingre = val.split(":");
+      return { name: ingre[0], amount: ingre[1] };
     });
 
     // Calculate the properties of this option
     let capacity = 0;
-    let durability = 0;  
+    let durability = 0;
     let flavor = 0;
     let texture = 0;
     let calories = 0;
-    for(let ingre of current){
+    for (let ingre of current) {
       let ingredient = ingredients.get(ingre.name);
-      capacity += (ingredient.capacity * ingre.amount);
-      durability += (ingredient.durability * ingre.amount);
-      flavor += (ingredient.flavor * ingre.amount);
-      texture += (ingredient.texture * ingre.amount);
-      calories += (ingredient.calories * ingre.amount);
+      capacity += ingredient.capacity * ingre.amount;
+      durability += ingredient.durability * ingre.amount;
+      flavor += ingredient.flavor * ingre.amount;
+      texture += ingredient.texture * ingre.amount;
+      calories += ingredient.calories * ingre.amount;
     }
 
     // Set any negative property values to 0
@@ -135,25 +137,25 @@ const calcBestCookie = (allOptions, ingredients, calorieCount) => {
     let total = capacity * durability * flavor * texture;
 
     // If a calorie count is specified check that this cookie option matches it
-    if(calorieCount){
-      if(calorieCount === calories){
+    if (calorieCount) {
+      if (calorieCount === calories) {
         // Check if this option total is larger than the largest total found so far
         largestTotal = largestTotal < total ? total : largestTotal;
       }
     }
     // If no calorie count specified
-    else{
+    else {
       // Check if this option total is larger than the largest total found so far
       largestTotal = largestTotal < total ? total : largestTotal;
     }
   });
 
   return largestTotal;
-}
+};
 
 // A class for holding the ingredient information
 class Ingredient {
-  constructor (name, capacity, durability, flavor, texture, calories){
+  constructor(name, capacity, durability, flavor, texture, calories) {
     this.name = name;
     this.capacity = capacity;
     this.durability = durability;

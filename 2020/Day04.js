@@ -15,7 +15,7 @@ export const run = (fileContents) => {
       passports.push(createPassport(buffer));
       // Empty the buffer
       buffer = [];
-    } 
+    }
     // Add the properties on this line to the buffer for the next passport
     else {
       // Split the line by spaces to separate the properties
@@ -70,7 +70,7 @@ export const run = (fileContents) => {
       let hgtMatches = passport["hgt"].match(/(\d+)(in|cm)/);
       let hgtNum = hgtMatches !== null ? parseInt(hgtMatches[1]) : NaN;
       let hgtUnit = hgtMatches !== null ? hgtMatches[2] : null;
-      // Regex to match a value starting with a # followed exactly 6 values that are digits or letters a-f 
+      // Regex to match a value starting with a # followed exactly 6 values that are digits or letters a-f
       let hclMatches = passport["hcl"].match(/^#[\da-f]{6,6}$/);
       let ecl = passport["ecl"];
       let pid = passport["pid"];
@@ -116,7 +116,7 @@ export const run = (fileContents) => {
 
 /**
  * Create a passport object from a buffer array of property and value objects
- * @param {{prop:string, val: string}[]} buffer 
+ * @param {{prop:string, val: string}[]} buffer
  * @returns A new passport object
  */
 const createPassport = (buffer) => {

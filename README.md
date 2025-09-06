@@ -22,7 +22,7 @@ npm run day <yyyy> <dd> [time]
 
 ## Setup
 
-Input files are stored in a private submodule that is referenced by git in the project. 
+Input files are stored in a private submodule that is referenced by git in the project.
 
 After cloning the repo run these commands to setup the submodule
 
@@ -32,6 +32,7 @@ After cloning the repo run these commands to setup the submodule
 git submodule init
 git submodule update
 ```
+
 ## Input files
 
 The solution runner expects that all input files will be in the location `./AOCPuzzlesInputs/{yyyy}/Day{dd}_input.txt`. In this template `{yyyy}` is the 4 digit year and `{dd}` is the 2 digit day.

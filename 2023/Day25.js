@@ -17,18 +17,18 @@ export const run = (fileContents) => {
     for (let to of toArr) {
       // Add the to nodes to the map of nodes if it is not already included
       if (!nodes.has(to)) nodes.set(to, nodes.size);
-      // Add the edge using the mapped numbers for each node instead of the names 
+      // Add the edge using the mapped numbers for each node instead of the names
       // from the input. This is due to how the implementation of this algorithm works
       edges.push(new Edge(nodes.get(from), nodes.get(to)));
     }
   }
 
-  // Create a new graph with the specified number of nodes 
+  // Create a new graph with the specified number of nodes
   // and edges that have been parsed in from the input
   let graph = new Graph(nodes.size, edges.length);
   graph.edge = edges;
 
-  // Run Karger's algorithm until 3 cuts have been detected since we 
+  // Run Karger's algorithm until 3 cuts have been detected since we
   // know that is the minimum number from the problem statement
   let result;
   for (let x = 0; x < 1000; x++) {
@@ -37,7 +37,7 @@ export const run = (fileContents) => {
   }
 
   // The result components will be an array of each node and the group number is has been assigned.
-  // Add these group numbers as properties to the groupCounts object with the values being the total 
+  // Add these group numbers as properties to the groupCounts object with the values being the total
   // number of times it comes up in the components array.
   let groupCounts = {};
   result.components.forEach((component) => {

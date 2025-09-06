@@ -13,21 +13,21 @@ export const run = (fileContents) => {
     trees: 3,
     cars: 2,
     perfumes: 1,
-  }
+  };
 
   // Parse all Aunts Sue info into objects
   let sues = parseInput(fileContents);
 
   // Find Aunt Sue matching Part 1's scenario
   let match = findMatchingSuePart1(sues, sample);
-  match = parseInt(match.split(' ')[1]);
+  match = parseInt(match.split(" ")[1]);
 
   // Find Aunt Sue matching Part 2's scenario
   let match2 = findMatchingSuePart2(sues, sample);
-  match2 = parseInt(match2.split(' ')[1])
+  match2 = parseInt(match2.split(" ")[1]);
 
-  return {part1: match, part2: match2};
-}
+  return { part1: match, part2: match2 };
+};
 
 // Parse each line of the input as a new Aunt Sue object
 const parseInput = (fileContents) => {
@@ -35,9 +35,9 @@ const parseInput = (fileContents) => {
   let reg = new RegExp(/(\w+ \d+): (\w+): (\d+), (\w+): (\d+), (\w+): (\d+)/);
   // All Aunt Sue's
   let sues = [];
-  for(let sueText of fileContents){
+  for (let sueText of fileContents) {
     let matches = sueText.match(reg);
-    // Create new object and add each property to the object. 
+    // Create new object and add each property to the object.
     // Properties not added will result in undefined
     let sue = {};
     sue.name = matches[1];
@@ -47,66 +47,70 @@ const parseInput = (fileContents) => {
     sues.push(sue);
   }
   return sues;
-}
+};
 
 // Find Aunt Sue matching Part 1's criteria
 const findMatchingSuePart1 = (sues, sample) => {
   // Check each Aunt Sue
-  for(let sue of sues){
-    // Assume all defined properties will match 
+  for (let sue of sues) {
+    // Assume all defined properties will match
     let matchesAll = true;
     // Check each property in the sample
-    for(let property in sample){
-      // If the matchesAll assumption is still true and 
-      // the Aunt Sue has this property defined and they 
+    for (let property in sample) {
+      // If the matchesAll assumption is still true and
+      // the Aunt Sue has this property defined and they
       // are not equal values set matchesAll to false
-      if(matchesAll && sue[property] !== undefined && sue[property] !== sample[property]){
+      if (
+        matchesAll &&
+        sue[property] !== undefined &&
+        sue[property] !== sample[property]
+      ) {
         matchesAll = false;
       }
     }
 
     // If the matchesAll assumption is still true this must be the result
-    if (matchesAll){
+    if (matchesAll) {
       return sue.name;
     }
   }
-}
+};
 
 // Find Aunt Sue matching Part 2's criteria
 const findMatchingSuePart2 = (sues, sample) => {
   // Check each Aunt Sue
-  for(let sue of sues){
-    // Assume all defined properties will match 
+  for (let sue of sues) {
+    // Assume all defined properties will match
     let matchesAll = true;
     // Check each property in the sample
-    for(let property in sample){
-      // If the matchesAll assumption is still true and 
-      // the Aunt Sue has this property defined and they 
-      if(matchesAll && sue[property] !== undefined){
+    for (let property in sample) {
+      // If the matchesAll assumption is still true and
+      // the Aunt Sue has this property defined and they
+      if (matchesAll && sue[property] !== undefined) {
         // If the property is cats or trees
-        if(property === 'cats' || property === 'trees'){
+        if (property === "cats" || property === "trees") {
           // If this Aunt Sue's value is not greater than the sample set matchesAll to false
-          if(!(sue[property] > sample[property])){
+          if (!(sue[property] > sample[property])) {
             matchesAll = false;
           }
         }
         // If this property is pomeranians or goldfish
-        else if(property === 'pomeranians' || property === 'goldfish'){
+        else if (property === "pomeranians" || property === "goldfish") {
           // If this Aunt Sue's value is not less than the sample set matchesAll to false
-          if(!(sue[property] < sample[property])){
+          if (!(sue[property] < sample[property])) {
             matchesAll = false;
           }
         }
         // If this property exists and is not equal in value to the sample set matchesAll to false
-        else if(sue[property] !== sample[property]){
+        else if (sue[property] !== sample[property]) {
           matchesAll = false;
         }
       }
     }
 
     // If the matchesAll assumption is still true this must be the result
-    if (matchesAll){
+    if (matchesAll) {
       return sue.name;
     }
   }
-}
+};

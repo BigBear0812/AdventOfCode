@@ -11,13 +11,13 @@ export const run = (fileContents) => {
   // Simulate the particles movements and eliminate particles that collide
   particlesAfterCollisions(particles2);
 
-  return {part1: result1.closestAvgPart, part2: particles2.size};
-}
+  return { part1: result1.closestAvgPart, part2: particles2.size };
+};
 
 // Simulate the movements of particles and eliminate ones that collide
 const particlesAfterCollisions = (particles) => {
   // Simulate for 500 movements to make sure all collisions happen brfore particles begin to move away from each other
-  for(let t = 0; t < 500; t++){
+  for (let t = 0; t < 500; t++) {
     // Create a map of new positions
     let newPositions = new Map();
     // Find each particles new position and add it to the map
@@ -31,9 +31,9 @@ const particlesAfterCollisions = (particles) => {
       val.p.z += val.v.z;
 
       // Create or update map entries for new positions to find collisions
-      let parts = []
+      let parts = [];
       let pos = `${val.p.x},${val.p.y},${val.p.z}`;
-      if(newPositions.has(pos)){
+      if (newPositions.has(pos)) {
         parts = newPositions.get(pos);
       }
       parts.push(key);
@@ -42,17 +42,16 @@ const particlesAfterCollisions = (particles) => {
 
     // Create an array of all particle that are sharing a given point
     let collided = [];
-    newPositions.forEach(val => {
-      if(val.length > 1)
-        collided = collided.concat(val);
-    })
+    newPositions.forEach((val) => {
+      if (val.length > 1) collided = collided.concat(val);
+    });
 
     // Delete the collided particles from the particles map
-    for(let c of collided){
+    for (let c of collided) {
       particles.delete(c);
     }
   }
-}
+};
 
 // FInd the particle that stays the closest to (0, 0, 0) on average
 const avgClosestParticle = (particles) => {
@@ -64,9 +63,9 @@ const avgClosestParticle = (particles) => {
   particles.forEach((val, key) => {
     // The distances a point has from 0 at each time
     let distances = [];
-    // Simulate 500 movements to make sure points have moved 
+    // Simulate 500 movements to make sure points have moved
     // enough to predict long term results
-    for(let t = 0; t < 500; t++){
+    for (let t = 0; t < 500; t++) {
       // Add the current diatance to the array
       distances.push(Math.abs(val.p.x) + Math.abs(val.p.y) + Math.abs(val.p.z));
       // Find the new position of the particle
@@ -78,50 +77,53 @@ const avgClosestParticle = (particles) => {
       val.p.z += val.v.z;
     }
     // After 500 movements find the average particle distance from (0, 0, 0)
-    let avgDistance = distances.reduce((total,val) => total + val) / (distances.length * 1.0);
+    let avgDistance =
+      distances.reduce((total, val) => total + val) / (distances.length * 1.0);
     // If this is the lowest average so far save it and the particle number
-    if(avgDistance < closestAvg){
+    if (avgDistance < closestAvg) {
       closestAvg = avgDistance;
       closestAvgPart = key;
     }
   });
 
-  return {closestAvg, closestAvgPart};
-}
+  return { closestAvg, closestAvgPart };
+};
 
 // Parse each line as a new particle into a map
 const parseInput = (fileContents) => {
   // Regex for reading each particle's information
-  let reg = new RegExp(/p=<([-\d]+),([-\d]+),([-\d]+)>, v=<([-\d]+),([-\d]+),([-\d]+)>, a=<([-\d]+),([-\d]+),([-\d]+)>/);
+  let reg = new RegExp(
+    /p=<([-\d]+),([-\d]+),([-\d]+)>, v=<([-\d]+),([-\d]+),([-\d]+)>, a=<([-\d]+),([-\d]+),([-\d]+)>/,
+  );
   // Resulting particles in a map
   let particles = new Map();
 
   // Parse each line of the file as a new particle
-  for(let x = 0; x < fileContents.length; x++){
+  for (let x = 0; x < fileContents.length; x++) {
     // Find matches in the current line of text
     let line = fileContents[x];
     let matches = line.match(reg);
 
-    // Add particles to the map with their specified 
+    // Add particles to the map with their specified
     // position, velocity, and acceleration
     particles.set(x, {
       p: {
         x: parseInt(matches[1]),
         y: parseInt(matches[2]),
-        z: parseInt(matches[3])
+        z: parseInt(matches[3]),
       },
       v: {
         x: parseInt(matches[4]),
         y: parseInt(matches[5]),
-        z: parseInt(matches[6])
+        z: parseInt(matches[6]),
       },
       a: {
         x: parseInt(matches[7]),
         y: parseInt(matches[8]),
-        z: parseInt(matches[9])
-      }
+        z: parseInt(matches[9]),
+      },
     });
   }
 
   return particles;
-}
+};

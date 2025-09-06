@@ -10,90 +10,93 @@ export const run = (fileContents) => {
   let iterator = data.carts.values();
   let lastCart = iterator.next().value;
 
-  return {part1: `${collisions[0].x},${collisions[0].y}`, part2: `${lastCart.x},${lastCart.y}`};
-}
+  return {
+    part1: `${collisions[0].x},${collisions[0].y}`,
+    part2: `${lastCart.x},${lastCart.y}`,
+  };
+};
 
-// Run the collision simulation until the all collisions 
+// Run the collision simulation until the all collisions
 // have happened and only one cart remains
 const findAllCollisions = (data) => {
   // All collisions
   let collisions = [];
 
   // Continue until only one cart remains
-  while(data.carts.size > 1){
+  while (data.carts.size > 1) {
     // Find the next collision and add it to the results set
     let next = findNextCollision(data);
     collisions.push(next);
   }
 
   return collisions;
-}
+};
 
 // Continue the simulation until it reaches only one cart remaining
 const findNextCollision = (data) => {
   // The location of the next collision
   let collision = null;
 
-  // TODO: This will run faster if instead of checking each 
-  // location only process cart movements in the correct order. 
+  // TODO: This will run faster if instead of checking each
+  // location only process cart movements in the correct order.
   // Checking each spot one at a time makes the process much slower
 
   // Process each tick
-  for(let tick = 0; collision === null; tick++){
+  for (let tick = 0; collision === null; tick++) {
     // Check each location starting at the top row
-    for(let y = 0; y < data.map.length; y++){
+    for (let y = 0; y < data.map.length; y++) {
       // Check each location starting at the left column
-      for(let x = 0; x < data.map[y].length; x++){
+      for (let x = 0; x < data.map[y].length; x++) {
         // Find cart
         let cart = data.carts.get(`${x},${y}`);
         // If there is a cart and it has not been updated this tick it needs to be updated
-        if(cart !== undefined && cart.lastMovedTick !== tick){
+        if (cart !== undefined && cart.lastMovedTick !== tick) {
           // Delete the current cart from the map
           data.carts.delete(`${x},${y}`);
 
           // Find the location to move the cart into
           let nextX;
           let nextY;
-          switch(cart.dir){
+          switch (cart.dir) {
             case "U":
               nextX = x;
-              nextY = y-1;
+              nextY = y - 1;
               break;
             case "R":
-              nextX = x+1;
+              nextX = x + 1;
               nextY = y;
               break;
             case "D":
               nextX = x;
-              nextY = y+1;
+              nextY = y + 1;
               break;
             case "L":
-              nextX = x-1;
+              nextX = x - 1;
               nextY = y;
               break;
           }
 
           // Detect collisions
-          if(data.carts.has(`${nextX},${nextY}`)){
-            // If a collision is found delete the other 
+          if (data.carts.has(`${nextX},${nextY}`)) {
+            // If a collision is found delete the other
             // cart that was collided into
             data.carts.delete(`${nextX},${nextY}`);
             // Set the current next location as the point
             // of the collision to be returned
-            collision = {x: nextX, y: nextY};
+            collision = { x: nextX, y: nextY };
           }
 
           // If no collisions
-          else{
+          else {
             cart.x = nextX;
             cart.y = nextY;
             // Update direction based on the next character
             let nextChar = data.map[nextY][nextX];
 
-            // Turn 
-            if(nextChar === "/"){
-              switch(cart.dir){
-                case "U": 
+            // Turn
+            if (nextChar === "/") {
+              switch (cart.dir) {
+                case "U":
                   cart.dir = "R";
                   break;
                 case "R":
@@ -108,9 +111,9 @@ const findNextCollision = (data) => {
               }
             }
             // Opposite turn
-            else if(nextChar === "\\"){
-              switch(cart.dir){
-                case "U": 
+            else if (nextChar === "\\") {
+              switch (cart.dir) {
+                case "U":
                   cart.dir = "L";
                   break;
                 case "R":
@@ -125,16 +128,16 @@ const findNextCollision = (data) => {
               }
             }
             // Intersection
-            else if(nextChar === "+"){
+            else if (nextChar === "+") {
               // Update this carts number of intersections visited
               cart.ints++;
-              // Decide the direction to turn and update the direction 
+              // Decide the direction to turn and update the direction
               // based on the current cart direction
               let dir = cart.ints % 3;
-              switch (dir){
+              switch (dir) {
                 // right
                 case 0:
-                  switch(cart.dir){
+                  switch (cart.dir) {
                     case "U":
                       cart.dir = "R";
                       break;
@@ -150,7 +153,7 @@ const findNextCollision = (data) => {
                   break;
                 // left
                 case 1:
-                  switch(cart.dir){
+                  switch (cart.dir) {
                     case "U":
                       cart.dir = "L";
                       break;
@@ -165,7 +168,7 @@ const findNextCollision = (data) => {
                   }
                   break;
                 // straight
-                case 2: 
+                case 2:
                   break;
               }
             }
@@ -180,7 +183,7 @@ const findNextCollision = (data) => {
   }
 
   return collision;
-}
+};
 
 // Parse the input into a data object
 const parseInput = (fileContents) => {
@@ -190,20 +193,20 @@ const parseInput = (fileContents) => {
   let carts = new Map();
 
   // Parse each line of the input file
-  for(let y = 0; y < fileContents.length; y++){
+  for (let y = 0; y < fileContents.length; y++) {
     // Split the current line into a character array
     let line = fileContents[y].split("");
     // The updated line to add to the track map
     let mapLine = [];
     // Examine each character in the line of the input file
-    for(let x = 0; x < line.length; x++){
+    for (let x = 0; x < line.length; x++) {
       // The current character of the input file line
       let char = line[x];
       // The cart diurection if this character is a cart
       let cartDir;
-      // If this is a cart get the direction and replace the 
+      // If this is a cart get the direction and replace the
       // current character with the correct track map symbol
-      switch(char){
+      switch (char) {
         case "^":
           cartDir = "U";
           char = "|";
@@ -222,15 +225,15 @@ const parseInput = (fileContents) => {
           break;
       }
 
-      // If a cart direction was found the add 
+      // If a cart direction was found the add
       // this cart to the carts map
-      if(cartDir){
-        carts.set(`${x},${y}`,{
+      if (cartDir) {
+        carts.set(`${x},${y}`, {
           dir: cartDir,
           x,
           y,
           ints: 0,
-          lastMovedTick: null
+          lastMovedTick: null,
         });
       }
 
@@ -241,5 +244,5 @@ const parseInput = (fileContents) => {
     map.push(mapLine);
   }
 
-  return {map, carts};
-}
+  return { map, carts };
+};

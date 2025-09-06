@@ -7,8 +7,8 @@ export const run = (fileContents) => {
   let result1 = part1(fileContents);
   let result2 = part2(fileContents);
 
-  return {part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
 const part1 = (fileContents) => {
   // Off false
@@ -16,29 +16,29 @@ const part1 = (fileContents) => {
 
   // Create the grid
   let grid = [];
-  for(let x = 0; x < xLen; x++){
+  for (let x = 0; x < xLen; x++) {
     let col = [];
-    for(let y = 0; y < yLen; y++){
+    for (let y = 0; y < yLen; y++) {
       col.push(false);
     }
     grid.push(col);
   }
 
-  for (const line of fileContents){
+  for (const line of fileContents) {
     let updates = parseLine(line);
     // Update the grid
-    for(let x = updates.start.x; x <= updates.end.x; x++){
-      for(let y = updates.start.y; y <= updates.end.y; y++){
-        switch(updates.command){
-          case 'turn on': 
+    for (let x = updates.start.x; x <= updates.end.x; x++) {
+      for (let y = updates.start.y; y <= updates.end.y; y++) {
+        switch (updates.command) {
+          case "turn on":
             grid[x][y] = true;
             break;
-          
-          case 'turn off': 
+
+          case "turn off":
             grid[x][y] = false;
             break;
-          
-          case 'toggle': 
+
+          case "toggle":
             grid[x][y] = !grid[x][y];
             break;
         }
@@ -48,45 +48,42 @@ const part1 = (fileContents) => {
 
   // Count the lights on
   let total = 0;
-  for(let x = 0; x < xLen; x++){
-    for(let y = 0; y < yLen; y++){
-      if(grid[x][y])
-        total++;
+  for (let x = 0; x < xLen; x++) {
+    for (let y = 0; y < yLen; y++) {
+      if (grid[x][y]) total++;
     }
   }
 
   // Log output
-  console.log('Part 1:', total);
-}
+  console.log("Part 1:", total);
+};
 
 const part2 = (fileContents) => {
-
   // Create the grid
   let grid = [];
-  for(let x = 0; x < xLen; x++){
+  for (let x = 0; x < xLen; x++) {
     let col = [];
-    for(let y = 0; y < yLen; y++){
+    for (let y = 0; y < yLen; y++) {
       col.push(0);
     }
     grid.push(col);
   }
 
-  for (const line of fileContents){
+  for (const line of fileContents) {
     let updates = parseLine(line);
     // Update the grid
-    for(let x = updates.start.x; x <= updates.end.x; x++){
-      for(let y = updates.start.y; y <= updates.end.y; y++){
-        switch(updates.command){
-          case 'turn on': 
+    for (let x = updates.start.x; x <= updates.end.x; x++) {
+      for (let y = updates.start.y; y <= updates.end.y; y++) {
+        switch (updates.command) {
+          case "turn on":
             grid[x][y]++;
             break;
-          
-          case 'turn off': 
-            if(grid[x][y] > 0)
-              grid[x][y]--;
+
+          case "turn off":
+            if (grid[x][y] > 0) grid[x][y]--;
             break;
-          
-          case 'toggle': 
+
+          case "toggle":
             grid[x][y] += 2;
             break;
         }
@@ -96,30 +93,30 @@ const part2 = (fileContents) => {
 
   // Count the total brightness of the lights
   let total = 0;
-  for(let x = 0; x < xLen; x++){
-    for(let y = 0; y < yLen; y++){
+  for (let x = 0; x < xLen; x++) {
+    for (let y = 0; y < yLen; y++) {
       total += grid[x][y];
     }
   }
 
   // Log output
-  console.log('Part 2:', total);
+  console.log("Part 2:", total);
 };
 
-
-
 const parseLine = (line) => {
-  const regex = new RegExp('([turnofgle ]+) (\\d+),(\\d+) through (\\d+),(\\d+)');
+  const regex = new RegExp(
+    "([turnofgle ]+) (\\d+),(\\d+) through (\\d+),(\\d+)",
+  );
   const results = line.match(regex);
   return {
     command: results[1],
     start: {
-      x: Math.min(results[2], results[4]), 
-      y: Math.min(results[3], results[5])
+      x: Math.min(results[2], results[4]),
+      y: Math.min(results[3], results[5]),
     },
     end: {
-      x: Math.max(results[2], results[4]), 
-      y: Math.max(results[3], results[5])
-    }
-  }
-}
+      x: Math.max(results[2], results[4]),
+      y: Math.max(results[3], results[5]),
+    },
+  };
+};

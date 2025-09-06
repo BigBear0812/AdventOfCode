@@ -10,5 +10,8 @@
   "type": "module",
   "dependencies": {
     "z3-solver": "^4.12.4"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
   }
 }

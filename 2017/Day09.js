@@ -2,7 +2,7 @@
 
 export const run = (fileContents) => {
   // Split the stream into characters to be evaluated one at a time
-  let stream = fileContents[0].split('');
+  let stream = fileContents[0].split("");
 
   // Keep track of several things at once
   // How many groups deep are we
@@ -17,38 +17,37 @@ export const run = (fileContents) => {
   let inGarbage = false;
 
   // Continue processing the stream while the index is still valid
-  while(index < stream.length){
+  while (index < stream.length) {
     // Get the current character
     let current = stream[index];
     // If a ! then skip the next character regardless of being in garbage or not
-    if(current === '!'){
+    if (current === "!") {
       index++;
-    }
-    else{
-      // If not in garbage 
-      if(!inGarbage){
+    } else {
+      // If not in garbage
+      if (!inGarbage) {
         // Add one to groupsDeep if at an opening brace
-        if(current === '{'){
+        if (current === "{") {
           groupsDeep++;
         }
         // Update the score then subtract one from groupsDeep if at a closing brace
-        else if(current === '}'){
+        else if (current === "}") {
           score += groupsDeep;
           groupsDeep--;
         }
         // Set inGarbage to true if finding < while not already in garbage
-        else if(current === '<'){
+        else if (current === "<") {
           inGarbage = true;
         }
       }
       // If in garbage
-      else{
+      else {
         // Set inGarnbage toi false if  > is found while in garbage
-        if(current === '>'){
+        if (current === ">") {
           inGarbage = false;
         }
         // Else this is just a random garbage character so add one to garbage characters
-        else{
+        else {
           grabageChars++;
         }
       }
@@ -57,5 +56,5 @@ export const run = (fileContents) => {
     index++;
   }
 
-  return {part1: score, part2: grabageChars};
-}
+  return { part1: score, part2: grabageChars };
+};

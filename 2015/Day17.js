@@ -7,7 +7,7 @@ export const run = (fileContents) => {
   // Find all possible combinations that exactly match the amount of eggnog
   let combinations = findAllCombinations(containers, 150);
 
-  // Find the number of container combinations that all 
+  // Find the number of container combinations that all
   // use the minimum number of containers possible
 
   // Length of the minimum number of containers arrays
@@ -15,33 +15,33 @@ export const run = (fileContents) => {
   // Count of the number of minimum length containers there are
   let minComboCount = 0;
   // Check each cmobinations
-  for(let x = 0; x < combinations.length; x++){
-    // If this combination's legnth is smaller than any found before, 
+  for (let x = 0; x < combinations.length; x++) {
+    // If this combination's legnth is smaller than any found before,
     // set this length as the new length and reset the count to 1
-    if(minComboLength > combinations[x].length){
+    if (minComboLength > combinations[x].length) {
       minComboLength = combinations[x].length;
       minComboCount = 1;
     }
-    // Else if this combination's length equals the minimum length 
+    // Else if this combination's length equals the minimum length
     // found then add one to the count
-    else if(minComboLength === combinations[x].length){
+    else if (minComboLength === combinations[x].length) {
       minComboCount++;
     }
   }
 
-  return {part1: combinations.length, part2: minComboCount};
-}
+  return { part1: combinations.length, part2: minComboCount };
+};
 
 // Parse input values into an array of integers
 const parseInput = (fileContents) => {
   // Resulting array of containers
   let containers = [];
   // Parse each line as an int
-  for(let container of fileContents){
+  for (let container of fileContents) {
     containers.push(parseInt(container));
   }
   return containers;
-}
+};
 
 // Find all of the combinations of containers that eaxctly match the maxSize
 const findAllCombinations = (containers, maxSize) => {
@@ -55,20 +55,23 @@ const findAllCombinations = (containers, maxSize) => {
   // The first combo for the queue which has nothing used
   queue.push({
     unused: JSON.parse(JSON.stringify(containers)),
-    used: []
+    used: [],
   });
   // Continue checking combos in the queue until there are none left to consider
-  while(queue.length > 0){
+  while (queue.length > 0) {
     // Take the first combo off the front of the queue
     let current = queue.shift();
     // Find the total amount used by these containers
-    let totalUsed = current.used.reduce((accumulator, val) => accumulator + val, 0);
+    let totalUsed = current.used.reduce(
+      (accumulator, val) => accumulator + val,
+      0,
+    );
     // If it is less add new combos to the queue
-    if(totalUsed < maxSize){
+    if (totalUsed < maxSize) {
       // Continue while there are still unused contsiners to consider
-      while(current.unused.length > 0){
-        // Add the next unused container to a new combo's 
-        // used container list. Add the remaining unused 
+      while (current.unused.length > 0) {
+        // Add the next unused container to a new combo's
+        // used container list. Add the remaining unused
         // containers to the new combo's unused list.
         // Add this new combo to the queue
         let nextItem = current.unused.shift();
@@ -77,31 +80,30 @@ const findAllCombinations = (containers, maxSize) => {
         newUsed.push(nextItem);
         queue.push({
           unused: newUnused,
-          used: newUsed
+          used: newUsed,
         });
       }
     }
     // Else if the total equals the maxSize add this combination to the results array
-    else if(totalUsed === maxSize){
+    else if (totalUsed === maxSize) {
       combos.push(current.used);
     }
   }
   return combos;
-}
+};
 
 // Basic bubble sorting algorithm
 const bubbleSort = (array) => {
-  for(let x = 0; x < array.length - 1; x++){
-    for(let y = 0; y < array.length - x - 1; y++){
-      if (array[y] < array[y + 1])
-        swap(array, y, y + 1);
+  for (let x = 0; x < array.length - 1; x++) {
+    for (let y = 0; y < array.length - x - 1; y++) {
+      if (array[y] < array[y + 1]) swap(array, y, y + 1);
     }
   }
-}
+};
 
 // Basic swap method
 const swap = (array, indexA, indexB) => {
   let temp = array[indexA];
   array[indexA] = array[indexB];
   array[indexB] = temp;
-}
+};

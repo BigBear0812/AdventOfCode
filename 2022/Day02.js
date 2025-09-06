@@ -2,17 +2,16 @@
 
 export const run = (fileContents) => {
   {
-
     // OP
     // A: Rock
     // B: Paper
     // C: Scissors
-  
+
     // You
     // X: Rock:    1
     // Y: Paper    2
     // Z: Scissors 3
-  
+
     // Win  6
     // Tie  3
     // Lose 0
@@ -26,18 +25,18 @@ export const run = (fileContents) => {
       "C X", // OP: Scissors You: Rock     1 Win  6
       "A Y", // OP: Rock     You: Paper    2 Win  6
       "B Z", // OP: Paper    You: Scissors 3 Win  6
-    ]
-  
+    ];
+
     // OP
     // A: Rock
     // B: Paper
     // C: Scissors
-  
+
     // You
     // Rock:    1
     // Paper    2
     // Scissors 3
-  
+
     // X: Lose 0
     // Y: Tie  3
     // Z: Win  6
@@ -51,18 +50,18 @@ export const run = (fileContents) => {
       "C Z", // OP: Scissors Win  6 You: Rock     1
       "A Z", // OP: Rock     Win  6 You: Paper    2
       "B Z", // OP: Paper    Win  6 You: Scissors 3
-    ]
-  
+    ];
+
     let runningTotal1 = 0;
     let runningTotal2 = 0;
-  
+
     // Read in all of the lines one at a time
     for (const line of fileContents) {
       // need to add one since the index is 0 based instead of 1 based
       runningTotal1 += games1.indexOf(line) + 1;
       runningTotal2 += games2.indexOf(line) + 1;
     }
-    
-    return{part1: runningTotal1, part2: runningTotal2};
+
+    return { part1: runningTotal1, part2: runningTotal2 };
   }
-}
+};

@@ -4,19 +4,18 @@ export const run = (fileContents) => {
   let result1 = part1(fileContents);
   let result2 = part2(fileContents);
 
-  return{part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
-const part1 = (fileContents) => { 
+const part1 = (fileContents) => {
   // Create and object map from the file contents
   let map = parseMap(fileContents);
-  
+
   // Find the start on the map
   let start = null;
-  for(let y = 0; y < map.length && start === null; y++){
-    for(let x = 0; x < map[y].length && start === null; x++){
-      if(map[y][x].elevation === 'S')
-        start = map[y][x];
+  for (let y = 0; y < map.length && start === null; y++) {
+    for (let x = 0; x < map[y].length && start === null; x++) {
+      if (map[y][x].elevation === "S") start = map[y][x];
     }
   }
   // Do a breadth first search to find the shortest route
@@ -24,13 +23,13 @@ const part1 = (fileContents) => {
 
   // Count how many steps by backtracking to the start.
   let count = 0;
-  while(result.parent !== null){
+  while (result.parent !== null) {
     result = result.parent;
     count++;
   }
 
   return count;
-}
+};
 
 const part2 = (fileContents) => {
   // Create and object map from the file contents
@@ -38,37 +37,36 @@ const part2 = (fileContents) => {
 
   // Find the all possible starts on the map
   let allAs = [];
-  for(let y = 0; y < map.length; y++){
-    for(let x = 0; x < map[y].length; x++){
-      if(map[y][x].elevation === 'S' || map[y][x].elevation === 'a')
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      if (map[y][x].elevation === "S" || map[y][x].elevation === "a")
         allAs.push(map[y][x]);
     }
   }
 
   // Look for the shortest path from any a the can successfully reach the end.
   let shortest = Number.MAX_SAFE_INTEGER;
-  for(const a of allAs){
+  for (const a of allAs) {
     // Copy the map
     let mapCopy = JSON.parse(JSON.stringify(map));
     // Do a breadth first search to find the shortest route
     let result = breadthFirstSearch(mapCopy, a);
 
-    // Count how many steps by backtracking to the start 
+    // Count how many steps by backtracking to the start
     // if it reached the end successfully
-    if(result != undefined){
+    if (result != undefined) {
       let count = 0;
-      while(result.parent !== null){
+      while (result.parent !== null) {
         result = result.parent;
         count++;
       }
       // If this is the shortest route so far then save it
-      if(count < shortest)
-      shortest = count;
+      if (count < shortest) shortest = count;
     }
   }
 
   return shortest;
-}
+};
 
 // Breadth first search algorithm to find the shortest path
 const breadthFirstSearch = (map, start) => {
@@ -78,29 +76,57 @@ const breadthFirstSearch = (map, start) => {
   start.explored = true;
   queue.push(start);
   // Continue searching while the queue has next possible steps
-  while(queue.length > 0){
+  while (queue.length > 0) {
     // Remove the next step to evaluate fomr the from of the queue
     let current = queue.shift();
     // Check if we have reached the end
-    if(current.elevation === 'E')
-      return current;
+    if (current.elevation === "E") return current;
     // If this is not the end then  compute the next possible steps.
-    // For each unexplored next step mark it exploredm, set it's 
+    // For each unexplored next step mark it exploredm, set it's
     // parent to the current step, and add it to the queue
-    for(const edge of getValidEdges(map, current)){
-      if(edge.explored === false){
-        edge.explored = true
+    for (const edge of getValidEdges(map, current)) {
+      if (edge.explored === false) {
+        edge.explored = true;
         edge.parent = current;
         queue.push(edge);
       }
     }
-  } 
-}
+  }
+};
 
 // Get all of the valid next possible steps for a given location
 const getValidEdges = (map, current) => {
   // The list of all elevations in order from lowest to highest
-  const elevationOrder = ['S', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'E'];
+  const elevationOrder = [
+    "S",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "E",
+  ];
   // Next steps can only be to an elevation at, one above, or below the current elevation.
   const elevOrderIndex = elevationOrder.indexOf(current.elevation);
   const possibleElevations = elevationOrder.slice(0, elevOrderIndex + 2);
@@ -109,27 +135,49 @@ const getValidEdges = (map, current) => {
   // If it is then add it to the results set
   let results = [];
   // Up
-  if(current.y - 1 >= 0 && possibleElevations.indexOf(map[current.y - 1][current.x].elevation) !== -1)
+  if (
+    current.y - 1 >= 0 &&
+    possibleElevations.indexOf(map[current.y - 1][current.x].elevation) !== -1
+  )
     results.push(map[current.y - 1][current.x]);
   // Down
-  if(current.y + 1 < map.length && possibleElevations.indexOf(map[current.y + 1][current.x].elevation) !== -1)
+  if (
+    current.y + 1 < map.length &&
+    possibleElevations.indexOf(map[current.y + 1][current.x].elevation) !== -1
+  )
     results.push(map[current.y + 1][current.x]);
   // Left
-  if(current.x - 1 >= 0 && possibleElevations.indexOf(map[current.y][current.x - 1].elevation) !== -1)
+  if (
+    current.x - 1 >= 0 &&
+    possibleElevations.indexOf(map[current.y][current.x - 1].elevation) !== -1
+  )
     results.push(map[current.y][current.x - 1]);
   // Right
-  if(current.x + 1 < map[current.y].length && possibleElevations.indexOf(map[current.y][current.x + 1].elevation) !== -1)
+  if (
+    current.x + 1 < map[current.y].length &&
+    possibleElevations.indexOf(map[current.y][current.x + 1].elevation) !== -1
+  )
     results.push(map[current.y][current.x + 1]);
 
   return results;
-}
+};
 
 // Parse each line of the file contents and create an object with the
 const parseMap = (fileContents) => {
   let map = [];
-  for(let y = 0; y < fileContents.length; y++){
+  for (let y = 0; y < fileContents.length; y++) {
     const line = fileContents[y];
-    map.push(line.split('').map((value, index) => {return { elevation: value, parent: null, explored: false, y: y, x: index }}));
+    map.push(
+      line.split("").map((value, index) => {
+        return {
+          elevation: value,
+          parent: null,
+          explored: false,
+          y: y,
+          x: index,
+        };
+      }),
+    );
   }
   return map;
-}
+};

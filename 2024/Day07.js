@@ -6,21 +6,19 @@ export const run = async (fileContents) => {
     // Match target value and the equation numbers
     let matches = line.match(/(\d+): ([\d ]+)/);
     // Return a data object for each equation
-    return{
+    return {
       // Parse the target to int
-      target: parseInt(matches[1]), 
+      target: parseInt(matches[1]),
       // Split the equation numbers by spaces and parse each one to an int
-      numbers: matches[2]
-        .split(" ")
-        .map((num) => parseInt(num))
-      };
-  })
+      numbers: matches[2].split(" ").map((num) => parseInt(num)),
+    };
+  });
   // Part 1
   let result1 = checkAllEquations(data, false);
   // Part 2
   let result2 = checkAllEquations(data, true);
-  return {part1: result1, part2: result2};
-}
+  return { part1: result1, part2: result2 };
+};
 
 /**
  * Check all equations and return the sum of the valid targets
@@ -32,26 +30,25 @@ const checkAllEquations = (data, withConcat) => {
   // Save the total sum of the valid targets values
   let total = 0;
 
-  // Check each equation 
-  for(let equation of data){
+  // Check each equation
+  for (let equation of data) {
     // Clone the numbers to avoid having to reparse them later
-    let numbers = structuredClone(equation.numbers)
+    let numbers = structuredClone(equation.numbers);
     let target = equation.target;
 
     // Keep track of an array of answer possibilities starting with the first equation number
     let answers = [numbers.shift()];
     // Continue while there are still numbers to consider
-    while(numbers.length > 0){
+    while (numbers.length > 0) {
       // Get the next number to apply to all of the answers
       let next = numbers.shift();
       // Create a new set of all possible answers
       let newAnswers = [];
       // Apply all possible next operations with the next values to all current answers
-      for(let answer of answers){
-        // If the answer is already larger then the target skip it since all operators 
+      for (let answer of answers) {
+        // If the answer is already larger then the target skip it since all operators
         // only increase the size of the answer
-        if(answer > target)
-          continue;
+        if (answer > target) continue;
         // Add result for addition and multiplication
         newAnswers.push(answer + next);
         newAnswers.push(answer * next);
@@ -59,17 +56,19 @@ const checkAllEquations = (data, withConcat) => {
         if (withConcat)
           // Concatenate using math
           // Multiply the current answer by 10^(number of digits of the next value).
-          // This way when adding the next value it will fill the newly added zeros of the answer. 
-          newAnswers.push(answer * Math.pow(10, Math.floor(Math.log10(next))+1) + next);
+          // This way when adding the next value it will fill the newly added zeros of the answer.
+          newAnswers.push(
+            answer * Math.pow(10, Math.floor(Math.log10(next)) + 1) + next,
+          );
       }
       // Set the answer array to the new answers for the next number to be processed
       answers = newAnswers;
     }
     // Check if the target value is in the answers
-    if(answers.indexOf(target) >= 0)
+    if (answers.indexOf(target) >= 0)
       // Add valid target values to the total
       total += equation.target;
   }
 
   return total;
-}
+};

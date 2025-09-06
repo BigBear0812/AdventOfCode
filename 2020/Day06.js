@@ -27,7 +27,7 @@ export const run = (fileContents) => {
       groupSet = new Set();
       groupMap = new Map();
       groupSize = 0;
-    } 
+    }
     // Process an individuals responses
     else {
       // Split all letters for this individual
@@ -55,12 +55,12 @@ export const run = (fileContents) => {
   // Get the sum of all groups any letters array lengths
   let result1 = groups.reduce(
     (total, current) => (total += current.anyLetters.length),
-    0
+    0,
   );
   // Get the sum of all groups all letters array lengths
   let result2 = groups.reduce(
     (total, current) => (total += current.allLetters.length),
-    0
+    0,
   );
 
   return { part1: result1, part2: result2 };
