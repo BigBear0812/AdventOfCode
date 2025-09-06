@@ -20,7 +20,7 @@ const solver = (data, shortcutMaxDistance) => {
   // each index is the locations distance from the end.
   let pathLocations = data.graph
     .dijkstraShortestPath(data.end, data.start)
-    .shortestPaths[0]// Parse the info into coordinates and key strings
+    .shortestPaths[0] // Parse the info into coordinates and key strings
     .map((loc) => {
       let splits = loc.split(",").map((val) => parseInt(val));
       return [loc, { y: splits[1], x: splits[0] }];

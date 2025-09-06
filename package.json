@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Advent of Code",
   "scripts": {
-    "day": "node solutionRunner.js"
+    "day": "node solutionRunner.js",
+    "format": "npx prettier . --write",
+    "prepare": "husky",
+    "test": "npx prettier . --check"
   },
   "author": "Matthew Miller",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "z3-solver": "^4.12.4"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "prettier": "3.6.2"
   }
 }
