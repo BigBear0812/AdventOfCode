@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "rvest.vs-code-prettier-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}
