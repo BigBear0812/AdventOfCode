@@ -8,5 +8,6 @@
     "Djikstra's",
     "heapify",
     "Warshall"
-  ]
+  ],
+  "editor.formatOnSave": true
 }
