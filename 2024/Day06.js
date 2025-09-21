@@ -9,6 +9,11 @@ import {
 // Set the max number of worker threads to use for part 2
 const WORKER_THREADS = 15;
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = async (fileContents) => {
   // Parse the input data into a map and a starting position with direction
   let data = parseInput(fileContents);

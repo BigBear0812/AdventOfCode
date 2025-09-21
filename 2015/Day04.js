@@ -1,5 +1,10 @@
 // Puzzle for Day 4: https://adventofcode.com/2015/day/4
-import { createHash } from "node:crypto";
+
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */ import { createHash } from "node:crypto";
 
 export const run = (fileContents) => {
   // Setup variables

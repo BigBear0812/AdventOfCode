@@ -1,5 +1,10 @@
 // Puzzle for Day 08: https://adventofcode.com/2020/day/8
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the instructions from the input file
   let instructions = [];

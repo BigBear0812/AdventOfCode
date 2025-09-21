@@ -1,5 +1,10 @@
 // Puzzle for Day 18: https://adventofcode.com/2016/day/18
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the start row input from the first line of the input file
   let startRow = fileContents[0].split("");

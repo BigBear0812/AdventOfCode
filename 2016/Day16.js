@@ -1,5 +1,10 @@
 // Puzzle for Day 16: https://adventofcode.com/2016/day/16
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the inital state form the first lin eof the input file. Split this
   // into an array of strings. Convert each string to an int

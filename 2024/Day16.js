@@ -2,6 +2,11 @@
 
 const PRINT = false;
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Make 2D Grid
   let grid = fileContents.map((line) => line.split(""));

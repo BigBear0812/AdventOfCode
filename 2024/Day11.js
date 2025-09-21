@@ -1,5 +1,10 @@
 // Puzzle for Day 11: https://adventofcode.com/2024/day/11
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = async (fileContents) => {
   let data = fileContents[0].split(" ").map((val) => parseInt(val));
   let result1 = runSim(data, 25);

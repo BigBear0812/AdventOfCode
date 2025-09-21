@@ -1,5 +1,10 @@
 // Puzzle for Day 9: https://adventofcode.com/2015/day/9
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input file to build an undirected weighted graph
   let graph = parseInput(fileContents);

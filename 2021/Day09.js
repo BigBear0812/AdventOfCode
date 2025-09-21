@@ -1,5 +1,10 @@
 // Puzzle for Day 09: https://adventofcode.com/2021/day/9
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Convert the input into a 2D array of number heights
   const map = fileContents.map((line) =>

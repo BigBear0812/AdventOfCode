@@ -1,5 +1,10 @@
 // Puzzle for Day 22: https://adventofcode.com/2017/day/22
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input into a hash set of the infected positions relative to the center
   let infected1 = parseInput(fileContents);

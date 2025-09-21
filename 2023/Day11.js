@@ -1,5 +1,10 @@
 // Puzzle for Day 11: https://adventofcode.com/2023/day/11
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the results for parts 1 and 2
   let result1 = analyzeImage(fileContents, 1);

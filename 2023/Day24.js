@@ -1,6 +1,11 @@
 // Puzzle for Day 24: https://adventofcode.com/2023/day/24
 import { init } from "z3-solver";
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = async (fileContents) => {
   // Generate points from input
   let lines = [];

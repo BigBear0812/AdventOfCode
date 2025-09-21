@@ -1,5 +1,10 @@
 // Puzzle for Day 19: https://adventofcode.com/2023/day/19
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse workflows into a map of arrays with rules and results of passing each rule
   let workflows = new Map();

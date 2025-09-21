@@ -1,5 +1,10 @@
 // Puzzle for Day 14: https://adventofcode.com/2017/day/14
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the input to be hashed from the intput file's first line
   let hashInput = fileContents[0];

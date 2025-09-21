@@ -1,5 +1,10 @@
 // Puzzle for Day 13: https://adventofcode.com/2016/day/13
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the favorite numebr from the input
   let favNum = parseInt(fileContents[0]);

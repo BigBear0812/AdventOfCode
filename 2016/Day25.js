@@ -1,5 +1,10 @@
 // Puzzle for Day 25: https://adventofcode.com/2016/day/25
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // The assembunny commands
   let commands = parseInput(fileContents);

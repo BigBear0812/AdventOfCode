@@ -1,5 +1,10 @@
 // Puzzle for Day 3: https://adventofcode.com/2016/day/3
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input into 2d array's of triangle info
   let triangles1 = parseInput1(fileContents);

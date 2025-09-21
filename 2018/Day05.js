@@ -1,5 +1,10 @@
 // Puzzle for Day 5: https://adventofcode.com/2018/day/5
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Convert the polymer string into an array
   let polymer = fileContents[0].split("");

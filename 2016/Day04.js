@@ -1,5 +1,10 @@
 // Puzzle for Day 4: https://adventofcode.com/2016/day/4
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   let idSum = 0;
   let reg = new RegExp(/([A-z\-]+)-(\d+)\[([A-z]+)\]/);

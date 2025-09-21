@@ -1,5 +1,10 @@
 // Puzzle for Day 09: https://adventofcode.com/2020/day/9
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Set the preamble size and the number of previous numbers to consider
   const PREAMBLE_SIZE = 25;

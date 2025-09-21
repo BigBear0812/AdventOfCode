@@ -1,5 +1,10 @@
 // Puzzle for Day 6: https://adventofcode.com/2019/day/6
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input into an orbits map
   let map = parseInput(fileContents);

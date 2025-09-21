@@ -1,6 +1,11 @@
 import { createHash } from "node:crypto";
 // Puzzle for Day 5: https://adventofcode.com/2016/day/5
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // The doorId for the project and the passwords that are constructed
   let doorId = fileContents[0];

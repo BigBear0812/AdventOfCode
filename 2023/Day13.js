@@ -1,5 +1,10 @@
 // Puzzle for Day 13: https://adventofcode.com/2023/day/13
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get all of the patterns into separate string arrays from
   // an input of string array for the input file

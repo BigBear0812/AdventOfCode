@@ -1,5 +1,10 @@
 // Puzzle for Day 20: https://adventofcode.com/2016/day/20
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the list of blocked IP ranges from the input file contents
   let blockList = parseInput(fileContents);

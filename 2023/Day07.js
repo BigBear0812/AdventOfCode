@@ -1,5 +1,10 @@
 // Puzzle for Day 07: https://adventofcode.com/2023/day/7
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   let result1 = solver(fileContents, false);
   let result2 = solver(fileContents, true);

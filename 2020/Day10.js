@@ -1,5 +1,10 @@
 // Puzzle for Day 10: https://adventofcode.com/2020/day/10
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Map the file contents into ints and order them from smallest to largest
   let data = fileContents

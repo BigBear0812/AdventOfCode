@@ -6,6 +6,11 @@ import * as readline from "node:readline";
 const HEIGHT = 103;
 const WIDTH = 101;
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = async (fileContents) => {
   let robots = parseInput(fileContents);
   let result1 = safetyFactorSim(robots, 100);

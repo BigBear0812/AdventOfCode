@@ -1,5 +1,10 @@
 // Puzzle for Day 12: https://adventofcode.com/2018/day/12
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Create a plants object for each part of the puzzle
   let plants1 = new Plants(fileContents);

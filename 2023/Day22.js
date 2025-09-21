@@ -1,5 +1,10 @@
 // Puzzle for Day 22: https://adventofcode.com/2023/day/22
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Switch progress logging on an off. This solution takes approximately 8-9
   // minutes to run so this is helpful for seeing the progress.

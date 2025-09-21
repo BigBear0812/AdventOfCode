@@ -1,5 +1,10 @@
 // Puzzle for Day 3: https://adventofcode.com/2019/day/3
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the lines of the input file into wire data objects
   let wire1 = parseLine(fileContents[0]);

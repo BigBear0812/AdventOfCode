@@ -1,5 +1,10 @@
 // Puzzle for Day 05: https://adventofcode.com/2023/day/5
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Convert the input array into a single string
   let input = fileContents.join("\n");

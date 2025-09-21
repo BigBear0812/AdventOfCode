@@ -1,5 +1,10 @@
 // Puzzle for Day 19: https://adventofcode.com/2016/day/19
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the number of elves from the first linke of the input file
   let numElves = parseInt(fileContents[0]);

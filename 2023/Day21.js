@@ -1,5 +1,10 @@
 // Puzzle for Day 21: https://adventofcode.com/2023/day/21
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Assume the grid is square
   let grid = fileContents.map((l) => l.split(""));

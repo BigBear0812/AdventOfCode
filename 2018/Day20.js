@@ -1,5 +1,10 @@
 // Puzzle for Day 20: https://adventofcode.com/2018/day/20
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // The directions instructions will be in the first
   let directions = fileContents[0].split("");

@@ -1,5 +1,10 @@
 // Puzzle for Day 12: https://adventofcode.com/2017/day/12
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input into a map of all programs and what they are connected to
   let programs = parseInput(fileContents);

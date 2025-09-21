@@ -1,6 +1,11 @@
 import { createHash } from "node:crypto";
 // Puzzle for Day 14: https://adventofcode.com/2016/day/14
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the salt from the first line of the input file
   let salt = fileContents[0];

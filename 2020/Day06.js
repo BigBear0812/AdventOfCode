@@ -1,5 +1,10 @@
 // Puzzle for Day 06: https://adventofcode.com/2020/day/6
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Keep track of the current groups letters that anyone has using a set
   let groupSet = new Set();

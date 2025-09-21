@@ -1,5 +1,10 @@
 // Puzzle for Day 1: https://adventofcode.com/2018/day/1
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // The current frequency
   let frequency = 0;

@@ -1,5 +1,10 @@
 // Puzzle for Day 12: https://adventofcode.com/2020/day/12
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse each line fo the input file out as a separate object that contains a move and an int value
   let moves = fileContents.map((x) => {

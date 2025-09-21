@@ -1,5 +1,10 @@
 // Puzzle for Day 15: https://adventofcode.com/2016/day/15
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the disc info from the
   let discs = parseInput(fileContents);

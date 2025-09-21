@@ -1,5 +1,10 @@
 // Puzzle for Day 10: https://adventofcode.com/2019/day/10
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the grid from the input file
   let grid = parseInput(fileContents);

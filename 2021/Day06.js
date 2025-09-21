@@ -1,5 +1,10 @@
 // Puzzle for Day 06: https://adventofcode.com/2021/day/6
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Create a map opf the number of days remaining until a fish
   // reproduces and the number of fish currently on that day

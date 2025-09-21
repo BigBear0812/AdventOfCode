@@ -1,5 +1,10 @@
 // Puzzle for Day 9: https://adventofcode.com/2017/day/9
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Split the stream into characters to be evaluated one at a time
   let stream = fileContents[0].split("");

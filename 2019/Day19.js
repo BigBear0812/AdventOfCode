@@ -1,6 +1,11 @@
 // Puzzle for Day 19: https://adventofcode.com/2019/day/19
 // Not currently working. Will return to this in the future
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the program in from the input file
   let program = fileContents[0].split(",").map((x) => parseInt(x));

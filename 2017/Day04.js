@@ -1,5 +1,10 @@
 // Puzzle for Day 4: https://adventofcode.com/2017/day/4
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in each pass phrase into a word seperated array
   let passPhrases = [];

@@ -6,6 +6,12 @@
 //
 // Reddit: https://www.reddit.com/r/adventofcode/comments/ec8090/comment/fbbs143/?utm_source=share&utm_medium=web2x&context=3
 // Code: https://github.com/kufii/Advent-Of-Code-2019-Solutions/blob/master/src/solutions/18/index.js
+
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   let output1 = part1(fileContents);
 

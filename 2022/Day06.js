@@ -1,5 +1,10 @@
 // Puzzle for Day 6: https://adventofcode.com/2022/day/6
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // All data should be on the first line
   let data = fileContents[0];

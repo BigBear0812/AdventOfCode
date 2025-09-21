@@ -1,5 +1,10 @@
 // Puzzle for Day 22: https://adventofcode.com/2015/day/22
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the boss info from the input file and parse
   // it into a new contestant object

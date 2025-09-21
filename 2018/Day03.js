@@ -1,5 +1,10 @@
 // Puzzle for Day 3: https://adventofcode.com/2018/day/3
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Create and empty 1000 x 1000 grid and an array of all of the claim info
   let grid = createEmptyGrid();

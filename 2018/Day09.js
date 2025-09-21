@@ -1,5 +1,10 @@
 // Puzzle for Day 9: https://adventofcode.com/2018/day/9
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Regex to parse values from the input line
   let reg = new RegExp(/(\d+) players; last marble is worth (\d+) points/);

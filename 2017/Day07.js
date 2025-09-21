@@ -1,5 +1,10 @@
 // Puzzle for Day 7: https://adventofcode.com/2017/day/7
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Create a map of all tower info
   let towers = parseInput(fileContents);

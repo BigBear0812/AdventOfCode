@@ -1,6 +1,11 @@
 import { createHash } from "node:crypto";
 // Puzzle for Day 17: https://adventofcode.com/2016/day/17
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the passcode from the first line of the input file
   let passcode = fileContents[0];

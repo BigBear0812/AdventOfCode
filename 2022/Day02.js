@@ -1,5 +1,10 @@
 // Puzzle for Day 2: https://adventofcode.com/2022/day/2
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   {
     // OP

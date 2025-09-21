@@ -1,5 +1,10 @@
 // Puzzle for Day 18: https://adventofcode.com/2018/day/18
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input file into a 2D array grid of the space symbols
   let grid = parseInput(fileContents);

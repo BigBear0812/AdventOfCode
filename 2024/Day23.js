@@ -1,5 +1,10 @@
 // Puzzle for Day 23: https://adventofcode.com/2024/day/23
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input into a from and to node array from a string array
   let connections = fileContents.map((line) => {

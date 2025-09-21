@@ -1,5 +1,10 @@
 // Puzzle for Day 3: https://adventofcode.com/2015/day/3
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Setup stroage for the locations that have been visited
   let houseLocsY1 = ["0,0"];

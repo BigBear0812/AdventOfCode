@@ -1,5 +1,10 @@
 // Puzzle for Day 15: https://adventofcode.com/2020/day/15
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in the starting numbers from the input
   let startingNums = fileContents[0].split(",").map((x) => parseInt(x));

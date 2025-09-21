@@ -12,6 +12,11 @@ const notRegex = new RegExp(/^([NOT]+) ([a-z]+) -> (.+)$/);
 
 let wires = {};
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in all of the command lines in the instructions
   // and get then ready to be evaluated

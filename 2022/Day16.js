@@ -1,6 +1,11 @@
 // Solution Inspired by: https://github.com/mebeim/aoc/blob/master/2022/README.md#day-16---proboscidea-volcanium
 // Puzzle for Day 16: https://adventofcode.com/2022/day/16
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   let map = part1(fileContents);
   let result2 = part2(map.input);

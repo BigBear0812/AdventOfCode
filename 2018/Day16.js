@@ -1,5 +1,10 @@
 // Puzzle for Day 16: https://adventofcode.com/2018/day/16
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in the data from the file
   let data = parseInput(fileContents);

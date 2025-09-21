@@ -1,5 +1,10 @@
 // Puzzle for Day 11: https://adventofcode.com/2015/day/11
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get Santa's old password from the input file
   let oldPassword = fileContents[0];

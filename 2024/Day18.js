@@ -3,6 +3,11 @@
 let HEIGHT = 71;
 let WIDTH = 71;
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the data from the input into an array of y,x coordinates
   let data = fileContents.map((line) => {

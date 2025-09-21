@@ -1,5 +1,10 @@
 // Puzzle for Day 6: https://adventofcode.com/2017/day/6
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse all of the individual numbers into ints in an array
   let reg = new RegExp(/(\d+)/g);

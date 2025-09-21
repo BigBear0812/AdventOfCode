@@ -1,5 +1,10 @@
 // Puzzle for Day 4: https://adventofcode.com/2019/day/4
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Get the value range from the input file
   let range = fileContents[0].split("-").map((x) => parseInt(x));

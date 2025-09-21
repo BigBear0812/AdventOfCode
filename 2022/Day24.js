@@ -1,6 +1,11 @@
 // Puzzle for Day 24: https://adventofcode.com/2022/day/24
 // TODO: Overall this takes a few minutes to complete each trip. It would be good to improve this in the future.
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse input for blizzard positions, start, end, maxX, and maxY
   let input = parseInput(fileContents);

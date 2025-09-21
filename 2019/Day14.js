@@ -1,5 +1,10 @@
 // Puzzle for Day 14: https://adventofcode.com/2019/day/14
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input file into a map of reactions for this process.
   let reactions = parseInput(fileContents);

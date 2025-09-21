@@ -1,5 +1,10 @@
 // Puzzle for Day 04: https://adventofcode.com/2024/day/4
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Create a 2d array from the file input
   let grid = fileContents.map((line) => line.split(""));

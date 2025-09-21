@@ -1,5 +1,10 @@
 // Puzzle for Day 7: https://adventofcode.com/2022/day/7
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Setup reg ex to parse incoming lines of text
   const cmdReg = new RegExp(/\$ (cd|ls) *(.+)*/);

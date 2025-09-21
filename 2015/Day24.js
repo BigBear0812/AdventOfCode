@@ -1,5 +1,10 @@
 // Puzzle for Day 24: https://adventofcode.com/2015/day/24
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input and get the packegs weights as a list of numbers
   let packages = parseInput(fileContents);

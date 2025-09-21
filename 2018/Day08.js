@@ -1,5 +1,10 @@
 // Puzzle for Day 8: https://adventofcode.com/2018/day/8
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse the input's first line into an array of int's
   let data = fileContents[0].split(" ").map((x) => parseInt(x));

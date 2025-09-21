@@ -1,5 +1,10 @@
 // Puzzle for Day 16: https://adventofcode.com/2017/day/16
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in the moves from the first line of the input file and split the moves by commas
   let moves = fileContents[0].split(",");

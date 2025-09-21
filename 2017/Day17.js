@@ -1,5 +1,10 @@
 // Puzzle for Day 17: https://adventofcode.com/2017/day/17
 
+/**
+ * Main Runner
+ * @param {string[]} fileContents The file contents in an array of strings for each line
+ * @returns {{part1: *, part2: *}} The puzzle results
+ */
 export const run = (fileContents) => {
   // Parse in the number of steps from the input file's first line
   let steps = parseInt(fileContents[0]);
