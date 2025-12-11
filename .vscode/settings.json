@@ -8,6 +8,7 @@
     "Djikstra's",
     "heapify",
     "joltage",
+    "joltages",
     "Warshall"
   ],
   "editor.formatOnSave": true
